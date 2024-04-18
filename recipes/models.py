@@ -48,7 +48,7 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment by {self.user.username} on {self.recipe.title}"
 
-class Rating(models.Model):
+class Rating(models.Model): 
     user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, related_name='ratings', on_delete=models.CASCADE)
     score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
