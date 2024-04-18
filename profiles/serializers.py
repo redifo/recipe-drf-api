@@ -10,6 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'id',
             'user',
             'bio',
+            'name',
             'image',
             'created_at',
             'updated_at',
