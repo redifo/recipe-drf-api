@@ -22,9 +22,8 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='recipe_images', default='../recipe-default_ye1fru')
-    """ https://docs.djangoproject.com/en/3.2/ref/models/fields/#django.db.models.ManyToManyField 
-    and https://docs.djangoproject.com/en/3.2/topics/db/models/#intermediary-manytomany """
-    ingredients = models.ManyToManyField(Ingredient, through='RecipeIngredientQuantity', related_name='recipes')
+ 
+    ingredients = models.TextField() 
     tags = models.ManyToManyField('Tag', related_name='recipes')
     class Meta:
         ordering = ['-created_at']
@@ -32,12 +31,7 @@ class Recipe(models.Model):
     def __str__(self):
         return f"{self.title} by {self.user.username}"
     
-class RecipeIngredientQuantity(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.CharField(max_length=100)
-    def __str__(self):
-        return f"{self.quantity} of {self.ingredient.name} for {self.recipe.title}"
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)

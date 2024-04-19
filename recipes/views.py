@@ -5,8 +5,8 @@ from rest_framework import status, permissions
 from .models import Recipe
 from .models import Ingredient
 from .serializers import RecipeSerializer
-from .serializers import IngredientSerializer
-from drf_api.permissions import IsOwnerOrReadOnly, IsSuperUser
+
+from drf_api.permissions import IsOwnerOrReadOnly
 
 class RecipeList(APIView):
    
@@ -46,22 +46,3 @@ class RecipeDetail(APIView):
         recipe = self.get_object(pk)
         recipe.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-class CreateIngredient(APIView):
-    permission_classes = [IsSuperUser]
-
-    def get(self, request):
-       
-        ingredients = Ingredient.objects.all()
-        serializer = IngredientSerializer(ingredients, many=True)  
-        return Response(serializer.data)
-    
-    def post(self, request, format=None):
-        existing_ingredient = Ingredient.objects.filter(name__iexact=request.data.get('name')).first()
-        if existing_ingredient:
-            return Response({'message': 'Ingredient already exists!'}, status=status.HTTP_409_CONFLICT)
-        serializer = IngredientSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

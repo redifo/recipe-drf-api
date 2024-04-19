@@ -1,17 +1,6 @@
 from rest_framework import serializers
-from .models import Recipe, Ingredient, Tag, Rating, RecipeIngredientQuantity
+from .models import Recipe, Tag, Rating
 
-
-class IngredientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Ingredient
-        fields = ['name', 'description']
-
-class RecipeIngredientQuantitySerializer(serializers.ModelSerializer):
-    ingredient = IngredientSerializer(read_only=True)
-    class Meta:
-        model = RecipeIngredientQuantity
-        fields = ['ingredient', 'quantity']
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
@@ -20,7 +9,6 @@ class TagSerializer(serializers.ModelSerializer):
 class RecipeSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     is_owner = serializers.SerializerMethodField()
-    ingredients = RecipeIngredientQuantitySerializer(source='recipeingredientquantity_set', many=True, read_only=True)
     tags = TagSerializer(many=True, read_only=True)
 
     def validate_image(self, value):
