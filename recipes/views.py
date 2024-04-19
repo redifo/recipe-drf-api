@@ -50,6 +50,12 @@ class RecipeDetail(APIView):
 class CreateIngredient(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
+    def get(self, request):
+       
+        ingredients = Ingredient.objects.all()
+        serializer = IngredientSerializer(ingredients, many=True)  
+        return Response(serializer.data)
+    
     def post(self, request, format=None):
         existing_ingredient = Ingredient.objects.filter(name__iexact=request.data.get('name')).first()
         if existing_ingredient:
