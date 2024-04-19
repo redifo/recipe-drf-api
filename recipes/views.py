@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from .models import Recipe
 from .serializers import RecipeSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
+from django.http import Http404
 
 class RecipeList(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
