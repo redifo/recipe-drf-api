@@ -3,14 +3,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.core.validators import MaxValueValidator, MinValueValidator
 
-
-class Ingredient(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
 class Recipe(models.Model):
     title = models.CharField(max_length=255)
     user = models.ForeignKey(User, related_name='recipes', on_delete=models.CASCADE)
@@ -31,8 +23,6 @@ class Recipe(models.Model):
     def __str__(self):
         return f"{self.title} by {self.user.username}"
     
-
-
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, related_name='comments', on_delete=models.CASCADE)
@@ -56,8 +46,4 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
     
-def create_user_recipe(sender, instance, created, **kwargs):
-    if created:
-        Recipe.objects.create(user=instance, title="Default Recipe")
 
-post_save.connect(create_user_recipe, sender=User)
