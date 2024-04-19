@@ -6,7 +6,7 @@ from .models import Recipe
 from .models import Ingredient
 from .serializers import RecipeSerializer
 from .serializers import IngredientSerializer
-from drf_api.permissions import IsOwnerOrReadOnly
+from drf_api.permissions import IsOwnerOrReadOnly, IsSuperUser
 
 class RecipeList(APIView):
    
@@ -48,7 +48,7 @@ class RecipeDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class CreateIngredient(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsSuperUser]
 
     def get(self, request):
        
