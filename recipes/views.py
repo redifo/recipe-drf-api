@@ -50,6 +50,9 @@ class CreateIngredient(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, format=None):
+        existing_ingredient = Ingredient.objects.filter(name__iexact=request.data.get('name')).first()
+        if existing_ingredient:
+            return Response({'message': 'Ingredient already exists!'}, status=status.HTTP_409_CONFLICT)
         serializer = IngredientSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
