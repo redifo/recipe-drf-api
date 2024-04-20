@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Recipe(models.Model):
     title = models.CharField(max_length=255)
@@ -23,15 +21,6 @@ class Recipe(models.Model):
     def __str__(self):
         return f"{self.title} by {self.user.username}"
     
-
-class Rating(models.Model): 
-    user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, related_name='ratings', on_delete=models.CASCADE)
-    score = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
-
-    def __str__(self):
-        return f"Rating {self.score}/10 by {self.user.username} for {self.recipe.title}"
-
 class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True)
 

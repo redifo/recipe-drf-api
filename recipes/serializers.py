@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipe, Tag, Rating
+from .models import Recipe, Tag
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
