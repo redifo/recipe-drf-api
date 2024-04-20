@@ -23,14 +23,6 @@ class Recipe(models.Model):
     def __str__(self):
         return f"{self.title} by {self.user.username}"
     
-class Comment(models.Model):
-    user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, related_name='comments', on_delete=models.CASCADE)
-    text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Comment by {self.user.username} on {self.recipe.title}"
 
 class Rating(models.Model): 
     user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE)
