@@ -9,7 +9,7 @@ class TagSerializer(serializers.ModelSerializer):
 class RecipeSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     is_owner = serializers.SerializerMethodField()
-    tags = TagSerializer(many=True, read_only=True)
+    tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
     profile_id = serializers.ReadOnlyField(source='user.profile.id')
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
 
