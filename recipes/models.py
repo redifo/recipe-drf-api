@@ -16,7 +16,7 @@ class Recipe(models.Model):
     image = models.ImageField(upload_to='recipe_images', default='../recipe-default_ye1fru')
  
     ingredients = models.TextField() 
-    tags = models.ManyToManyField('Tag', related_name='recipes')
+    tags = models.ManyToManyField('Tag', related_name='recipes', blank=True)
     class Meta:
         ordering = ['-created_at']
 
