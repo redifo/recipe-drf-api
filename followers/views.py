@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions, status
 from .models import Follow
 from .serializers import FollowSerializer
-from drf_api.permissions import IsOwnerOrReadOnlyFollow
+from drf_api.permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
 
 class FollowListView(generics.ListCreateAPIView):
@@ -15,7 +15,7 @@ class FollowListView(generics.ListCreateAPIView):
 class FollowDetailView(generics.RetrieveDestroyAPIView):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
-    permission_classes = [IsOwnerOrReadOnlyFollow]
+    permission_classes = [IsOwnerOrReadOnly]
 
     def put(self, request, pk):
         follow = self.get_object()
