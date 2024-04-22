@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Recipe, Tag
-
+from ratings.models import Rating
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
@@ -12,6 +12,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all(), required=False)
     profile_id = serializers.ReadOnlyField(source='user.profile.id')
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
+    rating_id = serializers.SerializerMethodField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -31,6 +32,14 @@ class RecipeSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.user
 
+    def get_rating_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            rating = Rating.objects.filter(
+                user=user, recipe=obj
+            ).first()
+            return rating.id if rating else None
+        return None
     class Meta:
         model = Recipe
         fields = [
@@ -50,4 +59,5 @@ class RecipeSerializer(serializers.ModelSerializer):
             'tags',
             'profile_id',
             'profile_image',
+            'rating_id'
         ]
