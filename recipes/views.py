@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions, filters
-from django.db.models import Count, Avg
+from django.db.models import Count, Avg, Q
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Recipe
 from .serializers import RecipeSerializer
@@ -21,6 +21,8 @@ class RecipeList(generics.ListCreateAPIView):
         DjangoFilterBackend,
     ]
     filterset_fields = [
+        'user__followers__follower',  
+        'user__following__followed', 
         'user__profile',
         'tags'
     ]
