@@ -1,0 +1,51 @@
+.App {
+    font-family: "Merriweather Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    min-height: 100vh;
+}
+
+/*  <uniquifier>: Use a unique and descriptive class name
+    <weight>: Use a value from 300 to 800 */
+
+.font-merriweather-sans {
+    font-family: "Merriweather Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.Main{
+    padding-top: 108px;
+}
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: #555555;
+    transition: color ease-in-out 0.3s;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:hover i {
+    color: #2142b2;
+    transition: color ease-in-out 0.3s;
+}
+
+i {
+    color: #cfced3;
+    font-size: 1.6rem;
+    padding: 7px;
+    
+}
+
+i:hover {
+    cursor: pointer;
+    transition: color ease-in-out 0.3s;
+    color: #2142b2;
+}
