@@ -16,7 +16,10 @@ class ProfileList(generics.ListAPIView):
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
     filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
-    filterset_fields = ['user__username']
+    filterset_fields = [
+        'user__followers__follower',  
+        'user__following__followed', 
+                        ]
     ordering_fields = ['created_at', 'recipes_count', 'followers_count', 'following_count']
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
@@ -28,5 +31,5 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         recipes_count=Count('user__recipes', distinct=True),
         followers_count=Count('user__followers', distinct=True), 
         following_count=Count('user__following', distinct=True)  
-    )
+    ).order_by('-created_at')
     serializer_class = ProfileSerializer
