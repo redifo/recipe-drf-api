@@ -36,7 +36,7 @@ REST_FRAMEWORK = {
     'DATETIME_FORMAT': '%d %b %Y',
 }
 
-if 'DEV' not in os.environ:
+if 'DEBUG' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
         'rest_framework.renderers.JSONRenderer',
     ]
@@ -106,10 +106,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+client_origin = os.environ.get('CLIENT_ORIGIN')
+if client_origin:
+    origins = [origin.strip() for origin in client_origin.split(',')]
+else:
+    origins = []
 
-CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-        ]
+CORS_ALLOWED_ORIGINS = origins
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -148,7 +151,7 @@ else:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
     }
-    print('connected')
+
 
 
 # Password validation
