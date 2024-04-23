@@ -1,8 +1,8 @@
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
-from .models import Comment
+from .models import Review
 
-class CommentSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     """
     Serializer for the Comment model
     Adds three extra fields when returning a list of Comment instances
@@ -13,6 +13,7 @@ class CommentSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
+    
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -25,13 +26,13 @@ class CommentSerializer(serializers.ModelSerializer):
         return naturaltime(obj.updated_at)
 
     class Meta:
-        model = Comment
+        model = Review
         fields = [
             'id', 'user', 'is_owner', 'profile_id', 'profile_image',
-            'recipe', 'created_at', 'updated_at', 'text'  
+            'recipe', 'created_at', 'updated_at', 'text', 'image' 
         ]
 
-class CommentDetailSerializer(CommentSerializer):
+class ReviewDetailSerializer(ReviewSerializer):
     """
     Serializer for the Comment model used in Detail view
     """

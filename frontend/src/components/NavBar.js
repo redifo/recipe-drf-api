@@ -18,7 +18,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="">
                         <NavLink className={ styles.NavLink } to='/' exact activeClassName= { styles.Active } ><i className="fas fa-home"></i>Home</NavLink>
-                        <NavLink className={ styles.NavLink } to='/Link' activeClassName= { styles.Active } >Link</NavLink>
+                        <NavLink className={ styles.NavLink } to='/recipes' activeClassName= { styles.Active } >Recipes</NavLink>
                     </Nav>
                     <Nav className='ml-auto'>
                         {

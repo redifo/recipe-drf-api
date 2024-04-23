@@ -15,6 +15,7 @@ function App() {
           <Route path="/login" exact render={() => <h1>Sign in</h1>} />
           <Route path="/signup" exact render={() => <h1>Sign Up</h1>} />
           <Route path="/profile" exact render={() => <h1>Your Profile</h1>} />
+          <Route path="/recipes" exact render={() => <h1>Recipes</h1>} />
           <Route path="/action" exact render={() => <h1>Perform an Action</h1>} />
           <Route path="/something" exact render={() => <h1>Something Else</h1>} />
           {/* Fallback route for unmatched paths */}

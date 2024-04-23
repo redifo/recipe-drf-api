@@ -12,7 +12,6 @@ class Recipe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='recipe_images', default='../recipe-default_ye1fru')
- 
     ingredients = models.TextField() 
     tags = models.ManyToManyField('Tag', related_name='recipes', blank=True)
     class Meta:
