@@ -13,7 +13,7 @@ class RecipeList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Recipe.objects.annotate(
         ratings_average=Avg('ratings__score'),
-        comments_count=Count('comments', distinct=True)
+        reviews_count=Count('reviews', distinct=True)
     ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
@@ -33,7 +33,7 @@ class RecipeList(generics.ListCreateAPIView):
     ]
     ordering_fields = [
         'ratings_average',
-        'comments_count',
+        'reviews_count',
         'ratings__created_at',
     ]
 

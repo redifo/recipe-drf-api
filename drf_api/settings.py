@@ -90,7 +90,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'profiles',
     'recipes',
-    'comments',
+    'reviews',
     'ratings',
     'followers',
 ]

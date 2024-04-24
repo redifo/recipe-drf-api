@@ -1,5 +1,5 @@
 from django.urls import path
-from comments import views
+from reviews import views
 
 urlpatterns = [
     path('reviews/', views.ReviewList.as_view()),

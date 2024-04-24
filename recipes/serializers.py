@@ -14,7 +14,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
     rating_id = serializers.SerializerMethodField()
     ratings_average = serializers.ReadOnlyField()
-    comments_count = serializers.ReadOnlyField()
+    reviews_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -62,6 +62,6 @@ class RecipeSerializer(serializers.ModelSerializer):
             'profile_id',
             'profile_image',
             'rating_id',
-            'comments_count',
+            'reviews_count',
             'ratings_average'
         ]

@@ -3,8 +3,8 @@ from recipes.models import Recipe
 from django.contrib.auth.models import User
 
 class Review(models.Model):
-    user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name='reviews', on_delete=models.CASCADE)
     text = models.TextField()
     image = models.ImageField(upload_to='review_pics')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -12,4 +12,4 @@ class Review(models.Model):
     class Meta:
         ordering = ['-created_at']
     def __str__(self):
-        return f"Comment by {self.user.username} on {self.recipe.title}"
+        return f"review by {self.user.username} on {self.recipe.title}"

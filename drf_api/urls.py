@@ -30,7 +30,7 @@ urlpatterns = [
     ),
     path('api/', include('profiles.urls')),
     path('api/', include('recipes.urls')),
-    path('api/', include('comments.urls')),
+    path('api/', include('reviews.urls')),
     path('api/', include('ratings.urls')),
     path('api/', include('followers.urls')),
 ]
