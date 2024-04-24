@@ -4,7 +4,7 @@ from reviews.models import Review
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name='likes')
     is_like = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
 

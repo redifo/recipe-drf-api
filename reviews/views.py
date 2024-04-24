@@ -1,10 +1,9 @@
 from rest_framework import generics, permissions
+from django.db.models import Count, Q
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Review
 from .serializers import ReviewSerializer, ReviewDetailSerializer
-from rest_framework.decorators import action
-from rest_framework.response import Response
 
 
 class ReviewList(generics.ListCreateAPIView):
@@ -13,7 +12,10 @@ class ReviewList(generics.ListCreateAPIView):
     """
     serializer_class = ReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Review.objects.all()
+    queryset = Review.objects.annotate(
+        likes_count=Count('likes', filter=Q(likes__is_like=True)),
+        dislikes_count=Count('likes', filter=Q(likes__is_like=False))
+    )
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['recipe']
 

@@ -12,7 +12,8 @@ class ReviewSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
-    
+    likes_count = serializers.IntegerField(read_only=True)
+    dislikes_count = serializers.IntegerField(read_only=True)
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -28,7 +29,8 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = [
             'id', 'user', 'is_owner', 'profile_id', 'profile_image',
-            'recipe', 'created_at', 'updated_at', 'text', 'image' 
+            'recipe', 'created_at', 'updated_at', 'text', 'image', 
+            'likes_count', 'dislikes_count'
         ]
 
 class ReviewDetailSerializer(ReviewSerializer):
