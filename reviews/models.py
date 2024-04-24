@@ -6,7 +6,7 @@ class Review(models.Model):
     user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, related_name='reviews', on_delete=models.CASCADE)
     text = models.TextField()
-    image = models.ImageField(upload_to='review_pics')
+    image = models.ImageField(upload_to='review_pics', blank=True, null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     class Meta:

@@ -20,7 +20,7 @@ class ReviewList(generics.ListCreateAPIView):
     filterset_fields = ['recipe']
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        serializer.save(user=self.request.user)
 
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
