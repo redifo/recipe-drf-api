@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
 from django.db.models import Count, Q
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
@@ -16,9 +16,16 @@ class ReviewList(generics.ListCreateAPIView):
         likes_count=Count('likes', filter=Q(likes__is_like=True)),
         dislikes_count=Count('likes', filter=Q(likes__is_like=False))
     )
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [
+        filters.OrderingFilter,
+        DjangoFilterBackend
+                       ]
     filterset_fields = ['recipe']
-
+    ordering_fields = [
+        'likes_count',
+        'dislikes_count',
+        'likes__created_at',
+        ]
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
