@@ -8,19 +8,19 @@ import { useCurrentUser } from '../contexts/CurrentUserContext';
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
-    // Simulated authentication state
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+
     const loggedOutIcons = <>
         <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signin"><i class="fa-solid fa-right-to-bracket"></i>Login</NavLink>
         <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signup"><i class="fa-solid fa-user-plus"></i>Sign Up</NavLink>
     </>
+
     const loggedInIcons = <>
         <NavDropdown title={<span><i className="fa-solid fa-user"></i> {currentUser?.username}</span>} id="basic-nav-dropdown">
             <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/profile" >Profile Page</NavDropdown.Item>
             <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/action" >Another action</NavDropdown.Item>
             <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/something" >Something</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item onClick={() => setIsLoggedIn(false)}> <i class="fa-solid fa-right-from-bracket"></i>Sign Out</NavDropdown.Item>
+            <NavDropdown.Item as={NavLink}  to="/api/dj-rest-auth/logout"> <i class="fa-solid fa-right-from-bracket"></i>Sign Out</NavDropdown.Item>
         </NavDropdown>
     </>
 
