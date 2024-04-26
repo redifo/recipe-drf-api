@@ -88,11 +88,14 @@ const SignUpForm = () => {
                         {errors.password2?.map((message, idx) =>
                             <Alert variant="warning" key={idx}>{message}</Alert>
                         )}
-                        <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-3`} variant="primary" type="submit">
+                        <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-2 mb-2`} variant="primary" type="submit">
                             Sign Up
                         </Button>
+                        {errors.non_field_errors?.map((message, idx) => (
+                            <Alert variant="warning" key={idx} className="mt-3">{message}</Alert>
+                        ))}
                     </Form>
-                    <Link className={`${styles.Link} pt-4`} to="/signin">
+                    <Link className={`${styles.Link} mt-4`} to="/signin">
                         Already have an account? <span>Sign in</span>
                     </Link>
                 </Container>
