@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
     // Simulated authentication state
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     return (
         <Navbar className={styles.NavBar} expand="md" fixed='top'>

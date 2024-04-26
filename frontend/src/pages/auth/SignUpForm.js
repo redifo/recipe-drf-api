@@ -33,11 +33,11 @@ const SignUpForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('api/dj-rest-auth/registration/', signUpData)
+            await axios.post('/api/dj-rest-auth/registration/', signUpData)
             history.push('/signin')
 
         } catch (err) {
-            setErrors(err.response?.data)
+            setErrors(err.response?.data);
         }
     };
     return (
@@ -49,7 +49,7 @@ const SignUpForm = () => {
                         <h1 className={`${styles.Header} pb-2 pt-2`}>Sign Up</h1>
 
                         <Form onSubmit={handleSubmit}>
-                            <Form.Group controlId="username">
+                            <Form.Group className={styles.FormGroup} controlId="username">
                                 <Form.Label className="d-none">Username</Form.Label>
                                 <Form.Control
                                     className={styles.Input}
@@ -60,10 +60,10 @@ const SignUpForm = () => {
                                     onChange={handleChange} />
                             </Form.Group>
                             {errors.username?.map((message, idx) =>
-                                <Alert variant="warning" key={idx}>{message}</Alert>
+                                <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             )}
 
-                            <Form.Group controlId="password1">
+                            <Form.Group className={styles.FormGroup} controlId="password1">
                                 <Form.Label className="d-none">Password</Form.Label>
                                 <Form.Control
                                     className={styles.Input}
@@ -74,9 +74,9 @@ const SignUpForm = () => {
                                     onChange={handleChange} />
                             </Form.Group>
                             {errors.password1?.map((message, idx) =>
-                                <Alert variant="warning" key={idx}>{message}</Alert>
+                                <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             )}
-                            <Form.Group controlId="password2">
+                            <Form.Group className={styles.FormGroup} controlId="password2">
                                 <Form.Label className="d-none">Confirm Password</Form.Label>
                                 <Form.Control
                                     className={styles.Input}
@@ -87,13 +87,13 @@ const SignUpForm = () => {
                                     onChange={handleChange} />
                             </Form.Group>
                             {errors.password2?.map((message, idx) =>
-                                <Alert variant="warning" key={idx}>{message}</Alert>
+                                <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             )}
-                            <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-2 mb-2`} type="submit">
+                            <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-4 mb-2`} type="submit">
                                 Sign Up
                             </Button>
                             {errors.non_field_errors?.map((message, idx) => (
-                                <Alert variant="warning" key={idx} className="mt-3">{message}</Alert>
+                                <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             ))}
                         </Form>
                         <Link className={`${styles.Link} mt-4 mb-1`} to="/signin">

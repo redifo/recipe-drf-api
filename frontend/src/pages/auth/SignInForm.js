@@ -33,7 +33,7 @@ const SignInForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('api/dj-rest-auth/login/', SignInData)
+            await axios.post('/api/dj-rest-auth/login/', SignInData)
             history.push('/')
 
         } catch (err) {
@@ -49,7 +49,7 @@ const SignInForm = () => {
                         <h1 className={`${styles.Header} pb-2 pt-2`}>Sign In</h1>
 
                         <Form onSubmit={handleSubmit}>
-                            <Form.Group controlId="username">
+                            <Form.Group className={styles.FormGroup} controlId="username">
                                 <Form.Label className="d-none">Username</Form.Label>
                                 <Form.Control
                                     className={styles.Input}
@@ -60,7 +60,7 @@ const SignInForm = () => {
                                     onChange={handleChange} />
                             </Form.Group>
                             {errors.username?.map((message, idx) =>
-                                <Alert variant="warning" key={idx}>{message}</Alert>
+                                <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             )}
 
                             <Form.Group controlId="password">
@@ -74,13 +74,13 @@ const SignInForm = () => {
                                     onChange={handleChange} />
                             </Form.Group>
                             {errors.password?.map((message, idx) =>
-                                <Alert variant="warning" key={idx}>{message}</Alert>
+                                <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             )}
                             <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-2 mb-2`} type="submit">
                                 Sign In
                             </Button>
                             {errors.non_field_errors?.map((message, idx) => (
-                                <Alert variant="warning" key={idx} className="mt-3">{message}</Alert>
+                                <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             ))}
                         </Form>
                         <Link className={`${styles.Link} mt-4 mb-1`} to="/signup">
