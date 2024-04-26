@@ -9,8 +9,10 @@ import pancakeImage from '../../assets/img/pancakes.webp';
 
 import { Form, Button, Image, Col, Row, Alert } from "react-bootstrap";
 import axios from "axios";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 const SignInForm = () => {
+    const setCurrentUser = useSetCurrentUser();
 
     const [SignInData, setSignInData] = useState({
         username: '',
@@ -33,7 +35,8 @@ const SignInForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('/api/dj-rest-auth/login/', SignInData)
+            const {data} = await axios.post('/api/dj-rest-auth/login/', SignInData)
+            setCurrentUser(data.user)
             history.push('/')
 
         } catch (err) {
