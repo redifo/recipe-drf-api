@@ -9,10 +9,10 @@
 
 .Row {
     width: 100%;
-    flex-grow: 1; /* Allow the row to grow with content */
-    display: flex; /* Using flex to control the columns */
-    flex-direction: row; /* Columns next to each other */
-    align-items: stretch; /* Stretch columns to fill the row */
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: row; 
+    align-items: stretch; 
     border: 1px solid;
     border-color: #eeeeee;
     border-radius: 20px;
@@ -68,7 +68,11 @@
 }
 
 .SignInCol {
-    height: 320px;
+    margin: 0px !important;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .SignUpCol {

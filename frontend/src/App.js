@@ -5,6 +5,7 @@ import styles from './App.module.css';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import SignUpForm from './pages/auth/SignUpForm';
+import SignInForm from './pages/auth/SignInForm';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Container className={styles.Main}>
         <Switch>
           <Route path="/" exact render={() => <h1>Welcome to the app!</h1>} />
-          <Route path="/login" exact render={() => <h1>Sign in</h1>} />
+          <Route path="/signin" exact render={() => <SignInForm/>} />
           <Route path="/signup" exact render={() => <SignUpForm/>} />
           <Route path="/profile" exact render={() => <h1>Your Profile</h1>} />
           <Route path="/recipes" exact render={() => <h1>Recipes</h1>} />

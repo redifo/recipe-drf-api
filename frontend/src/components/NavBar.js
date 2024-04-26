@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
     // Simulated authentication state
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     return (
         <Navbar className={styles.NavBar} expand="md" fixed='top'>
@@ -34,7 +34,7 @@ const NavBar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <NavLink className={ styles.NavLink } activeClassName= { styles.Active } to="/login"><i class="fa-solid fa-right-to-bracket"></i>Login</NavLink>
+                                    <NavLink className={ styles.NavLink } activeClassName= { styles.Active } to="/signin"><i class="fa-solid fa-right-to-bracket"></i>Login</NavLink>
                                     <NavLink className={ styles.NavLink } activeClassName= { styles.Active } to="/signup"><i class="fa-solid fa-user-plus"></i>Sign Up</NavLink>
                                 </>
                             )
