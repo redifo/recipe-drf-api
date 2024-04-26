@@ -1,13 +1,14 @@
 .NavBar{
-    background-color: antiquewhite;
+    background-color: #e4bf8d;
+    width: 100%;
 }
 
 .Active  {
-    color:rgb(0, 17, 255) ;
+    color:#c65c14 ;
 }
 
 .Active  i{
-    color:rgb(0, 17, 255) ;
+    color:#c65c14 ;
 }
 
 .NavLink {
@@ -18,7 +19,7 @@
 
 i {
     margin-right: 0px;  /* Space between icon and text */
-    color: #cfced3;
+    color: #000000;
     font-size: 1.6rem;
 }
 
@@ -29,10 +30,37 @@ i {
     transition: color ease-in-out 0.3s;
 }
 
-.NavLink a:hover {
-    text-decoration: none;
+a:hover {
+    color: #c65c14;
 }
 
-.NavLink a:hover i {
-    color: #2142b2;
+ a:hover i {
+    color: #c65c14;
+}
+
+.Container{
+    margin-left: 0px;
+    margin-right: 5px;
+    width: 100%;
+}
+.loggedInIcons {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {  /* Adjust this breakpoint as needed */
+    .loggedInIcons {
+        display: flex;
+        align-items: center;
+    }
+
+    .NavDropdown {
+        display: flex;
+        margin-right: 10px; /* Adjust spacing as needed */
+    }
+
+    /* Ensure icons are smaller to fit better in mobile view */
+    .loggedInIcons i {
+        font-size: 1.2rem; /* Adjust size as needed */
+    }
 }

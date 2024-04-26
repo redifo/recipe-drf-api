@@ -15,18 +15,32 @@ const NavBar = () => {
     </>
 
     const loggedInIcons = <>
-        <NavDropdown title={<span><i className="fa-solid fa-user"></i> {currentUser?.username}</span>} id="basic-nav-dropdown">
-            <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/profile" >Profile Page</NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/action" >Another action</NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/something" >Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item as={NavLink}  to="/api/dj-rest-auth/logout"> <i class="fa-solid fa-right-from-bracket"></i>Sign Out</NavDropdown.Item>
-        </NavDropdown>
+        <div className={styles.loggedInIcons}>
+            <NavDropdown
+                className='pl-2'
+                title={<span><i className="fa-solid fa-user"></i> {currentUser?.username}</span>}
+                id="basic-nav-dropdown"
+            >
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/profile">Profile Page</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/liked">Liked Recipes</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/followed">Followed Chefs</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item as={NavLink} to="/api/dj-rest-auth/logout">
+                    <i className="fa-solid fa-right-from-bracket"></i> Sign Out
+                </NavDropdown.Item>
+            </NavDropdown>
+            <NavLink className={styles.NavLink} to="/notifications">
+                <i className="fa-solid fa-bell"></i>
+            </NavLink>
+            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/add-recipe">
+                <i className="fa-solid fa-plus fa-2xl"></i>
+            </NavLink>
+        </div>
     </>
 
     return (
         <Navbar className={styles.NavBar} expand="md" fixed='top'>
-            <Container>
+            <Container fluid className={styles.Container}>
                 <NavLink to='/'>
                     <Navbar.Brand ><img src={logo} alt="logo" height="75" />Recipe Domain</Navbar.Brand>
                 </NavLink>
@@ -34,7 +48,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="">
                         <NavLink className={styles.NavLink} to='/' exact activeClassName={styles.Active} ><i className="fas fa-home"></i>Home</NavLink>
-                        <NavLink className={styles.NavLink} to='/recipes' activeClassName={styles.Active} >Recipes</NavLink>
+                        <NavLink className={styles.NavLink} to='/recipes' activeClassName={styles.Active} ><i class="fa-solid fa-utensils"></i>Recipes</NavLink>
                     </Nav>
                     <Nav className='ml-auto'>
                         {
