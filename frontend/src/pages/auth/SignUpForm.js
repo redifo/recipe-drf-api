@@ -41,78 +41,81 @@ const SignUpForm = () => {
         }
     };
     return (
-        <Row className={styles.Row}>
+        <div className={styles.Wrapper}>
+            <Row className={styles.Row}>
 
-            <Col className="my-auto p-0" md={7}>
-                <Container className={`${appStyles.Content} p-4`}>
-                    <h1 className={`${styles.Header} pb-2 pt-2`}>Sign Up</h1>
+                <Col className="my-auto p-0 text-center" md={8}>
+                    
+                        <h1 className={`${styles.Header} pb-2 pt-2`}>Sign Up</h1>
 
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group controlId="username">
-                            <Form.Label className="d-none">Username</Form.Label>
-                            <Form.Control
-                                className={styles.Input}
-                                type="text"
-                                placeholder="Username"
-                                name="username"
-                                value={username}
-                                onChange={handleChange} />
-                        </Form.Group>
-                        {errors.username?.map((message, idx) =>
-                            <Alert variant="warning" key={idx}>{message}</Alert>
-                        )}
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group controlId="username">
+                                <Form.Label className="d-none">Username</Form.Label>
+                                <Form.Control
+                                    className={styles.Input}
+                                    type="text"
+                                    placeholder="Username"
+                                    name="username"
+                                    value={username}
+                                    onChange={handleChange} />
+                            </Form.Group>
+                            {errors.username?.map((message, idx) =>
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            )}
 
-                        <Form.Group controlId="password1">
-                            <Form.Label className="d-none">Password</Form.Label>
-                            <Form.Control
-                                className={styles.Input}
-                                type="password"
-                                placeholder="Password"
-                                name="password1"
-                                value={password1}
-                                onChange={handleChange} />
-                        </Form.Group>
-                        {errors.password1?.map((message, idx) =>
-                            <Alert variant="warning" key={idx}>{message}</Alert>
-                        )}
-                        <Form.Group controlId="password2">
-                            <Form.Label className="d-none">Confirm Password</Form.Label>
-                            <Form.Control
-                                className={styles.Input}
-                                type="password"
-                                placeholder="Confirm Password"
-                                name="password2"
-                                value={password2}
-                                onChange={handleChange} />
-                        </Form.Group>
-                        {errors.password2?.map((message, idx) =>
-                            <Alert variant="warning" key={idx}>{message}</Alert>
-                        )}
-                        <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-2 mb-2`} variant="primary" type="submit">
-                            Sign Up
-                        </Button>
-                        {errors.non_field_errors?.map((message, idx) => (
-                            <Alert variant="warning" key={idx} className="mt-3">{message}</Alert>
-                        ))}
-                    </Form>
-                    <Link className={`${styles.Link} mt-4`} to="/signin">
-                        Already have an account? <span>Sign in</span>
-                    </Link>
-                </Container>
+                            <Form.Group controlId="password1">
+                                <Form.Label className="d-none">Password</Form.Label>
+                                <Form.Control
+                                    className={styles.Input}
+                                    type="password"
+                                    placeholder="Password"
+                                    name="password1"
+                                    value={password1}
+                                    onChange={handleChange} />
+                            </Form.Group>
+                            {errors.password1?.map((message, idx) =>
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            )}
+                            <Form.Group controlId="password2">
+                                <Form.Label className="d-none">Confirm Password</Form.Label>
+                                <Form.Control
+                                    className={styles.Input}
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                    name="password2"
+                                    value={password2}
+                                    onChange={handleChange} />
+                            </Form.Group>
+                            {errors.password2?.map((message, idx) =>
+                                <Alert variant="warning" key={idx}>{message}</Alert>
+                            )}
+                            <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-2 mb-2`} variant="primary" type="submit">
+                                Sign Up
+                            </Button>
+                            {errors.non_field_errors?.map((message, idx) => (
+                                <Alert variant="warning" key={idx} className="mt-3">{message}</Alert>
+                            ))}
+                        </Form>
+                        <Link className={`${styles.Link} mt-4 mb-1`} to="/signin">
+                            Already have an account? <span>Sign in</span>
+                        </Link>
+                    
 
-            </Col>
-            <Col
-                md={5}
-                className={`my-auto d-none d-md-block p-0 ${styles.SignUpCol}`}
-            >
-                <Image
-                    className={`${appStyles.FillerImage}`}
-                    src={
-                        pancakeImage
-                    }
-                />
-            </Col>
-        </Row>
+                </Col>
+                <Col
+                    md={4}
+                    className={`my-auto d-none d-md-block p-0 ${styles.SignUpCol}`}
+                >
+                    <Image
+                        className={`${appStyles.FillerImage}`}
+                        src={
+                            pancakeImage
+                        }
+                    />
+                </Col>
+
+            </Row>
+        </div>
     );
 };
 

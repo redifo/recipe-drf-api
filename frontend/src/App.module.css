@@ -4,6 +4,7 @@
     font-weight: 400;
     font-style: normal;
     min-height: 100vh;
+    background-color: #ececec70;
 }
 
 /*  <uniquifier>: Use a unique and descriptive class name
@@ -18,13 +19,13 @@
 
 .Main {
     padding-top: 108px;
+    
 }
 
 .Content {
     background-color: #ffffff;
     padding: 10px;
     border: 1px solid #dadadf;
-    
 }
 
 .FillerImage {

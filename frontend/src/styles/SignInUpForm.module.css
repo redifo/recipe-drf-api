@@ -1,10 +1,23 @@
-.Row {
-    height: calc(100vh - 81px);
+.Wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    align-items: center;
+    height: calc(100vh - 81px);
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.Row {
+    width: 100%;
+    flex-grow: 1; /* Allow the row to grow with content */
+    display: flex; /* Using flex to control the columns */
+    flex-direction: row; /* Columns next to each other */
+    align-items: stretch; /* Stretch columns to fill the row */
+    border: 1px solid;
+    border-color: #eeeeee;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: white;
 }
 
 .Input {
@@ -14,7 +27,8 @@
     color: #000000;
     text-align: center;
     padding: 10px;
-    
+    width: 85%;
+    margin: auto;
 }
 
 .Header {
@@ -41,15 +55,15 @@
 
 
 .Link :hover {
-   color: #0056b3;
+    color: #0056b3;
 }
 
 
-   
+
 
 .Container {
     padding: 0px;
-    
+
 
 }
 
@@ -58,5 +72,9 @@
 }
 
 .SignUpCol {
-    height: 363px;
+    margin: 0px !important;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
