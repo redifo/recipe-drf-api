@@ -35,8 +35,8 @@ const NavBar = () => {
     };
 
     const loggedOutIcons = <>
-        <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signin"><i class="fa-solid fa-right-to-bracket"></i>Login</NavLink>
-        <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signup"><i class="fa-solid fa-user-plus"></i>Sign Up</NavLink>
+        <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signin"><i className="fa-solid fa-right-to-bracket"></i>Login</NavLink>
+        <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signup"><i className="fa-solid fa-user-plus"></i>Sign Up</NavLink>
     </>
 
     const loggedInIcons = <>
@@ -48,8 +48,8 @@ const NavBar = () => {
                 id="basic-nav-dropdown"
             >
                 <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to={`/profiles/${currentUser?.profile_id}`}> <i className="fa-solid fa-user"></i> Profile Page</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/liked"><i class="fa-solid fa-heart"></i>  Liked Recipes</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/followed"><i class="fa-solid fa-users"></i>Followed Chefs</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/liked"><i className="fa-solid fa-heart"></i>  Liked Recipes</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/followed"><i className="fa-solid fa-users"></i>Followed Chefs</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item as={NavLink} to="/" onClick={handleSignOut}>
                     <i className="fa-solid fa-right-from-bracket"></i> Sign Out
@@ -74,7 +74,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="">
                         <NavLink className={styles.NavLink} to='/' exact activeClassName={styles.Active} ><i className="fas fa-home"></i>Home</NavLink>
-                        <NavLink className={styles.NavLink} to='/recipes' activeClassName={styles.Active} ><i class="fa-solid fa-utensils"></i>Recipes</NavLink>
+                        <NavLink className={styles.NavLink} to='/recipes' activeClassName={styles.Active} ><i className="fa-solid fa-utensils"></i>Recipes</NavLink>
                     </Nav>
                     <Nav className='ml-auto'>
                         {
