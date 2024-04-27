@@ -58,7 +58,7 @@ const NavBar = () => {
             <NavLink ref={notificationRef} className={styles.NavLink} to="/notifications">
                 <i className="fa-solid fa-bell"></i>
             </NavLink>
-            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/add-recipe">
+            <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/recipe/create">
                 <i className="fa-solid fa-plus fa-2xl"></i>
             </NavLink>
         </div>

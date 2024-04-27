@@ -6,8 +6,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
-
-
+import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
 
 
 function App() {
@@ -23,6 +22,7 @@ function App() {
           <Route path="/recipes" exact render={() => <h1>Recipes</h1>} />
           <Route path="/action" exact render={() => <h1>Perform an Action</h1>} />
           <Route path="/something" exact render={() => <h1>Something Else</h1>} />
+          <Route path="/recipe/create" exact render={() => <RecipeCreateForm />} />
           {/* Fallback route for unmatched paths */}
           <Route render={() => <h1>404 Not Found</h1>} />
         </Switch>
