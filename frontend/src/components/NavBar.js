@@ -5,27 +5,30 @@ import styles from '../styles/NavBar.module.css';
 import { NavLink } from 'react-router-dom';
 
 import { useCurrentUser } from '../contexts/CurrentUserContext';
+import Avatar from './Avatar';
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
+    const setCurrentUser = useSetCurrentUser();
 
+   
     const loggedOutIcons = <>
         <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signin"><i class="fa-solid fa-right-to-bracket"></i>Login</NavLink>
         <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signup"><i class="fa-solid fa-user-plus"></i>Sign Up</NavLink>
     </>
 
     const loggedInIcons = <>
-        <div className={styles.loggedInIcons}>
+        <div className={styles.LoggedInIcons}>
             <NavDropdown
-                className='pl-2'
-                title={<span><i className="fa-solid fa-user"></i> {currentUser?.username}</span>}
+                className={`${styles.NavDropdown} pl-2`}
+                title={ <Avatar src={currentUser?.profile_image} height={60} text={currentUser?.username}/>}
                 id="basic-nav-dropdown"
             >
-                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/profile">Profile Page</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/liked">Liked Recipes</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/followed">Followed Chefs</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to={`/profiles/${currentUser?.profile_id}`}> <i className="fa-solid fa-user"></i> Profile Page</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/liked"><i class="fa-solid fa-heart"></i>  Liked Recipes</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/followed"><i class="fa-solid fa-users"></i>Followed Chefs</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item as={NavLink} to="/api/dj-rest-auth/logout">
+                <NavDropdown.Item as={NavLink} to="/" onClick={()=> {}}>
                     <i className="fa-solid fa-right-from-bracket"></i> Sign Out
                 </NavDropdown.Item>
             </NavDropdown>
