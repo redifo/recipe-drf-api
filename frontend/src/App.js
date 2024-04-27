@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Route, Switch } from 'react-router-dom';
 import styles from './App.module.css';

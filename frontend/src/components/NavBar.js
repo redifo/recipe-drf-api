@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import logo from '../assets/img/logo-removebg.png';
 import styles from '../styles/NavBar.module.css';
@@ -7,18 +7,24 @@ import { NavLink } from 'react-router-dom';
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import Avatar from './Avatar';
 import axios from "axios";
+import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
 
+    const dropdownRef = useRef(null);
+    const notificationRef = useRef(null);
+
+    const { expanded, setExpanded, ref } = useClickOutsideToggle([dropdownRef, notificationRef]);
+
     const handleSignOut = async () => {
         try {
-            const response = await axios.post("/dj-rest-auth/logout/", null, {
+            await axios.post("/dj-rest-auth/logout/", null, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': axios.defaults.xsrfHeaderName, 
+                    'X-CSRFToken': axios.defaults.xsrfHeaderName,
                 },
             });
             setCurrentUser(null);
@@ -36,6 +42,7 @@ const NavBar = () => {
     const loggedInIcons = <>
         <div className={styles.LoggedInIcons}>
             <NavDropdown
+                ref={dropdownRef}
                 className={`${styles.NavDropdown} pl-2`}
                 title={<Avatar src={currentUser?.profile_image} height={60} text={currentUser?.username} />}
                 id="basic-nav-dropdown"
@@ -48,7 +55,7 @@ const NavBar = () => {
                     <i className="fa-solid fa-right-from-bracket"></i> Sign Out
                 </NavDropdown.Item>
             </NavDropdown>
-            <NavLink className={styles.NavLink} to="/notifications">
+            <NavLink ref={notificationRef} className={styles.NavLink} to="/notifications">
                 <i className="fa-solid fa-bell"></i>
             </NavLink>
             <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/add-recipe">
@@ -58,12 +65,12 @@ const NavBar = () => {
     </>
 
     return (
-        <Navbar className={styles.NavBar} expand="md" fixed='top'>
+        <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed='top'>
             <Container fluid className={styles.Container}>
                 <NavLink to='/'>
                     <Navbar.Brand ><img src={logo} alt="logo" height="75" />Recipe Domain</Navbar.Brand>
                 </NavLink>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle ref={ref} onClick={() => setExpanded(!expanded)} aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="">
                         <NavLink className={styles.NavLink} to='/' exact activeClassName={styles.Active} ><i className="fas fa-home"></i>Home</NavLink>
