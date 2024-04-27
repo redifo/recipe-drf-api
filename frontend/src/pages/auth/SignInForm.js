@@ -35,7 +35,7 @@ const SignInForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const {data} = await axios.post('/api/dj-rest-auth/login/', SignInData)
+            const {data} = await axios.post('/dj-rest-auth/login/', SignInData)
             setCurrentUser(data.user)
             history.push('/')
 
@@ -66,7 +66,7 @@ const SignInForm = () => {
                                 <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             )}
 
-                            <Form.Group controlId="password">
+                            <Form.Group className={styles.FormGroup} controlId="password">
                                 <Form.Label className="d-none">Password</Form.Label>
                                 <Form.Control
                                     className={styles.Input}
@@ -79,7 +79,7 @@ const SignInForm = () => {
                             {errors.password?.map((message, idx) =>
                                 <Alert className={styles.Alert} variant="warning" key={idx}>{message}</Alert>
                             )}
-                            <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-2 mb-2`} type="submit">
+                            <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Yellow} mt-5 mb-2`} type="submit">
                                 Sign In
                             </Button>
                             {errors.non_field_errors?.map((message, idx) => (
