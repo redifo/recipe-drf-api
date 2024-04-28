@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { Form, Button, Row, Col, Container, Alert, Image } from "react-bootstrap";
+import { Form, Button, Col, Container, Alert, Image } from "react-bootstrap";
 import { useDropzone } from 'react-dropzone';
 
 import styles from "../../styles/RecipeCreateEditForm.module.css";
@@ -34,13 +34,13 @@ function RecipeCreateForm() {
     const handleToggleTag = tagId => {
         setSelectedTags(prev => {
             if (prev.includes(tagId)) {
-                return prev.filter(t => t !== tagId); 
+                return prev.filter(t => t !== tagId);
             } else {
                 if (prev.length >= 3) {
-                    
+
                     return prev;
                 }
-                return [...prev, tagId]; 
+                return [...prev, tagId];
             }
         });
     };
@@ -50,8 +50,8 @@ function RecipeCreateForm() {
             <Button
                 key={tag.id}
                 onClick={() => handleToggleTag(tag.id)}
-                variant={selectedTags.includes(tag.id) ? "primary" : "secondary"}
-                className="m-1">
+                variant={selectedTags.includes(tag.id) ? "info" : "secondary"}
+                className={`m-1 ${btnStyles.TagButton}`}>
                 {tag.name}
             </Button>
         ));
@@ -68,7 +68,7 @@ function RecipeCreateForm() {
         image: null,
         tags: [],
     });
-    const { title, description, ingredients, instructions, preparation_time, cooking_time, servings, image, tags } = recipeData;
+    const { title, description, ingredients, instructions, preparation_time, cooking_time, servings, image } = recipeData;
 
     const history = useHistory();
 
@@ -157,53 +157,53 @@ function RecipeCreateForm() {
 
 
     const recipeFields = (
-        <div className="text-center">
+        <div className={styles.RecipeFields}>
             <Form.Group>
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" name="title" value={title} onChange={handleChange} />
+                <Form.Label><strong>Title</strong></Form.Label>
+                <Form.Control type="text" name="title" placeholder="What do you call your recipe?" value={title} onChange={handleChange} />
             </Form.Group>
             {errors?.title?.map((message, idx) => <Alert variant="warning" key={idx}>{message}</Alert>)}
 
             <Form.Group>
-                <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows={3} name="description" value={description} onChange={handleChange} />
+                <Form.Label><strong>Description</strong></Form.Label>
+                <Form.Control as="textarea" rows={3} name="description" value={description} placeholder="Shortly describe your recipe" onChange={handleChange} />
             </Form.Group>
             {errors?.description?.map((message, idx) => <Alert variant="warning" key={idx}>{message}</Alert>)}
 
             <Form.Group>
-                <Form.Label>Ingredients</Form.Label>
-                <Form.Control as="textarea" rows={3} name="ingredients" value={ingredients} onChange={handleChange} />
+                <Form.Label><strong>Ingredients</strong></Form.Label>
+                <Form.Control as="textarea" rows={3} name="ingredients" placeholder="List your ingredients and their quantities" value={ingredients} onChange={handleChange} />
             </Form.Group>
             {errors?.ingredients?.map((message, idx) => <Alert variant="warning" key={idx}>{message}</Alert>)}
 
             <Form.Group>
-                <Form.Label>Instructions</Form.Label>
-                <Form.Control as="textarea" rows={6} name="instructions" value={instructions} onChange={handleChange} />
+                <Form.Label><strong>Instructions</strong></Form.Label>
+                <Form.Control as="textarea" rows={6} name="instructions" placeholder="How do you cook your recipe?" value={instructions} onChange={handleChange} />
             </Form.Group>
             {errors?.instructions?.map((message, idx) => <Alert variant="warning" key={idx}>{message}</Alert>)}
 
             <Form.Group>
-                <Form.Label>Preparation Time (minutes)</Form.Label>
+                <Form.Label><strong>Preparation Time <i className="fa-solid fa-clock fa-lg"></i>(minutes)</strong></Form.Label>
                 <Form.Control type="number" name="preparation_time" value={preparation_time} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Cooking Time (minutes)</Form.Label>
+                <Form.Label><strong>Cooking Time <i className="fa-solid fa-clock fa-lg"></i> (minutes)</strong></Form.Label>
                 <Form.Control type="number" name="cooking_time" value={cooking_time} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Servings</Form.Label>
-                <Form.Control type="number" name="servings" value={servings} onChange={handleChange} />
+                <Form.Label><strong>Servings</strong></Form.Label>
+                <Form.Control type="number" name="servings" value={servings} onChange={handleChange} placeholder="Number of servings"/>
             </Form.Group>
             <Form.Group>
-                <Form.Label>Tags</Form.Label>
+                <Form.Label><strong>Tags</strong> (Select up to 3 tags for categorisation of your recipe)</Form.Label>
                 <div>{renderTags()}</div>
             </Form.Group>
-            <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => history.goBack()}>
+            <Button className={`${btnStyles.Button} ${btnStyles.Yellow} ${btnStyles.Large}`} onClick={() => history.goBack()}>
                 Cancel
             </Button>
-            <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+            <Button className={`${btnStyles.Button} ${btnStyles.Yellow} ${btnStyles.Large} ml-3`} type="submit">
                 Create
             </Button>
         </div>
@@ -211,9 +211,9 @@ function RecipeCreateForm() {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Row>
+            
                 <Col className="py-2 p-0 p-md-2" md={12}>
-                    <Container className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}>
+                    <Container className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center mb-2`}>
                         <Form.Group className="text-center">
                             <div {...getRootProps({ className: 'dropzone' })}>
                                 <input {...getInputProps()} />
@@ -229,7 +229,7 @@ function RecipeCreateForm() {
                     </Container>
                 </Col>
 
-            </Row>
+           
         </Form>
     );
 }

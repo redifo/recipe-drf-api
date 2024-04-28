@@ -67,3 +67,12 @@
     background-color: #ebc76b;
     color: #000000;
   }
+
+  .TagButton{
+    border-radius: 15px;
+    font-size: 90%;
+  }
+
+  .Large{
+    font-size: 130%;
+  }

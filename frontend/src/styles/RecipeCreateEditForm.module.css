@@ -1,7 +1,12 @@
 .Container {
-    min-height: 343px;
+    min-height: 200px;
   }
 
 .Text{
     margin: auto;
+}
+
+.RecipeFields{
+    margin-left: 10px;
+    margin-right: 10px;
 }
