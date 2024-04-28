@@ -36,7 +36,10 @@ function RecipeCreateForm() {
             if (prev.includes(tagId)) {
                 return prev.filter(t => t !== tagId); 
             } else {
-                
+                if (prev.length >= 3) {
+                    
+                    return prev;
+                }
                 return [...prev, tagId]; 
             }
         });
