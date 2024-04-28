@@ -54,7 +54,7 @@ function RecipeCreateForm() {
         image: null,
         tags: [],
     });
-    const { title, description, ingredients, instructions, preparation_time, cooking_time, servings, image } = recipeData;
+    const { title, description, ingredients, instructions, preparation_time, cooking_time, servings } = recipeData;
 
     const history = useHistory();
 
