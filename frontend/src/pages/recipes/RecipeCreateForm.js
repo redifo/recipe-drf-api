@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { Form, Button, Col, Container, Alert, Image } from "react-bootstrap";
+import { Form, Button, Col, Container, Alert, Image, FormLabel } from "react-bootstrap";
 import { useDropzone } from 'react-dropzone';
 
 import styles from "../../styles/RecipeCreateEditForm.module.css";
@@ -9,40 +9,26 @@ import btnStyles from "../../styles/Button.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 import axios from "axios";
+import Asset from "../../components/Asset";
+import Upload from "../../assets/img/upload.png";
 
 function RecipeCreateForm() {
     useRedirect("loggedOut");
     const [errors, setErrors] = useState({});
-
+    const [imageFile, setImageFile] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
     const [availableTags, setAvailableTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
 
-    useEffect(() => {
-        const fetchTags = async () => {
-            try {
-                const response = await axios.get("/tags");
-                setAvailableTags(response.data.results);
-            } catch (error) {
-                console.log("Error fetching tags:", error);
-                setAvailableTags([]);
-            }
-        };
 
-        fetchTags();
+    useEffect(() => {
+        axios.get("/tags")
+            .then(response => setAvailableTags(response.data.results))
+            .catch(error => console.error("Error fetching tags:", error));
     }, []);
 
     const handleToggleTag = tagId => {
-        setSelectedTags(prev => {
-            if (prev.includes(tagId)) {
-                return prev.filter(t => t !== tagId);
-            } else {
-                if (prev.length >= 3) {
-
-                    return prev;
-                }
-                return [...prev, tagId];
-            }
-        });
+        setSelectedTags(prev => prev.includes(tagId) ? prev.filter(t => t !== tagId) : (prev.length < 3 ? [...prev, tagId] : prev));
     };
 
     const renderTags = () => {
@@ -72,40 +58,12 @@ function RecipeCreateForm() {
 
     const history = useHistory();
 
-
-
-
-
-    const imagePreview = image && (
-        <Image src={image.preview} alt="Recipe preview" rounded className={appStyles.Image} />
-    );
-
     //https://react-dropzone.js.org/
     const onDrop = (acceptedFiles) => {
         const file = acceptedFiles[0];
-        if (file) {
-
-            if (recipeData.image) {
-                URL.revokeObjectURL(recipeData.image.preview);
-            }
-            setRecipeData(prevState => ({
-                ...prevState,
-                image: {
-                    ...file,
-                    preview: URL.createObjectURL(file)
-                }
-            }));
-        }
+        setImageFile(file);
+        setImagePreview(URL.createObjectURL(file));
     };
-
-    useEffect(() => {
-        // Clean up the preview 
-        return () => {
-            if (recipeData.image) {
-                URL.revokeObjectURL(recipeData.image.preview);
-            }
-        };
-    }, [recipeData.image]);
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
@@ -140,7 +98,7 @@ function RecipeCreateForm() {
         formData.append("preparation_time", preparation_time);
         formData.append("cooking_time", cooking_time);
         formData.append("servings", servings);
-        if (recipeData.image) formData.append("image", recipeData.image);
+        if (imageFile) formData.append("image", imageFile);
         selectedTags.forEach(tag => {
             formData.append("tags", tag);
         });
@@ -194,7 +152,7 @@ function RecipeCreateForm() {
 
             <Form.Group>
                 <Form.Label><strong>Servings</strong></Form.Label>
-                <Form.Control type="number" name="servings" value={servings} onChange={handleChange} placeholder="Number of servings"/>
+                <Form.Control type="number" name="servings" value={servings} onChange={handleChange} placeholder="Number of servings" />
             </Form.Group>
             <Form.Group>
                 <Form.Label><strong>Tags</strong> (Select up to 3 tags for categorisation of your recipe)</Form.Label>
@@ -211,25 +169,30 @@ function RecipeCreateForm() {
 
     return (
         <Form onSubmit={handleSubmit}>
-            
-                <Col className="py-2 p-0 p-md-2" md={12}>
-                    <Container className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center mb-2`}>
-                        <Form.Group className="text-center">
-                            <div {...getRootProps({ className: 'dropzone' })}>
-                                <input {...getInputProps()} />
-                                <Button className={`${btnStyles.Button} ${btnStyles.Blue}`}>Upload a photo</Button>
-                                <div>or drag and drop</div>
-                            </div>
-                            {errors?.image?.map((message, idx) => <Alert variant="warning" key={idx}>{message}</Alert>)}
-                            {imagePreview}
-                        </Form.Group>
-                    </Container>
-                    <Container className={appStyles.Content}>
-                        {recipeFields}
-                    </Container>
-                </Col>
 
-           
+            <Col className="py-2 p-0 p-md-2" md={12}>
+                <Container className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center mb-2`}>
+                    <Form.Group className="text-center">
+
+                        <div {...getRootProps({ className: 'dropzone' })}>
+                            <input {...getInputProps()} />
+                            {imagePreview ? (
+                                <FormLabel>Click on the photo or drop another photo here to change the photo<br></br>
+                                    <Image src={imagePreview} alt="Preview" rounded className={appStyles.Image} />
+                                </FormLabel>
+                            ) : (
+                                <Asset src={Upload} message="Drag and drop a photo here, or click to select a photo" />
+                            )}
+                        </div>
+                        {errors?.image?.map((message, idx) => <Alert variant="warning" key={idx}>{message}</Alert>)}
+                    </Form.Group>
+                </Container>
+                <Container className={appStyles.Content}>
+                    {recipeFields}
+                </Container>
+            </Col>
+
+
         </Form>
     );
 }
