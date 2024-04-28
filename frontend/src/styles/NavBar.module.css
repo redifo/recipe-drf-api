@@ -61,7 +61,7 @@ a:hover i {
 
 @media (max-width: 768px) {
 
-    #basic-nav-dropdown .dropdown-menu {
+    .NavDropdown [aria-labelledby = basic-nav-dropdown] {
         position: absolute;
     }
 
