@@ -1,8 +1,8 @@
 from rest_framework import generics, permissions, filters
 from django.db.models import Count, Avg, Q
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Recipe
-from .serializers import RecipeSerializer
+from .models import Recipe, Tag
+from .serializers import RecipeSerializer, TagSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
 class RecipeList(generics.ListCreateAPIView):
@@ -52,3 +52,7 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
         obj = super().get_object()
         self.check_object_permissions(self.request, obj)
         return obj
+
+class TagList(generics.ListAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer

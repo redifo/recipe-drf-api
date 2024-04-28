@@ -8,10 +8,52 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
+import axios from "axios";
 
 function RecipeCreateForm() {
     useRedirect("loggedOut");
     const [errors, setErrors] = useState({});
+
+    const [availableTags, setAvailableTags] = useState([]);
+    const [selectedTags, setSelectedTags] = useState([]);
+
+    useEffect(() => {
+        const fetchTags = async () => {
+            try {
+                const response = await axios.get("/tags");
+                setAvailableTags(response.data.results);
+            } catch (error) {
+                console.log("Error fetching tags:", error);
+                setAvailableTags([]);
+            }
+        };
+
+        fetchTags();
+    }, []);
+
+    const handleToggleTag = tagId => {
+        setSelectedTags(prev => {
+            if (prev.includes(tagId)) {
+                return prev.filter(t => t !== tagId); 
+            } else {
+                
+                return [...prev, tagId]; 
+            }
+        });
+    };
+
+    const renderTags = () => {
+        return availableTags.map(tag => (
+            <Button
+                key={tag.id}
+                onClick={() => handleToggleTag(tag.id)}
+                variant={selectedTags.includes(tag.id) ? "primary" : "secondary"}
+                className="m-1">
+                {tag.name}
+            </Button>
+        ));
+    };
+
     const [recipeData, setRecipeData] = useState({
         title: "",
         description: "",
@@ -21,10 +63,15 @@ function RecipeCreateForm() {
         cooking_time: "",
         servings: "",
         image: null,
+        tags: [],
     });
-    const { title, description, ingredients, instructions, preparation_time, cooking_time, servings, image } = recipeData;
+    const { title, description, ingredients, instructions, preparation_time, cooking_time, servings, image, tags } = recipeData;
 
     const history = useHistory();
+
+
+
+
 
     const imagePreview = image && (
         <Image src={image.preview} alt="Recipe preview" rounded className={appStyles.Image} />
@@ -90,10 +137,10 @@ function RecipeCreateForm() {
         formData.append("preparation_time", preparation_time);
         formData.append("cooking_time", cooking_time);
         formData.append("servings", servings);
-        if (image) {
-            formData.append('image', image);
-        }
-
+        if (recipeData.image) formData.append("image", recipeData.image);
+        selectedTags.forEach(tag => {
+            formData.append("tags", tag);
+        });
         try {
             const { data } = await axiosReq.post("/recipes/", formData);
             history.push(`/recipes/${data.id}`);
@@ -146,7 +193,10 @@ function RecipeCreateForm() {
                 <Form.Label>Servings</Form.Label>
                 <Form.Control type="number" name="servings" value={servings} onChange={handleChange} />
             </Form.Group>
-
+            <Form.Group>
+                <Form.Label>Tags</Form.Label>
+                <div>{renderTags()}</div>
+            </Form.Group>
             <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} onClick={() => history.goBack()}>
                 Cancel
             </Button>
@@ -159,7 +209,7 @@ function RecipeCreateForm() {
     return (
         <Form onSubmit={handleSubmit}>
             <Row>
-                <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+                <Col className="py-2 p-0 p-md-2" md={12}>
                     <Container className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}>
                         <Form.Group className="text-center">
                             <div {...getRootProps({ className: 'dropzone' })}>
@@ -171,12 +221,11 @@ function RecipeCreateForm() {
                             {imagePreview}
                         </Form.Group>
                     </Container>
-                </Col>
-                <Col md={5} lg={4} className="d-none d-md-block">
                     <Container className={appStyles.Content}>
                         {recipeFields}
                     </Container>
                 </Col>
+
             </Row>
         </Form>
     );
