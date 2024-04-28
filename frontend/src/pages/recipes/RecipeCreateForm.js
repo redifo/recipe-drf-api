@@ -158,7 +158,7 @@ function RecipeCreateForm() {
                 <Form.Label><strong>Tags</strong> (Select up to 3 tags for categorisation of your recipe)</Form.Label>
                 <div>{renderTags()}</div>
             </Form.Group>
-            <Button className={`${btnStyles.Button} ${btnStyles.Yellow} ${btnStyles.Large}`} onClick={() => history.goBack()}>
+            <Button className={`${btnStyles.Button} ${btnStyles.Large} ${btnStyles.Red}`} onClick={() => history.goBack()}>
                 Cancel
             </Button>
             <Button className={`${btnStyles.Button} ${btnStyles.Yellow} ${btnStyles.Large} ml-3`} type="submit">
