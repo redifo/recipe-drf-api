@@ -25,7 +25,7 @@ function RecipePage() {
                     <Card.Title>{recipe.title}</Card.Title>
                     <div>
                         {[...Array(5)].map((_, i) => (
-                            <span key={i} className={`fa fa-star ${i < recipe.ratings_average ? '' : 'fa-regular fa-lg'}`}></span>
+                            <span key={i} className={`fa fa-star ${i < recipe.ratings_average ? '' : 'fa-regular '}`}></span>
                         ))}
                         <span> ({recipe.ratings_count})</span>
                     </div>
