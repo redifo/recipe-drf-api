@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Form, Button, Row, Col, Container, Alert, Image } from "react-bootstrap";
 import { useDropzone } from 'react-dropzone';
@@ -26,26 +26,50 @@ function RecipeCreateForm() {
 
     const history = useHistory();
 
+    const imagePreview = image && (
+        <Image src={image.preview} alt="Recipe preview" rounded className={appStyles.Image} />
+    );
+
     //https://react-dropzone.js.org/
     const onDrop = (acceptedFiles) => {
-        const file = acceptedFiles[0]; 
+        const file = acceptedFiles[0];
         if (file) {
-           
+
             if (recipeData.image) {
                 URL.revokeObjectURL(recipeData.image.preview);
             }
-            setRecipeData({
-                ...recipeData,
-                image: Object.assign(file, {
+            setRecipeData(prevState => ({
+                ...prevState,
+                image: {
+                    ...file,
                     preview: URL.createObjectURL(file)
-                })
-            });
+                }
+            }));
         }
     };
 
+    useEffect(() => {
+        // Clean up the preview 
+        return () => {
+            if (recipeData.image) {
+                URL.revokeObjectURL(recipeData.image.preview);
+            }
+        };
+    }, [recipeData.image]);
+
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
-        accept: 'image/*',
+        accept: {
+            'image/jpeg': ['.jpeg', '.jpg'],
+            'image/png': ['.png'],
+            'image/gif': ['.gif'],
+            'image/bmp': ['.bmp'],
+            'image/tiff': ['.tiff', '.tif'],
+            'image/x-icon': ['.ico'],
+            'image/svg+xml': ['.svg'],
+            'image/webp': ['.webp']
+        },
+        maxSize: 10 * 1024 * 1024,
         maxFiles: 1
     });
 
@@ -80,9 +104,7 @@ function RecipeCreateForm() {
         }
     };
 
-   const imagePreview = recipeData.image && (
-        <Image src={recipeData.image.preview} alt="Recipe preview" rounded className={appStyles.Image} />
-    );
+
 
     const recipeFields = (
         <div className="text-center">
