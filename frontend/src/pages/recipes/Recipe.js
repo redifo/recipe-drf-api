@@ -6,7 +6,7 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import axios from 'axios';
 
-function RecipePage() {
+function Recipes() {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -56,4 +56,4 @@ function RecipePage() {
     );
 }
 
-export default RecipePage;
+export default Recipes;
