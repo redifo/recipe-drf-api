@@ -1,90 +1,84 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, CardBody } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import styles from "../../styles/Recipe.module.css";
-import axios from 'axios';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import Asset from "../../components/Asset";
-
-import Recipe from './Recipe';
+import { useParams } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
+import Asset from '../../components/Asset';
 
 function RecipePage() {
     const { id } = useParams();
-    const [recipe, setRecipe] = React.useState({ results: [] });
-
-    const currentUser = useCurrentUser();
-    const profile_image = currentUser?.profile_image;
-    const [comments, setComments] = useState({ results: [] });
+    const [recipe, setRecipe] = useState(null);
+    const [tags, setTags] = useState([]);
+    const [allTags, setAllTags] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const handleMount = async () => {
+        const fetchData = async () => {
             try {
-                const [{ data: recipe }] = await Promise.all([
+                const [recipeRes, tagsRes] = await Promise.all([
                     axiosReq.get(`/recipes/${id}`),
-                   
+                    axiosReq.get(`/tags`)
                 ]);
-                setRecipe({ results: [recipe] });
-                
-                console.log(recipe)
+                setRecipe(recipeRes.data);
+                setAllTags(tagsRes.data.results);
+                setIsLoading(false); // Set loading to false once data is fetched
             } catch (err) {
                 console.log(err);
+                setIsLoading(false);
             }
         };
-
-        handleMount();
+        fetchData();
     }, [id]);
 
+    // Filter tags specific to the recipe using the IDs
+    useEffect(() => {
+        if (recipe && allTags.length) {
+            const matchedTags = allTags.filter(tag => recipe.tags.includes(tag.id));
+            setTags(matchedTags);
+            
+        }
+    }, [recipe, allTags]);
+
+    if (isLoading) {
+        return <Asset spinner={true} message="Loading recipe details..." />;
+    }
+
     return (
-        <Container>
-            <Row className={styles.RecipeSummary}>
-                <Col className={styles.RecipeSummary} md="12">
-
-                    <Col md="4" className="text-center">
-                        <h2>CHICKEN PASTA</h2>
-
-                        <span> (164)</span>
-                    </Col>
-                    <Col md="8" className="text-center">
-                        <img></img>
-                    </Col>
-
-                    <Row className="my-3">
-                        <Col size="4" className="text-center">
-                            <span>Preparation Time</span><br></br>
-                        </Col>
-                        <Col size="4" className="text-center">
-                            <span>Cooking Time</span><br></br>
-                        </Col>
-                        <Col size="4" className="text-center">
-                            <span>Servings</span><br></br>
-                        </Col>
-                    </Row>
-                    
-                    <Row className="my-3">
-                        <Col md="12">
-                            <h4>INGREDIENTS</h4>
-                            {/* ingredients  */}
-                        </Col>
-                        <Col md="12">
-                            <h4>DESCRIPTION</h4>
-                            {/* DESC */}
-                        </Col>
-                        <Col md="12">
-                            <h4>INSTRUCTIONS</h4>
-                            {/* procedure */}
-                        </Col>
-                    </Row>
-                    <Row className="my-3">
-                        <Col md="12">
-                            <h4>RECIPE TAGS</h4>
-                            {/* Tags here */}
-                        </Col>
-                    </Row>
+        <Container fluid className='fluid'>
+            <Row fluid className={styles.RecipeSummary}>
+                <Col fluid xs={12} md={6} className={styles.RecipePageImage}>
+                    <img src={recipe.image} alt={recipe.title} className="img-fluid" />
                 </Col>
+                <Col fluid xs={12} md={6} >
+                    <h2 className="text-center">{recipe.title}</h2>
+                    <div className="text-center">
+                        {[...Array(5)].map((_, i) => (
+                            <span key={i} className={`${styles.Stars} fa fa-star ${i < (recipe.ratings_average || 0) ? 'checked' : 'fa-regular'}`}></span>
+                        ))}
+                        ({recipe.ratings_count || 0})
+                    </div>
+                    <Row className="my-3">
+                        <Col className="text-center"><strong > Preparation Time </strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.preparation_time} minutes</Col>
+                        <Col className="text-center"><strong> Cooking Time </strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.cooking_time} minutes</Col>
+                        <Col className="text-center"><strong>Servings</strong><br></br> <i className="fa-solid fa-bowl-food fa-lg"></i> {recipe.servings}</Col>
+                    </Row>
+                    <Row>
+                        <Col >
+                            Recipe by:
+                        </Col>
+                    </Row>
+
+                </Col>
+                
             </Row>
+            <Row className="my-3">
+                    <Col md={12} lg={6}><h4>Description</h4> {recipe.description}</Col>
+                    <Col md={12} lg={6}><h4>Ingredients</h4> {recipe.ingredients}</Col>
+                    <Col md={12} lg={6}><h4>Instructions</h4> {recipe.instructions}</Col>
+                    <Col md={12} lg={6}><h4>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span> )}</Col>
+                </Row>
         </Container>
     );
-};
+}
 
 export default RecipePage;

@@ -4,7 +4,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import styles from "../../styles/Recipe.module.css";
 import axios from 'axios';
 
-function Recipe() {
+function RecipeGrid() {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -54,4 +54,4 @@ function Recipe() {
     );
 }
 
-export default Recipe;
+export default RecipeGrid;

@@ -45,7 +45,11 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update, or delete a recipe instance.
     """
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.annotate(
+        ratings_average=Avg('ratings__score'),
+        reviews_count=Count('reviews', distinct=True),
+        ratings_count = Count('ratings', distinct=True),
+    ).order_by('-created_at')
     serializer_class = RecipeSerializer
     permission_classes = [IsOwnerOrReadOnly]
 
