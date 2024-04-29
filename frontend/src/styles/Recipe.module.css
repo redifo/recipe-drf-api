@@ -1,15 +1,30 @@
-.filter-column {
+.FilterCol {
     padding: 20px;
-    
-  }
-  
-  .recipes-grid {
+
+}
+
+.RecipeGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    
-  }
-  
-  .recipe-card {
-    
-  }
+    column-gap: 20px;
+    row-gap: 20px;
+    grid-template-columns: auto auto auto;
+
+}
+
+.RecipeCard {
+    max-height: 350px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+.RecipeCard .Img{
+    width: 100%;
+} 
+
+.RecipeCard:hover {
+
+    transform: scale(1.01);
+}
+
+.Stars {
+    color: #ffd700;
+}
