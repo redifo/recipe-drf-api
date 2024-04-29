@@ -7,8 +7,8 @@ import Footer from './components/Footer';
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
-import Recipes from './pages/recipes/Recipe';
-
+import Recipe from './pages/recipes/Recipe';
+import RecipePage from './pages/recipes/RecipePage';
 
 function App() {
   return (
@@ -20,7 +20,8 @@ function App() {
           <Route path="/signin" exact render={() => <SignInForm />} />
           <Route path="/signup" exact render={() => <SignUpForm />} />
           <Route path="/profile" exact render={() => <h1>Your Profile</h1>} />
-          <Route path="/recipes" exact render={() => <Recipes />} />
+          <Route path="/recipes" exact render={() => <Recipe />} />
+          <Route path="/recipes/:id" exact render={() => <RecipePage />} />
           <Route path="/action" exact render={() => <h1>Perform an Action</h1>} />
           <Route path="/something" exact render={() => <h1>Something Else</h1>} />
           <Route path="/recipe/create" exact render={() => <RecipeCreateForm />} />

@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 import styles from "../../styles/Recipe.module.css";
-import appStyles from "../../App.module.css";
-import btnStyles from "../../styles/Button.module.css";
 import axios from 'axios';
 
-function Recipes() {
+function Recipe() {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -56,4 +54,4 @@ function Recipes() {
     );
 }
 
-export default Recipes;
+export default Recipe;
