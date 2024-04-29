@@ -15,7 +15,7 @@ import Upload from "../../assets/img/upload.png";
 function RecipeCreateForm() {
     useRedirect("loggedOut");
     const [errors, setErrors] = useState({});
-    const [imageFile, setImageFile] = useState(null);
+    const [imageFile, setImageFile] = useState();
     const [imagePreview, setImagePreview] = useState(null);
     const [availableTags, setAvailableTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
@@ -63,6 +63,8 @@ function RecipeCreateForm() {
         const file = acceptedFiles[0];
         setImageFile(file);
         setImagePreview(URL.createObjectURL(file));
+        console.log("Image File to be uploaded:", imageFile);
+
     };
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -103,7 +105,11 @@ function RecipeCreateForm() {
             formData.append("tags", tag);
         });
         try {
-            const { data } = await axiosReq.post("/recipes/", formData);
+            const { data } = await axiosReq.post("/recipes/", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             history.push(`/recipes/${data.id}`);
         } catch (err) {
             if (err.response?.status !== 401) {
