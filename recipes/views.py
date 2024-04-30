@@ -15,7 +15,7 @@ class RecipeList(generics.ListCreateAPIView):
         ratings_average=Avg('ratings__score'),
         reviews_count=Count('reviews', distinct=True),
         ratings_count = Count('ratings', distinct=True),
-        favorites_count=Count('favorites'),
+        favorites_count=Count('favorites', distinct=True),
     ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
@@ -52,6 +52,7 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
         ratings_average=Avg('ratings__score'),
         reviews_count=Count('reviews', distinct=True),
         ratings_count = Count('ratings', distinct=True),
+        favorites_count=Count('favorites', distinct=True),
     ).order_by('-created_at')
     serializer_class = RecipeSerializer
     permission_classes = [IsOwnerOrReadOnly]

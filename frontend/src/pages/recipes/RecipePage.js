@@ -1,56 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import styles from "../../styles/Recipe.module.css";
 import { useParams } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import Asset from '../../components/Asset';
+import Avatar from '../../components/Avatar';
+import { axiosRes } from '../../api/axiosDefaults';
+import Review from '../reviews/Review';
 
 function RecipePage() {
+
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
     const [tags, setTags] = useState([]);
     const [allTags, setAllTags] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isFavorited, setIsFavorited] = useState(false);
+    const [favoriteId, setFavoriteId] = useState(null);
+    const [reviews, setReviews] = useState([]);
+    const [favoritesCount, setFavoritesCount] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [recipeRes, tagsRes] = await Promise.all([
+                const [recipeRes, tagsRes, reviewsRes] = await Promise.all([
                     axiosReq.get(`/recipes/${id}`),
-                    axiosReq.get(`/tags`)
+                    axiosReq.get(`/tags`),
+                    axiosReq.get(`/reviews/?recipe=${id}`)
                 ]);
                 setRecipe(recipeRes.data);
-                setAllTags(tagsRes.data.results);
-                setIsLoading(false); // Set loading to false once data is fetched
+                setTags(tagsRes.data.results.filter(tag => recipeRes.data.tags.includes(tag.id)));
+                setReviews(reviewsRes.data.results);
+                setIsFavorited(recipeRes.data.is_favorited);
+                setFavoriteId(recipeRes.data.favorite_id); 
+                setFavoritesCount(recipeRes.data.favorites_count);
+                setIsLoading(false);
             } catch (err) {
-                console.log(err);
+                console.error("Error fetching data:", err);
                 setIsLoading(false);
             }
         };
         fetchData();
     }, [id]);
 
-    // Filter tags specific to the recipe using the IDs
-    useEffect(() => {
-        if (recipe && allTags.length) {
-            const matchedTags = allTags.filter(tag => recipe.tags.includes(tag.id));
-            setTags(matchedTags);
-
+    const handleFavorite = async (event) => {
+        event.stopPropagation(); // Prevent the card click event
+        try {
+            if (isFavorited) {
+                await axiosRes.delete(`/favorites/${favoriteId}/`);
+                setIsFavorited(false);
+                setFavoriteId(null);
+                setFavoritesCount(favoritesCount - 1);
+                
+            } else {
+                const { data } = await axiosRes.post("/favorites/", { recipe: id });
+                setIsFavorited(true);
+                setFavoriteId(data.id);
+                setFavoritesCount(favoritesCount + 1);
+            }
+        } catch (err) {
+            console.error("Error managing favorite", err);
         }
-    }, [recipe, allTags]);
-
+    };
+    
     if (isLoading) {
         return <Asset spinner={true} message="Loading recipe details..." />;
     }
 
     return (
         <Container fluid >
-            <Row fluid className={styles.RecipeSummary}>
-                <Col fluid xs={12} md={6} className={`${styles.RecipePageImage}`}>
-                    <img src={recipe.image} alt={recipe.title} className="img-fluid" />
+            <Row  className={styles.RecipeSummary}>
+                <Col  xs={12} md={6} lg={5} xl={4} className={styles.RecipePageImageContainer}>
+                    <img className={`${styles.RecipePageImage}`} src={recipe.image} alt={recipe.title} />
                 </Col>
-                <Col fluid xs={12} md={6} >
-                    <h2 className="text-center">{recipe.title}</h2>
+                <Col  xs={12} md={6} lg={7} xl={8}>
+                    <h2 className="text-center mt-3">{recipe.title}</h2>
                     <div className="text-center">
                         {[...Array(5)].map((_, i) => (
                             <span key={i} className={`${styles.Stars} fa fa-star ${i < (recipe.ratings_average || 0) ? 'checked' : 'fa-regular'}`}></span>
@@ -63,23 +87,40 @@ function RecipePage() {
                         <Col className="text-center"><strong>Servings</strong><br></br> <i className="fa-solid fa-bowl-food fa-lg"></i> {recipe.servings}</Col>
                     </Row>
                     <Row>
-                        <Col >
-                            Recipe by:
+                        <Col className="text-center mt-4">
+                        Favorited by<br></br>
+                        <strong>{favoritesCount}</strong> <br></br>
+                            people
+                        </Col>
+                        <Col className="text-center">
+                            <span>Recipe by:</span> <br></br><Avatar src={recipe.profile_image} alt={`${recipe.user} avatar`}
+                                height={90} /> <br></br> {recipe.user}
+                        </Col>
+                        <Col className="text-center mt-4">
+                            Add to favorites <br></br>
+                            <Button className={`${styles.HeartButton} `} variant="link" onClick={(e) => handleFavorite(e)}>
+                                <i className={`fa fa-heart  ${isFavorited ? 'text-danger' : 'text-secondary'}`}></i>
+                            </Button>
                         </Col>
                     </Row>
+                    <Row>
 
+
+                    </Row>
                 </Col>
 
             </Row>
-            <Row className="my-3">
-                <Col lg={12} xl={6}><h4 className={`${styles.Headings} p-1`}>Description</h4> {recipe.description}</Col>
-                <Col lg={12} xl={6}><h4 className={`${styles.Headings} p-1`}>Ingredients</h4> {recipe.ingredients}</Col>
-                <Col lg={12} xl={6}><h4 className={`${styles.Headings} p-1`}>Instructions</h4> {recipe.instructions}</Col>
-                <Col lg={12} xl={6}><h4 className={`${styles.Headings} p-1`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
+            <Row className="mt-3 ml-1">
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Description</h4> {recipe.description}</Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Ingredients</h4> {recipe.ingredients}</Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Instructions</h4> {recipe.instructions}</Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
             </Row>
             <Row>
                 <Col>
-                        
+                    {reviews.map(review => (
+                        <Review key={review.id} review={review} />
+                    ))}
                 </Col>
             </Row>
         </Container>

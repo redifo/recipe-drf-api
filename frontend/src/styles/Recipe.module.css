@@ -64,18 +64,33 @@
     
 }
 .HeartButton{
-    padding: 0px;  
+    padding: 0px; 
     
     
 }
 
+.HeartButton:hover{
+    cursor: pointer;   
+    box-shadow: none !important;
+}
 .HeartButton:focus{
     
     box-shadow: none !important;
 }
 
 .RecipePageImage{
+    max-height: 400px;
     max-width: 100%;
-    max-height: 500px;
-    text-align: center;
+}
+
+.RecipeSummary{
+    position: relative;
+    
+}
+
+.RecipePageImageContainer{
+    text-align: left;
+    @media (max-width: 768px) {
+        text-align: center;
+    }
 }
