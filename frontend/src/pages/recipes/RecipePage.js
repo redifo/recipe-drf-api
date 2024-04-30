@@ -35,7 +35,7 @@ function RecipePage() {
         if (recipe && allTags.length) {
             const matchedTags = allTags.filter(tag => recipe.tags.includes(tag.id));
             setTags(matchedTags);
-            
+
         }
     }, [recipe, allTags]);
 
@@ -58,8 +58,8 @@ function RecipePage() {
                         ({recipe.ratings_count || 0})
                     </div>
                     <Row className="my-3">
-                        <Col className="text-center"><strong > Preparation Time </strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.preparation_time} minutes</Col>
-                        <Col className="text-center"><strong> Cooking Time </strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.cooking_time} minutes</Col>
+                        <Col className="text-center"><strong >Preparation Time</strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.preparation_time} minutes</Col>
+                        <Col className="text-center"><strong>Cooking Time</strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.cooking_time} minutes</Col>
                         <Col className="text-center"><strong>Servings</strong><br></br> <i className="fa-solid fa-bowl-food fa-lg"></i> {recipe.servings}</Col>
                     </Row>
                     <Row>
@@ -69,14 +69,19 @@ function RecipePage() {
                     </Row>
 
                 </Col>
-                
+
             </Row>
             <Row className="my-3">
-                    <Col md={12} lg={6}><h4>Description</h4> {recipe.description}</Col>
-                    <Col md={12} lg={6}><h4>Ingredients</h4> {recipe.ingredients}</Col>
-                    <Col md={12} lg={6}><h4>Instructions</h4> {recipe.instructions}</Col>
-                    <Col md={12} lg={6}><h4>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span> )}</Col>
-                </Row>
+                <Col md={12} lg={6}><h4 className={`${styles.Headings} p-1`}>Description</h4> {recipe.description}</Col>
+                <Col md={12} lg={6}><h4 className={`${styles.Headings} p-1`}>Ingredients</h4> {recipe.ingredients}</Col>
+                <Col md={12} lg={6}><h4 className={`${styles.Headings} p-1`}>Instructions</h4> {recipe.instructions}</Col>
+                <Col md={12} lg={6}><h4 className={`${styles.Headings} p-1`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
+            </Row>
+            <Row>
+                <Col>
+                        
+                </Col>
+            </Row>
         </Container>
     );
 }
