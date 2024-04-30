@@ -14,7 +14,7 @@ function App() {
   return (
     <div className={styles.App}>
       <NavBar />
-      <Container className={styles.Main}>
+      <Container fluid className={styles.Main}>
         <Switch>
           <Route path="/" exact render={() => <h1>Welcome to the app!</h1>} />
           <Route path="/signin" exact render={() => <SignInForm />} />

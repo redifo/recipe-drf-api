@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Recipe, Tag
 from ratings.models import Rating
+from favorites.models import Favorite
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
@@ -17,6 +18,8 @@ class RecipeSerializer(serializers.ModelSerializer):
     ratings_count = serializers.ReadOnlyField()
     reviews_count = serializers.ReadOnlyField()
     favorites_count = serializers.IntegerField(read_only=True, default=0)
+    is_favorited = serializers.SerializerMethodField()
+    favorite_id = serializers.SerializerMethodField()
 
     def validate_image(self, value):
         if value is not None:
@@ -32,7 +35,19 @@ class RecipeSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Image height larger than 4096px!'
                 )
+            
+    def get_is_favorited(self, obj):
+        """Check if a recipe is favorited by the current user."""
+        user = self.context['request'].user
+        if user.is_authenticated:
+            return Favorite.objects.filter(user=user, recipe=obj).exists()
+        return False
 
+    def get_favorite_id(self, obj):
+        user = self.context['request'].user
+        favorite = obj.favorites.filter(user=user).first()
+        return favorite.id if favorite else None
+    
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.user
@@ -68,5 +83,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             'ratings_count',
             'reviews_count',
             'ratings_average',
-            'favorites_count'
+            'favorites_count',
+            'is_favorited',
+            'favorite_id'
         ]

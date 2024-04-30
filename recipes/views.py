@@ -27,7 +27,7 @@ class RecipeList(generics.ListCreateAPIView):
         'user__following__followed', 
         'user__profile',
         'tags',
-        'favorites_count'
+        
     ]
     search_fields = [
         'user__username',
