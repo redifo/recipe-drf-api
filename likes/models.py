@@ -10,6 +10,7 @@ class Like(models.Model):
 
     class Meta:
         unique_together = ('user', 'review')  # Ensure one interaction per user per review
-
+        ordering = ['-created_at']
+        
     def __str__(self):
         return f"{self.user.username} {'liked' if self.is_like else 'disliked'} review {self.review.id}"
