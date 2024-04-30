@@ -68,7 +68,8 @@ i {
 i:hover {
     cursor: pointer;
     transition: color ease-in-out 0.3s;
-    color: #2142b2;
+    color: #e4bf8d;
+    cursor:default;
 }
 
 figure {
@@ -78,7 +79,7 @@ figure {
   
   /* scrollbar */
   *::-webkit-scrollbar {
-    width: 5px;
+    width: 7px;
   }
   *::-webkit-scrollbar-track {
     background: #f1f1f1;

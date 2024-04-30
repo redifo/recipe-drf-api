@@ -18,6 +18,7 @@
     }
 }
 
+
 .RecipeCard {
     max-height: 400px;
     
@@ -71,4 +72,10 @@
 .HeartButton:focus{
     
     box-shadow: none !important;
+}
+
+.RecipePageImage{
+    max-width: 100%;
+    max-height: 500px;
+    text-align: center;
 }

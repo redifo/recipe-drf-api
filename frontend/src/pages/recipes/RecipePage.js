@@ -44,9 +44,9 @@ function RecipePage() {
     }
 
     return (
-        <Container fluid className='fluid'>
+        <Container fluid >
             <Row fluid className={styles.RecipeSummary}>
-                <Col fluid xs={12} md={6} className={styles.RecipePageImage}>
+                <Col fluid xs={12} md={6} className={`${styles.RecipePageImage}`}>
                     <img src={recipe.image} alt={recipe.title} className="img-fluid" />
                 </Col>
                 <Col fluid xs={12} md={6} >
@@ -72,10 +72,10 @@ function RecipePage() {
 
             </Row>
             <Row className="my-3">
-                <Col md={12} lg={6}><h4 className={`${styles.Headings} p-1`}>Description</h4> {recipe.description}</Col>
-                <Col md={12} lg={6}><h4 className={`${styles.Headings} p-1`}>Ingredients</h4> {recipe.ingredients}</Col>
-                <Col md={12} lg={6}><h4 className={`${styles.Headings} p-1`}>Instructions</h4> {recipe.instructions}</Col>
-                <Col md={12} lg={6}><h4 className={`${styles.Headings} p-1`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
+                <Col lg={12} xl={6}><h4 className={`${styles.Headings} p-1`}>Description</h4> {recipe.description}</Col>
+                <Col lg={12} xl={6}><h4 className={`${styles.Headings} p-1`}>Ingredients</h4> {recipe.ingredients}</Col>
+                <Col lg={12} xl={6}><h4 className={`${styles.Headings} p-1`}>Instructions</h4> {recipe.instructions}</Col>
+                <Col lg={12} xl={6}><h4 className={`${styles.Headings} p-1`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
             </Row>
             <Row>
                 <Col>
