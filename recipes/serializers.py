@@ -16,6 +16,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     ratings_average = serializers.ReadOnlyField()
     ratings_count = serializers.ReadOnlyField()
     reviews_count = serializers.ReadOnlyField()
+    favorites_count = serializers.IntegerField(read_only=True, default=0)
 
     def validate_image(self, value):
         if value is not None:
@@ -66,5 +67,6 @@ class RecipeSerializer(serializers.ModelSerializer):
             'rating_id',
             'ratings_count',
             'reviews_count',
-            'ratings_average'
+            'ratings_average',
+            'favorites_count'
         ]

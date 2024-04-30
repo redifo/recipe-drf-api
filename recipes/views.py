@@ -15,6 +15,7 @@ class RecipeList(generics.ListCreateAPIView):
         ratings_average=Avg('ratings__score'),
         reviews_count=Count('reviews', distinct=True),
         ratings_count = Count('ratings', distinct=True),
+        favorites_count=Count('favorites'),
     ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
@@ -25,7 +26,8 @@ class RecipeList(generics.ListCreateAPIView):
         'user__followers__follower',  
         'user__following__followed', 
         'user__profile',
-        'tags'
+        'tags',
+        'favorites_count'
     ]
     search_fields = [
         'user__username',
@@ -36,6 +38,7 @@ class RecipeList(generics.ListCreateAPIView):
         'ratings_average',
         'reviews_count',
         'ratings__created_at',
+        'favorites_count'
     ]
 
     def perform_create(self, serializer):
