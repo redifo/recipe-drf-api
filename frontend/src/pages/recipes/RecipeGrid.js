@@ -19,7 +19,7 @@ function RecipeGrid() {
     const renderRecipes = () => {
         return Array.isArray(recipes) && recipes.map(recipe => (
             <Col key={recipe.id} className="mb-3">
-                <Card key={recipe.id} className={`m-1 ${styles.RecipeCard}`} onClick={() => history.push(`/recipe/${recipe.id}`)}>
+                <Card key={recipe.id} className={`m-1 ${styles.RecipeCard}`} onClick={() => history.push(`/recipes/${recipe.id}`)}>
                     <Card.Img variant="top" src={recipe.image} alt={recipe.title} />
                     <Card.Body>
                         <Card.Title>{recipe.title}</Card.Title>

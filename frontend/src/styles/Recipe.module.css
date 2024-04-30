@@ -7,18 +7,48 @@
     display: grid;
     column-gap: 20px;
     row-gap: 20px;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr;
 
+    @media (min-width: 768px) { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    @media (min-width: 992px) { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
 }
 
 .RecipeCard {
-    max-height: 350px;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     transition: transform 0.2s;
 }
-.RecipeCard .Img{
+
+.RecipeCard img {
+    height: 200px; 
+    object-fit: cover; 
     width: 100%;
-} 
+}
+
+.RecipeCard .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.RecipeCard .card-title {
+    font-size: 1.1rem; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    max-width: 100%; 
+    display: block; 
+}
 
 .RecipeCard:hover {
 
