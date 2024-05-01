@@ -56,8 +56,8 @@ const Review = ({ review, setRecipe }) => {
                     ...prev,
                     likeId: data.id,
                     isLike: newLikeState,
-                    likesCount: newLikeState ? prev.likesCount + 1 - (prev.isLike ? 1 : 0) : prev.likesCount,
-                    dislikesCount: newLikeState ? prev.dislikesCount : prev.dislikesCount + 1 - (!prev.isLike ? 1 : 0)
+                    likesCount: newLikeState ? prev.likesCount + 1 - (prev.isLike ? 1 : 0) : prev.likesCount -1,
+                    dislikesCount: newLikeState ? prev.dislikesCount -1 : prev.dislikesCount + 1 - (!prev.isLike ? 1 : 0)
                 }));
             } else {
                 // Create new like/dislike
