@@ -13,7 +13,6 @@ function RecipePage() {
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
     const [tags, setTags] = useState([]);
-    const [allTags, setAllTags] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isFavorited, setIsFavorited] = useState(false);
     const [favoriteId, setFavoriteId] = useState(null);
