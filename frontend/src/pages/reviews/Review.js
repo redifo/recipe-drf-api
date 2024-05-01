@@ -47,9 +47,9 @@ const Review = ({ review, setRecipe }) => {
           <Avatar src={profile_image} />
         </Link>
         <Media.Body className="align-self-center ml-2">
-          <strong className={styles.Owner}>{user}</strong>
-          <small className={styles.Date}>{updated_at}</small>
-          <div>Likes: {likes_count} Dislikes: {dislikes_count}</div>
+          <strong className={styles.Owner}>{user} </strong>
+          <small className={styles.Date}> {updated_at}</small>
+          
           {showEditForm ? (
             <ReviewEditForm
               id={id}
@@ -60,6 +60,7 @@ const Review = ({ review, setRecipe }) => {
           ) : (
             <p>{text}</p>
           )}
+          <div><i className="fa-solid fa-thumbs-up fa-lg"></i> {likes_count} <i className="fa-solid fa-thumbs-down fa-lg"></i> {dislikes_count}</div>
         </Media.Body>
         {is_owner && !showEditForm && (
           <MoreDropdown
