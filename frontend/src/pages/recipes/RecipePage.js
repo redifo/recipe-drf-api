@@ -116,7 +116,9 @@ function RecipePage() {
                 <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
             </Row>
             <Row>
+                
                 <Col>
+                <h4 className={`${styles.Headings} p-1 ml-3`}>Reviews</h4>
                     {reviews.map(review => (
                         <Review key={review.id} review={review} />
                     ))}

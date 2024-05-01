@@ -21,6 +21,9 @@ const Review = ({ review, setRecipe }) => {
     text,
     likes_count,
     dislikes_count,
+    like_id,
+    is_like
+
   } = review;
 
   const [showEditForm, setShowEditForm] = useState(false);
@@ -47,9 +50,8 @@ const Review = ({ review, setRecipe }) => {
           <Avatar src={profile_image} />
         </Link>
         <Media.Body className="align-self-center ml-2">
-          <strong className={styles.Owner}>{user} </strong>
-          <small className={styles.Date}> {updated_at}</small>
-          
+          <strong className={styles.Owner}>{user}</strong>
+          <small className={styles.Date}>{updated_at}</small>
           {showEditForm ? (
             <ReviewEditForm
               id={id}
@@ -60,12 +62,15 @@ const Review = ({ review, setRecipe }) => {
           ) : (
             <p>{text}</p>
           )}
-          <div><i className="fa-solid fa-thumbs-up fa-lg"></i> {likes_count} <i className="fa-solid fa-thumbs-down fa-lg"></i> {dislikes_count}</div>
+          <div>
+            <i className="fa-solid fa-thumbs-up fa-lg" ></i> 
+            <i className="fa-solid fa-thumbs-down fa-lg" ></i>
+          </div>
         </Media.Body>
         {is_owner && !showEditForm && (
           <MoreDropdown
             handleEdit={() => setShowEditForm(true)}
-            handleDelete={handleDelete}
+            handleDelete={() => handleDelete(id)}
           />
         )}
       </Media>

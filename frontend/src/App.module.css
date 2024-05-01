@@ -68,7 +68,7 @@ i {
 i:hover {
     cursor: pointer;
     transition: color ease-in-out 0.3s;
-    color: #e4bf8d;
+    color: #dd9d72;
     cursor:default;
 }
 

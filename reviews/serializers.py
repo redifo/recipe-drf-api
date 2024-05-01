@@ -1,6 +1,7 @@
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
 from .models import Review
+from likes.models import Like
 
 class ReviewSerializer(serializers.ModelSerializer):
     """
@@ -14,6 +15,8 @@ class ReviewSerializer(serializers.ModelSerializer):
     updated_at = serializers.SerializerMethodField()
     likes_count = serializers.IntegerField(read_only=True)
     dislikes_count = serializers.IntegerField(read_only=True)
+    like_id = serializers.SerializerMethodField()
+    is_like = serializers.SerializerMethodField()
 
     def validate_image(self, value):
         if value is not None:
@@ -29,6 +32,22 @@ class ReviewSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Image height larger than 4096px!'
                 )
+            
+    def get_is_like(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            like = Like.objects.filter(user=user, review=obj).first()
+            return like.is_like if like else None
+        return None
+
+    def get_like_id(self, obj):
+        request = self.context['request']
+        user = request.user
+        if user.is_authenticated:
+            like = Like.objects.filter(user=user, review=obj).first()
+            if like.exists():
+                return like.id if like else None
+        return None
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -45,7 +64,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'user', 'is_owner', 'profile_id', 'profile_image',
             'recipe', 'created_at', 'updated_at', 'text', 'image', 
-            'likes_count', 'dislikes_count'
+            'likes_count', 'dislikes_count', 'like_id', 'is_like'
         ]
 
 class ReviewDetailSerializer(ReviewSerializer):

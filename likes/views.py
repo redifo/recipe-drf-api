@@ -12,7 +12,7 @@ class LikeList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)  # Automatically save the user from the request
+        serializer.save(user=self.request.user)  
 
 class LikeDetail(generics.RetrieveDestroyAPIView):
     """
