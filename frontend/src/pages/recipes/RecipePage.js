@@ -118,7 +118,7 @@ function RecipePage() {
             <Row>
                 
                 <Col>
-                <h4 className={`${styles.Headings} p-1 ml-3`}>Reviews</h4>
+                <h4 className={`${styles.Headings} mt-3 ml-4`}>Reviews</h4>
                     {reviews.map(review => (
                         <Review key={review.id} review={review} />
                     ))}

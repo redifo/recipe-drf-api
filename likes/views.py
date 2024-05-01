@@ -14,10 +14,14 @@ class LikeList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)  
 
-class LikeDetail(generics.RetrieveDestroyAPIView):
+class LikeDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve a like or delete it by id if you own it.
+    Retrieve, update a like or delete it by id if you own it.
     """
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
     permission_classes = [IsOwnerOrReadOnly]
+
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True  # Allow partial updates
+        return super().update(request, *args, **kwargs)

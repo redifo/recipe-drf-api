@@ -12,6 +12,11 @@ class LikeSerializer(serializers.ModelSerializer):
         model = Like
         fields = ['id', 'user', 'review', 'is_like', 'created_at']
 
+    def update(self, instance, validated_data):
+        instance.is_like = validated_data.get('is_like', instance.is_like)
+        instance.save()
+        return instance
+    
     def create(self, validated_data):
             try:
                 return super().create(validated_data)

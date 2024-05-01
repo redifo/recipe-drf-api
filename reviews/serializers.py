@@ -45,8 +45,8 @@ class ReviewSerializer(serializers.ModelSerializer):
         user = request.user
         if user.is_authenticated:
             like = Like.objects.filter(user=user, review=obj).first()
-            if like.exists():
-                return like.id if like else None
+            if like:
+                return like.id
         return None
 
     def get_is_owner(self, obj):
