@@ -56,8 +56,8 @@ const Review = ({ review, setRecipe }) => {
                     ...prev,
                     likeId: data.id,
                     isLike: newLikeState,
-                    likesCount: newLikeState ? prev.likesCount + 1 - (prev.isLike ? 1 : 0) : prev.likesCount -1,
-                    dislikesCount: newLikeState ? prev.dislikesCount -1 : prev.dislikesCount + 1 - (!prev.isLike ? 1 : 0)
+                    likesCount: newLikeState ? prev.likesCount + 1 - (prev.isLike ? 1 : 0) : prev.likesCount - 1,
+                    dislikesCount: newLikeState ? prev.dislikesCount - 1 : prev.dislikesCount + 1 - (!prev.isLike ? 1 : 0)
                 }));
             } else {
                 // Create new like/dislike
@@ -98,7 +98,7 @@ const Review = ({ review, setRecipe }) => {
                     <Avatar src={profile_image} />
                 </Link>
                 <Media.Body className="align-self-center ml-2">
-                    <strong className={styles.Owner}>{user}</strong>
+                    <strong className={styles.Owner}>{user} </strong>
                     <small className={styles.Date}>{updated_at}</small>
                     {showEditForm ? (
                         <ReviewEditForm
