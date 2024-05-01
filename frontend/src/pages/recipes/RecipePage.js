@@ -87,7 +87,7 @@ function RecipePage() {
                         <Col className="text-center"><strong>Servings</strong><br></br> <i className="fa-solid fa-bowl-food fa-lg"></i> {recipe.servings}</Col>
                     </Row>
                     <Row>
-                        <Col className="text-center mt-4">
+                        <Col className="text-center mt-4 mb-2">
                         Favorited by<br></br>
                         <strong>{favoritesCount}</strong> <br></br>
                             people
@@ -96,7 +96,7 @@ function RecipePage() {
                             <span>Recipe by:</span> <br></br><Avatar src={recipe.profile_image} alt={`${recipe.user} avatar`}
                                 height={90} /> <br></br> {recipe.user}
                         </Col>
-                        <Col className="text-center mt-4">
+                        <Col className="text-center mt-4 mb-2">
                             Add to favorites <br></br>
                             <Button className={`${styles.HeartButton} `} variant="link" onClick={(e) => handleFavorite(e)}>
                                 <i className={`fa fa-heart  ${isFavorited ? 'text-danger' : 'text-secondary'}`}></i>
