@@ -1,22 +1,3 @@
-.FilterCol {
-    padding: 20px;
-
-}
-
-.RecipeGrid {
-    display: grid;
-    column-gap: 20px;
-    row-gap: 20px;
-    grid-template-columns: 1fr;
-
-    @media (min-width: 768px) { 
-        grid-template-columns: repeat(2, 1fr); 
-    }
-
-    @media (min-width: 992px) { 
-        grid-template-columns: repeat(3, 1fr); 
-    }
-}
 
 
 .RecipeCard {
@@ -31,8 +12,7 @@
 }
 
 .RecipeCard img {
-    max-height: 300px; 
-    min-height: 200px;
+    height: 250px;
     object-fit: cover; 
     width: 100%;
 }

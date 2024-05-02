@@ -26,13 +26,14 @@ class RecipeList(generics.ListCreateAPIView):
         'user__followers__follower',  
         'user__following__followed', 
         'user__profile',
-        'tags',
-        
+        'tags__name',       
     ]
     search_fields = [
         'user__username',
+        'tags__name',
         'title',
-        'tags'
+        'description',
+        'ingredients'
     ]
     ordering_fields = [
         'ratings_average',
