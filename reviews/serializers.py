@@ -17,6 +17,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     dislikes_count = serializers.IntegerField(read_only=True)
     like_id = serializers.SerializerMethodField()
     is_like = serializers.SerializerMethodField()
+   
 
     def validate_image(self, value):
         if value is not None:
@@ -32,6 +33,7 @@ class ReviewSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Image height larger than 4096px!'
                 )
+        return value
             
     def get_is_like(self, obj):
         user = self.context['request'].user
@@ -66,7 +68,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             'recipe', 'created_at', 'updated_at', 'text', 'image', 
             'likes_count', 'dislikes_count', 'like_id', 'is_like'
         ]
-
+        ordering = ['-created_at']
 class ReviewDetailSerializer(ReviewSerializer):
     """
     Serializer for the Review model used in Detail view

@@ -8,7 +8,7 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     bio = models.TextField(max_length=800, blank=True)
     name = models.CharField(max_length=255)
-    email = models.EmailField(max_length=255)
+    email = models.EmailField(max_length=255, blank=True, default=None)
     image = models.ImageField(default='../profile-default_f2ltpq', upload_to='profile_pics')
 
     class Meta:

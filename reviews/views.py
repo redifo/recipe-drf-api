@@ -27,7 +27,7 @@ class ReviewList(generics.ListCreateAPIView):
         'likes__created_at',
         ]
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user, image=self.request.FILES.get('image'))
 
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):

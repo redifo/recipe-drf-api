@@ -135,6 +135,7 @@ function RecipePage() {
                             post={id}
                             setRecipe={setRecipe}
                             setReviews={setReviews}
+                            recipeId={id}
                         />
                     ) : reviews.results.length ? (
                         "Reviews"
