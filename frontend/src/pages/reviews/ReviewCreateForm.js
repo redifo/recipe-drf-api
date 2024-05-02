@@ -31,22 +31,28 @@ function ReviewCreateForm({ recipeId, setRecipe, setReviews, profileImage, profi
     if (image) {
       formData.append("image", image);
     }
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
+
     try {
       const { data } = await axiosRes.post("/reviews/", formData);
-      setReviews((prevReviews) => ({
+      // Set default values for likes and dislikes count
+      const reviewWithDefaults = {
+        ...data,
+        likes_count: 0,
+        dislikes_count: 0
+      };
+
+      setReviews(prevReviews => ({
         ...prevReviews,
-        results: [data, ...prevReviews.results],
+        results: [reviewWithDefaults, ...prevReviews.results]
       }));
-      setRecipe((prevRecipe) => ({
+      setRecipe(prevRecipe => ({
         ...prevRecipe,
-        reviews_count: prevRecipe.reviews_count + 1,
+        reviews_count: prevRecipe.reviews_count + 1
       }));
       setText("");
       setImage(null);
       setPreview(null);
+
     } catch (err) {
       console.error("Error creating review:", err);
     }

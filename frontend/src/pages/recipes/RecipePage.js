@@ -3,9 +3,10 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import styles from "../../styles/Recipe.module.css";
 import { useParams } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
+import { axiosRes } from '../../api/axiosDefaults';
 import Asset from '../../components/Asset';
 import Avatar from '../../components/Avatar';
-import { axiosRes } from '../../api/axiosDefaults';
+
 import Review from '../reviews/Review';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
 import { Link } from "react-router-dom";
@@ -13,6 +14,7 @@ import RateRecipe from '../ratings/RateRecipe';
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
+import { fetchMoreData } from "../../utils/utils";
 
 function RecipePage() {
 
@@ -22,7 +24,7 @@ function RecipePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isFavorited, setIsFavorited] = useState(false);
     const [favoriteId, setFavoriteId] = useState(null);
-    const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState({ results: [] });
     const [favoritesCount, setFavoritesCount] = useState(0);
 
     const currentUser = useCurrentUser();
@@ -34,11 +36,11 @@ function RecipePage() {
                 const [recipeRes, tagsRes, reviewsRes] = await Promise.all([
                     axiosReq.get(`/recipes/${id}`),
                     axiosReq.get(`/tags`),
-                    axiosReq.get(`/reviews/?recipe=${id}`)
+                    axiosReq.get(`/reviews/?recipe=${id}`) 
                 ]);
                 setRecipe(recipeRes.data);
                 setTags(tagsRes.data.results.filter(tag => recipeRes.data.tags.includes(tag.id)));
-                setReviews(reviewsRes.data.results);
+                setReviews(reviewsRes.data);
                 setIsFavorited(recipeRes.data.is_favorited);
                 setFavoriteId(recipeRes.data.favorite_id);
                 setFavoritesCount(recipeRes.data.favorites_count);
@@ -125,20 +127,20 @@ function RecipePage() {
                 <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Ingredients</h4> {recipe.ingredients}</Col>
                 <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Instructions</h4> {recipe.instructions}</Col>
                 <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
-                
+
             </Row>
 
             <h4 className={`${styles.Headings} mt-3 ml-1`} >Rate this recipe </h4>
             {currentUser && (
-                    <RateRecipe 
-                        recipeId={id}
-                        currentUser={currentUser}
-                        initialRating={recipe.initial_rating}
-                    />
-                    
-                )}
+                <RateRecipe
+                    recipeId={id}
+                    currentUser={currentUser}
+                    initialRating={recipe.initial_rating}
+                />
+
+            )}
             <Row>
-                
+
                 <Col>
                     <h4 className={`${styles.Headings} ml-1 mt-4 mb-4`}>Reviews</h4>
 
@@ -151,12 +153,16 @@ function RecipePage() {
                             setReviews={setReviews}
                             recipeId={id}
                         />
-                    ) : reviews.results.length ? (
-                        "Reviews"
                     ) : null}
-                    {reviews.map(review => (
-                        <Review key={review.id} review={review} />
-                    ))}
+
+                    {reviews.results.length > 0 ? (
+                        reviews.results.map(review => (
+                            <Review key={review.id} review={review} />
+                        ))
+                    ) : (
+                        <p className='ml-2'>No reviews yet. Be the first to review!</p>
+                    )}
+                    
                 </Col>
             </Row>
         </Container>

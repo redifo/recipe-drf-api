@@ -23,6 +23,7 @@ class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RatingSerializer
     queryset = Rating.objects.all()
     
+    #https://www.django-rest-framework.org/api-guide/generic-views/
     def get_serializer_context(self):
         """
         Pass additional context to the serializer to handle the initial rating.
