@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 
 import styles from "../../styles/RecipeGrid.module.css";
 import axios from 'axios';
 import RecipeCard from './RecipeCard';
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { fetchMoreData } from '../../utils/utils';
 
 function RecipeGrid() {
-    const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState({ results: [], next: null });
     const [hasLoaded, setHasLoaded] = useState(false);
     const [query, setQuery] = useState("");
     const currentUser = useCurrentUser();
+    const [filters, setFilters] = useState({
+        tags: [],
+        
+    });
 
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
                 const { data } = await axios.get(`/recipes?search=${query}`);
-                setRecipes(data.results || []);
+                setRecipes({
+                    results: data.results,
+                    next: data.next
+                });
                 setHasLoaded(true);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
@@ -33,12 +41,10 @@ function RecipeGrid() {
         return () => clearTimeout(delayDebounce);
     }, [query]);
 
-    const updateRecipes = (id, updatedData) => {
-        setRecipes((prevRecipes) =>
-            prevRecipes.map((recipe) =>
-                recipe.id === id ? { ...recipe, ...updatedData } : recipe
-            )
-        );
+    const handleLoadMore = () => {
+        if (recipes.next) {
+            fetchMoreData(recipes.next, setRecipes);
+        }
     };
 
     return (
@@ -65,14 +71,17 @@ function RecipeGrid() {
                     </Form>
                     <Row className={styles.RecipeGrid}>
 
-                        {recipes.map(recipe => (
+                        {recipes.results.map(recipe => (
                             <Col key={recipe.id}>
-                                <RecipeCard recipe={recipe} updateRecipes={updateRecipes} />
+                                <RecipeCard recipe={recipe} />
                             </Col>
                         ))}
                     </Row>
                     {!hasLoaded && <p>Loading recipes...</p>}
                     {hasLoaded && recipes.length === 0 && <p>No recipes found.</p>}
+                    {recipes.next && (
+                        <Button className="my-3" onClick={handleLoadMore}>Load More</Button>
+                    )}
                 </Col>
             </Row>
         </Container>
