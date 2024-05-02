@@ -164,12 +164,12 @@ function RecipePage() {
 
                     {reviews.results.length > 0 ? (
                         reviews.results.map(review => (
-                            <Review key={review.id} review={review} />
+                            <Review key={review.id} review={review} setReviews={setReviews} />
                         ))
                     ) : (
                         <p className='ml-2'>No reviews yet. Be the first to review!</p>
                     )}
-                    
+
                     {reviews.next && (
                         <Button onClick={handleLoadMoreReviews} className="mb-3">
                             Load More Reviews

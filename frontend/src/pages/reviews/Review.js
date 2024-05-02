@@ -11,7 +11,7 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 import { MoreDropdown } from "../../components/MoreDropDown";
 
-const Review = ({ review, setRecipe }) => {
+const Review = ({ review, setReviews }) => {
 
     const {
         id,
@@ -73,18 +73,14 @@ const Review = ({ review, setRecipe }) => {
         }
     };
 
-
-    const handleEdit = () => {
-        setShowEditForm(true);
-    };
-
     const handleDelete = async () => {
         try {
             await axiosRes.delete(`/reviews/${id}/`);
-            setRecipe(prevRecipe => ({
-                ...prevRecipe,
-                reviews: prevRecipe.reviews.filter(rev => rev.id !== id),
+            setReviews(prevReviews => ({
+                ...prevReviews,
+                results: prevReviews.results.filter(review => review.id !== id),
             }));
+            
         } catch (err) {
             console.error("Error deleting the review:", err);
         }
@@ -105,7 +101,7 @@ const Review = ({ review, setRecipe }) => {
                             id={id}
                             content={text}
                             setShowEditForm={setShowEditForm}
-                            setRecipe={setRecipe}
+                            setReviews={setReviews}
                         />
                     ) : (
                         <p>{text}</p>
