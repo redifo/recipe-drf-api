@@ -35,7 +35,8 @@ class RecipeSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Image height larger than 4096px!'
                 )
-            
+        return value
+    
     def get_is_favorited(self, obj):
         """Check if a recipe is favorited by the current user."""
         user = self.context['request'].user
