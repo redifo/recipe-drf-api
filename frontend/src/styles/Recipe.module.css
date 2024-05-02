@@ -94,3 +94,8 @@
         text-align: center;
     }
 }
+
+.RatingCounter{
+    vertical-align: middle;
+    font-size: 1.3rem;
+}

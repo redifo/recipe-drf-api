@@ -69,7 +69,7 @@ function ReviewCreateForm({ recipeId, setRecipe, setReviews, profileImage, profi
           />
         </InputGroup>
       </Form.Group>
-      <Form.Group>
+      <Form.Group className="ml-5">
         <Form.Label>Upload Image</Form.Label>
         <Form.Control
           type="file"
@@ -81,14 +81,15 @@ function ReviewCreateForm({ recipeId, setRecipe, setReviews, profileImage, profi
             <img src={preview} alt="Preview" className={styles.ImagePreview} />
           </div>
         )}
+        <button
+          className={`${styles.Button} btn d-block ml-auto`}
+          disabled={!text.trim()}
+          type="submit"
+        >
+          Post Review
+        </button>
       </Form.Group>
-      <button
-        className={`${styles.Button} btn d-block ml-auto`}
-        disabled={!text.trim()}
-        type="submit"
-      >
-        Post Review
-      </button>
+
     </Form>
   );
 }

@@ -8,11 +8,11 @@ class RatingSerializer(serializers.ModelSerializer):
     The create method handles the unique constraint on 'user' and 'recipe'
     """
     user = serializers.ReadOnlyField(source='user.username') 
-
     class Meta:
         model = Rating
-        fields = ['id', 'created_at', 'updated_at', 'user', 'recipe', 'score'] 
-        read_only_fields = ['user', 'recipe']
+        fields = ['id', 'created_at', 'updated_at', 'user', 'recipe', 'score', ] 
+        read_only_fields = ['user']
+        ordering = ['-created_at']
 
     def create(self, validated_data):
         try:

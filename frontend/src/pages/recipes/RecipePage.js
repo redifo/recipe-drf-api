@@ -9,8 +9,10 @@ import { axiosRes } from '../../api/axiosDefaults';
 import Review from '../reviews/Review';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
 import { Link } from "react-router-dom";
+import RateRecipe from '../ratings/RateRecipe';
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+
 
 function RecipePage() {
 
@@ -83,9 +85,9 @@ function RecipePage() {
                     <h2 className="text-center mt-3">{recipe.title}</h2>
                     <div className="text-center">
                         {[...Array(5)].map((_, i) => (
-                            <span key={i} className={`${styles.Stars} fa fa-star ${i < (recipe.ratings_average || 0) ? 'checked' : 'fa-regular'}`}></span>
+                            <span key={i} className={`${styles.Stars} fa fa-star fa-xl ${i < (recipe.ratings_average || 0) ? 'checked' : 'fa-regular'}`}></span>
                         ))}
-                        ({recipe.ratings_count || 0})
+                        <span className={styles.RatingCounter}>({recipe.ratings_count || 0})</span>
                     </div>
                     <Row className="my-3">
                         <Col className="text-center"><strong >Preparation Time</strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.preparation_time} minutes</Col>
@@ -101,7 +103,7 @@ function RecipePage() {
                         <Col className="text-center">
                             <span>Recipe by:</span> <br></br>
                             <Link to={`/profiles/${recipe.profile_id}`}>
-                            <Avatar src={recipe.profile_image} alt={`${recipe.user} avatar`} height={90} /> </Link>
+                                <Avatar src={recipe.profile_image} alt={`${recipe.user} avatar`} height={90} /> </Link>
                             <br></br> {recipe.user}
                         </Col>
                         <Col className="text-center mt-4 mb-2">
@@ -118,16 +120,28 @@ function RecipePage() {
                 </Col>
 
             </Row>
-            <Row className="mt-3 ml-1">
-                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Description</h4> {recipe.description}</Col>
-                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Ingredients</h4> {recipe.ingredients}</Col>
-                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Instructions</h4> {recipe.instructions}</Col>
-                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
+            <Row className="mt-3">
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Description</h4> {recipe.description}</Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Ingredients</h4> {recipe.ingredients}</Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Instructions</h4> {recipe.instructions}</Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
+                
             </Row>
-            <Row>
 
+            <h4 className={`${styles.Headings} mt-3 ml-1`} >Rate this recipe </h4>
+            {currentUser && (
+                    <RateRecipe 
+                        recipeId={id}
+                        currentUser={currentUser}
+                        initialRating={recipe.initial_rating}
+                    />
+                    
+                )}
+            <Row>
+                
                 <Col>
-                    <h4 className={`${styles.Headings} ml-4 mt-4 mb-4`}>Reviews</h4>
+                    <h4 className={`${styles.Headings} ml-1 mt-4 mb-4`}>Reviews</h4>
+
                     {currentUser ? (
                         <ReviewCreateForm
                             profile_id={currentUser.profile_id}

@@ -20,6 +20,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     favorites_count = serializers.IntegerField(read_only=True, default=0)
     is_favorited = serializers.SerializerMethodField()
     favorite_id = serializers.SerializerMethodField()
+    initial_rating = serializers.SerializerMethodField(read_only=True)
 
     def validate_image(self, value):
         if value is not None:
@@ -37,6 +38,17 @@ class RecipeSerializer(serializers.ModelSerializer):
                 )
         return value
     
+    def get_initial_rating(self, obj):
+        """
+        Retrieve the initial rating value and ID for the current user if it exists.
+        """
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            rating = Rating.objects.filter(user=request.user, recipe=obj).first()
+            if rating:
+                return {'score': rating.score, 'id': rating.id}
+        return None
+
     def get_is_favorited(self, obj):
         """Check if a recipe is favorited by the current user."""
         user = self.context['request'].user
@@ -86,5 +98,6 @@ class RecipeSerializer(serializers.ModelSerializer):
             'ratings_average',
             'favorites_count',
             'is_favorited',
-            'favorite_id'
+            'favorite_id',
+            'initial_rating'
         ]
