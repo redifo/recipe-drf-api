@@ -24,7 +24,7 @@ function RecipePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isFavorited, setIsFavorited] = useState(false);
     const [favoriteId, setFavoriteId] = useState(null);
-    const [reviews, setReviews] = useState({ results: [] });
+    const [reviews, setReviews] = useState({ results: [], next: null });
     const [favoritesCount, setFavoritesCount] = useState(0);
 
     const currentUser = useCurrentUser();
@@ -36,11 +36,14 @@ function RecipePage() {
                 const [recipeRes, tagsRes, reviewsRes] = await Promise.all([
                     axiosReq.get(`/recipes/${id}`),
                     axiosReq.get(`/tags`),
-                    axiosReq.get(`/reviews/?recipe=${id}`) 
+                    axiosReq.get(`/reviews/?recipe=${id}&page=1`)
                 ]);
                 setRecipe(recipeRes.data);
                 setTags(tagsRes.data.results.filter(tag => recipeRes.data.tags.includes(tag.id)));
-                setReviews(reviewsRes.data);
+                setReviews({
+                    results: reviewsRes.data.results,
+                    next: reviewsRes.data.next
+                });
                 setIsFavorited(recipeRes.data.is_favorited);
                 setFavoriteId(recipeRes.data.favorite_id);
                 setFavoritesCount(recipeRes.data.favorites_count);
@@ -71,6 +74,10 @@ function RecipePage() {
         } catch (err) {
             console.error("Error managing favorite", err);
         }
+    };
+
+    const handleLoadMoreReviews = () => {
+        fetchMoreData(reviews.next, setReviews);
     };
 
     if (isLoading) {
@@ -163,6 +170,11 @@ function RecipePage() {
                         <p className='ml-2'>No reviews yet. Be the first to review!</p>
                     )}
                     
+                    {reviews.next && (
+                        <Button onClick={handleLoadMoreReviews} className="mb-3">
+                            Load More Reviews
+                        </Button>
+                    )}
                 </Col>
             </Row>
         </Container>
