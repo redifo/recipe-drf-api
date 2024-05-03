@@ -1,10 +1,18 @@
 from rest_framework import generics, permissions, filters
-from django.db.models import Count, Avg, Q
-from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Count, Avg
+from django_filters.rest_framework import DjangoFilterBackend, BaseInFilter, FilterSet
 from .models import Recipe, Tag
 from .serializers import RecipeSerializer, TagSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
+#https://michaelprather.medium.com/inclusion-and-exclusion-filtering-with-django-rest-framework-and-django-filter-e90a597f2af5
+#https://django-filter.readthedocs.io/en/stable/guide/usage.html
+class RecipeFilter(FilterSet):
+    tags = BaseInFilter(field_name='tags__id', lookup_expr='in')
+
+    class Meta:
+        model = Recipe
+        fields = []
 class RecipeList(generics.ListCreateAPIView):
     """
     List all recipes or create a new recipe if logged in.
@@ -22,11 +30,12 @@ class RecipeList(generics.ListCreateAPIView):
         filters.SearchFilter,
         DjangoFilterBackend,
     ]
+    filterset_class = RecipeFilter
     filterset_fields = [
         'user__followers__follower',  
         'user__following__followed', 
         'user__profile',
-        'tags__name',       
+        'tags__id',       
     ]
     search_fields = [
         'user__username',
