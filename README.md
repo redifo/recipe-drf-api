@@ -1,39 +1,63 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Recipe Domain
 
-Welcome,
+Recipe Domain is an interactive web application designed to simplify the process of finding, organizing, and sharing culinary recipes. It serves as a central hub for food enthusiasts to discover new recipes, manage their favorites, and share their culinary creations with others. The platform aims to provide a user-friendly environment where users can easily search, filter, and interact with a wide variety of recipes.
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Project Goals
+The main goals of Recipe Domain are:
+1) Provide a platform for users to easily find recipes based on various criteria such as ingredients or cooking time.
+2) Allow users to save and organize their favorite recipes in a personalized way.
+3) Enable users to share recipes with others and participate in a community of food enthusiasts.
+4) Offer a intuitive user interface that is accessible to users of all tech skill levels.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
+## Table of Contents
+- [Recipe Domain](#recipe-domain)
+  * [Project Goals](#project-goals)
+  * [Table of Contents](#table-of-contents)
+  * [User Stories](#user-stories)
+  * [Agile development methodology](#agile-development-methodology)
+  * [Planning](#planning)
+  * [Design](#design)
+  * [Features](#features)
+  * [Technologies Used](#technologies-used)
+  * [Testing](#testing)
+  * [Deployment](#deployment)
+  * [Credits](#credits)
 
-## Codeanywhere Reminders
+## User Stories
+User stories are created to ensure that the development of Recipe Domain meets the actual needs of its users.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+## Agile development methodology
 
-`python3 -m http.server`
+## Planning
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+## Design
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+## Features
+### Essential Features
+- **Recipe Search**: Users can search for recipes based on keywords, ingredients, or tags.
+- **Filter Recipes**: Users can filter recipes based on criteria such as cook time, and tags.
+- **Recipe Management**: Users can create, edit, and delete their own recipes.
+- **User Profiles**: Users can create profiles to manage their recipes and preferences.
+- **Social Interaction**: Users can share recipes and interact with other users.
 
-`http_server`
+### Future Enhancements
+- Integration with grocery shopping lists.
+- Meal planning tools.
+- Advanced dietary filtering, including allergen-free options.
+- Recipe recommendations based on user preferences and past activities.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+## Technologies Used
+- **Frontend**: React, Bootstrap for responsive design.
+- **Backend**: Django Rest Framework for handling API requests.
+- **Database**: PostgreSQL for storing user and recipe data.
+- **Additional Libraries**: 
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+## Testing
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## Deployment
+Recipe Domain is deployed on 
 
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
-
----
-
-Happy coding!
+## Credits
+- **Code**: 
+- **Media**: 
+- **Acknowledgements**: 
