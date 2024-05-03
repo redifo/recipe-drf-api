@@ -23,10 +23,24 @@ The main goals of Recipe Domain are:
   * [Deployment](#deployment)
   * [Credits](#credits)
 
-## User Stories
-User stories are created to ensure that the development of Recipe Domain meets the actual needs of its users.
+## User Stories and Agile Development Methodology
 
-## Agile development methodology
+In this project, I used an agile development methodology to manage the development process efficiently. I document each feature and task as an issue within GitHub, utilizing the MoSCoW prioritization method. Labels such as 'Must Have', 'Should Have', 'Could Have', and 'Won't Have' help in determining the essential features necessary for a Minimum Viable Product (MVP) and guide the prioritization of enhancements.
+
+I've categorized each issue further as either a 'User Story' or 'Development Task' and assigned a size label from 1 to 5, indicating the complexity and expected effort. This setup provides a clear roadmap and assists in workload management throughout the development phases.
+
+Each issue that has label user story is a user story, which is a description of a feature or functionality that a user would want to have in the application.
+Issues can be found at: [GitHub Project Issues](https://github.com/redifo/recipe-domain/issues) 
+
+To systematically track the progress, I've organized the development lifecycle into 8 sprints, represented as milestones on GitHub. These sprints do not have specific due dates but are crucial in grouping and scheduling tasks and user stories, allowing for structured and phased development.
+
+Ideally each sprint should begin with setting up a GitHub project board for that cycle, where tasks are moved from the product backlog into the current iteration based on their assigned priority and relevance to the ongoing sprint goals. However due to frequent user story (issues) changes and cross dependencies between issues the sprints were only used as a general guide and the whole project was managed in a signle github project board.
+
+The progress of the project is visually managed using a kanban board within the GitHub project. Tasks are dynamically moved between 'Todo', 'In Progress', and 'Done' columns, reflecting real-time progress and facilitating adjustments as needed.
+
+For a detailed view of the development process, please visit my [GitHub Project Boards](https://github.com/users/redifo/projects/4).
+
+This structured approach not only keeps the project organized but also aligns with agile principles, ensuring flexibility and responsiveness to change throughout the development cycle.
 
 ## Planning
 
