@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router";
+import { Modal, Button } from "react-bootstrap";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -16,7 +17,12 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
+
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <Dropdown className="ml-auto" drop="left">
       <Dropdown.Toggle as={ThreeDots} />
@@ -34,13 +40,28 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
         </Dropdown.Item>
         <Dropdown.Item
           className={styles.DropdownItem}
-          onClick={handleDelete}
+          onClick={handleShow}
           aria-label="delete"
         >
           <i className="fas fa-trash-alt" />
         </Dropdown.Item>
       </Dropdown.Menu>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this review? This action cannot be undone.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete Recipe
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Dropdown>
+
   );
 };
 

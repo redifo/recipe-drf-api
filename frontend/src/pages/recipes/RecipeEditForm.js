@@ -132,6 +132,7 @@ function RecipeEditForm() {
             handleClose();
         }
     };
+    
     const renderTags = () => {
         return availableTags.map(tag => (
             <Button
