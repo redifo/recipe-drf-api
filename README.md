@@ -13,8 +13,7 @@ The main goals of Recipe Domain are:
 - [Recipe Domain](#recipe-domain)
   * [Project Goals](#project-goals)
   * [Table of Contents](#table-of-contents)
-  * [User Stories](#user-stories)
-  * [Agile development methodology](#agile-development-methodology)
+  * [User Stories and Agile Development Methodology](#user-stories-and-agile-development-methodology)
   * [Planning](#planning)
   * [Design](#design)
   * [Features](#features)
@@ -34,7 +33,7 @@ Issues can be found at: [GitHub Project Issues](https://github.com/redifo/recipe
 
 To systematically track the progress, I've organized the development lifecycle into 8 sprints, represented as milestones on GitHub. These sprints do not have specific due dates but are crucial in grouping and scheduling tasks and user stories, allowing for structured and phased development.
 
-Ideally each sprint should begin with setting up a GitHub project board for that cycle, where tasks are moved from the product backlog into the current iteration based on their assigned priority and relevance to the ongoing sprint goals. However due to frequent user story (issues) changes and cross dependencies between issues the sprints were only used as a general guide and the whole project was managed in a signle github project board.
+Ideally each sprint should begin with setting up a GitHub project board for that cycle, where tasks are moved from the product backlog into the current iteration based on their assigned priority and relevance to the ongoing sprint goals. However due to frequent user story (issues) changes and cross dependencies between issues and sprints, the sprints were only used as a general guide and the whole project was managed in a signle github project board.
 
 The progress of the project is visually managed using a kanban board within the GitHub project. Tasks are dynamically moved between 'Todo', 'In Progress', and 'Done' columns, reflecting real-time progress and facilitating adjustments as needed.
 
@@ -43,6 +42,14 @@ For a detailed view of the development process, please visit my [GitHub Project 
 This structured approach not only keeps the project organized but also aligns with agile principles, ensuring flexibility and responsiveness to change throughout the development cycle.
 
 ## Planning
+
+### Mockups
+
+Wireframes were produced based on those user stories that had been identified as required for the MVP.
+
+### Data models
+
+Data models were planned alongside the wireframes. These are documented in the read-me for the backend [README-BACKEND.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).
 
 ## Design
 
