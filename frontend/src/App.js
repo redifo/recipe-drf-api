@@ -9,6 +9,7 @@ import SignInForm from './pages/auth/SignInForm';
 import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
 import RecipeGrid from './pages/recipes/RecipeGrid';
 import RecipePage from './pages/recipes/RecipePage';
+import RecipeEditForm from './pages/recipes/RecipeEditForm';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile" exact render={() => <h1>Your Profile</h1>} />
           <Route path="/recipes" exact render={() => <RecipeGrid />} />
           <Route path="/recipes/:id" exact render={() => <RecipePage />} />
+          <Route path="/recipes/edit/:id" exact render={() => <RecipeEditForm />} />
           <Route path="/action" exact render={() => <h1>Perform an Action</h1>} />
           <Route path="/something" exact render={() => <h1>Something Else</h1>} />
           <Route path="/recipe/create" exact render={() => <RecipeCreateForm />} />

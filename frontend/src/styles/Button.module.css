@@ -1,9 +1,9 @@
 .Button {
     font-size: 0.9rem;
     align-self: center;
-    border-radius: 10px;
+    border-radius: 5px;
     border-color: transparent;
-    padding: 4px 10px;
+    padding: 8px 10px;
     margin-left: 2px;
     margin-right: 2px;
     min-width: 75px;
@@ -17,14 +17,18 @@
   
   .Button:hover:active {
     background-color: #cf8d12 !important;
+    border-color: #df9b08 !important;
   }
   
   .Button:active {
     background-color: #cf8d12 !important;
+    border-color: #df9b08 !important;
   }
   
   .Button:focus {
-    background-color: #cf8d12;
+    background-color: #cf8d12 !important;
+    border-color: #df9b08 !important;
+    box-shadow: 0 0 0 .2rem rgba(219, 151, 4, 0.315) !important;
   }
   
   .Wide {
@@ -64,7 +68,7 @@
   }
   
   .Yellow {
-    background-color: #ebc76b;
+    background-color: #ffc107;
     color: #000000;
   }
 
@@ -78,7 +82,24 @@
   }
 
   .Red{
+    
     background-color: rgb(252, 61, 61);
   }
 
+  .Red:hover{
+    background-color: rgb(252, 61, 61);
+  }
+
+  .Red:focus{
+    background-color: rgb(252, 61, 61);
+    border-color: #fa8989;
+    box-shadow: 0 0 0 .1rem #f55454;
+  }
+
+  .Delete{
+    margin-left:auto;
+    margin-right: 15px;
+    
+   
+  }
   

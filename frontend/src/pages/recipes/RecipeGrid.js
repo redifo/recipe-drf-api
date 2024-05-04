@@ -107,9 +107,11 @@ function RecipeGrid() {
                     </Row>
                     {!hasLoaded && <p>Loading recipes...</p>}
                     {hasLoaded && recipes.length === 0 && <p>No recipes found.</p>}
-                    {recipes.next && (
-                        <Button className="my-3" onClick={handleLoadMore}>Load More</Button>
-                    )}
+                    <Row className={styles.LoadMoreBtnRow}>
+                        {recipes.next && (
+                            <Button className="my-3" onClick={handleLoadMore}>Load More</Button>
+                        )}
+                    </Row>
                 </Col>
             </Row>
         </Container>

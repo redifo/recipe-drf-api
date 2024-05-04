@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import styles from "../../styles/Recipe.module.css";
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
 import { axiosRes } from '../../api/axiosDefaults';
 import Asset from '../../components/Asset';
@@ -9,7 +9,7 @@ import Avatar from '../../components/Avatar';
 
 import Review from '../reviews/Review';
 import ReviewCreateForm from '../reviews/ReviewCreateForm';
-import { Link } from "react-router-dom";
+
 import RateRecipe from '../ratings/RateRecipe';
 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
@@ -17,7 +17,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { fetchMoreData } from "../../utils/utils";
 
 function RecipePage() {
-
+    const history = useHistory();
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
     const [tags, setTags] = useState([]);
@@ -91,13 +91,17 @@ function RecipePage() {
                     <img className={`${styles.RecipePageImage}`} src={recipe.image} alt={recipe.title} />
                 </Col>
                 <Col xs={12} md={6} lg={7} xl={8}>
-                    <h2 className="text-center mt-3">{recipe.title}</h2>
-                    <div className="text-center">
+                    <h2 className="ml-3 mt-3">{recipe.title}</h2>
+                    <div className=" ml-2">
                         {[...Array(5)].map((_, i) => (
                             <span key={i} className={`${styles.Stars} fa fa-star fa-xl ${i < (recipe.ratings_average || 0) ? 'checked' : 'fa-regular'}`}></span>
                         ))}
                         <span className={styles.RatingCounter}>({recipe.ratings_count || 0})</span>
+                        {recipe.is_owner && (
+                            <Button variant="primary" className="ml-3" onClick={() => history.push(`/recipes/edit/${id}`)}>Edit Recipe</Button>
+                        )}
                     </div>
+
                     <Row className="my-3">
                         <Col className="text-center"><strong >Preparation Time</strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.preparation_time} minutes</Col>
                         <Col className="text-center"><strong>Cooking Time</strong><br></br><i className="fa-solid fa-clock fa-lg"></i>{recipe.cooking_time} minutes</Col>
@@ -171,10 +175,13 @@ function RecipePage() {
                     )}
 
                     {reviews.next && (
-                        <Button onClick={handleLoadMoreReviews} className="mb-3">
+                        <Button onClick={handleLoadMoreReviews} className="text-center mt-4 mb-3">
                             Load More Reviews
                         </Button>
                     )}
+
+
+
                 </Col>
             </Row>
         </Container>

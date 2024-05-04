@@ -36,3 +36,7 @@
     cursor: default;
     color: #cfced3;
   }
+
+  .LoadMoreBtnRow{
+    justify-content: center;
+  }
