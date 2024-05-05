@@ -10,6 +10,7 @@ import RecipeCreateForm from './pages/recipes/RecipeCreateForm';
 import RecipeGrid from './pages/recipes/RecipeGrid';
 import RecipePage from './pages/recipes/RecipePage';
 import RecipeEditForm from './pages/recipes/RecipeEditForm';
+import ProfilePage from './pages/profiles/ProfilePage';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" exact render={() => <h1>Welcome to the app!</h1>} />
           <Route path="/signin" exact render={() => <SignInForm />} />
           <Route path="/signup" exact render={() => <SignUpForm />} />
-          <Route path="/profile" exact render={() => <h1>Your Profile</h1>} />
+          <Route path="/profiles/:id" exact render={() => <ProfilePage />} />
           <Route path="/recipes" exact render={() => <RecipeGrid />} />
           <Route path="/recipes/:id" exact render={() => <RecipePage />} />
           <Route path="/recipes/edit/:id" exact render={() => <RecipeEditForm />} />
