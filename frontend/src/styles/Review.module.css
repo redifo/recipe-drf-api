@@ -1,0 +1,9 @@
+.ReviewImage {
+    width: 100px; 
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.ReviewImageModal {
+    width: 100%; 
+}

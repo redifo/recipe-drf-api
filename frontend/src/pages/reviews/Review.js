@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Media from "react-bootstrap/Media";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
+import { Modal, Image } from 'react-bootstrap';
 
 import ReviewEditForm from "./ReviewEditForm";
 
@@ -20,6 +21,7 @@ const Review = ({ review, setReviews }) => {
         user,
         updated_at,
         text,
+        image,
         likes_count,
         dislikes_count,
         like_id: initialLikeId,
@@ -36,6 +38,8 @@ const Review = ({ review, setReviews }) => {
     const [showEditForm, setShowEditForm] = useState(false);
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === user;
+
+    const [showImageModal, setShowImageModal] = useState(false);
 
     const handleLikeToggle = async (newLikeState) => {
         if (likeState.isLike === newLikeState) {
@@ -80,10 +84,18 @@ const Review = ({ review, setReviews }) => {
                 ...prevReviews,
                 results: prevReviews.results.filter(review => review.id !== id),
             }));
-            
+
         } catch (err) {
             console.error("Error deleting the review:", err);
         }
+    };
+
+    const handleCloseImageModal = () => {
+        setShowImageModal(false);
+    };
+
+    const handleImageClick = () => {
+        setShowImageModal(true);
     };
 
     return (
@@ -96,6 +108,7 @@ const Review = ({ review, setReviews }) => {
                 <Media.Body className="align-self-center ml-2">
                     <strong className={styles.Owner}>{user} </strong>
                     <small className={styles.Date}>{updated_at}</small>
+
                     {showEditForm ? (
                         <ReviewEditForm
                             id={id}
@@ -104,7 +117,21 @@ const Review = ({ review, setReviews }) => {
                             setReviews={setReviews}
                         />
                     ) : (
-                        <p>{text}</p>
+
+                        <p>
+                            {image && (
+                                <>
+                                    <Image src={image} className={styles.ReviewImage} onClick={handleImageClick} thumbnail />
+                                    <Modal show={showImageModal} onHide={handleCloseImageModal} centered>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Image Preview</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <Image src={image} className={styles.ReviewImageModal} />
+                                        </Modal.Body>
+                                    </Modal>
+                                </>
+                            )}{text}</p>
                     )}
                     <div>
                         <i className={`fa-solid fa-thumbs-up fa-lg ${likeState.isLike ? "text-success" : ""}`} onClick={() => handleLikeToggle(true)}></i> {likeState.likesCount}
