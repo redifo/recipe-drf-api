@@ -23,7 +23,8 @@ function ProfilePage() {
     const currentUser = useCurrentUser();
     const { id } = useParams();
 
-
+    const [displayedFavoritesCount, setDisplayedFavoritesCount] = useState(4);
+    const [displayedRecipesCount, setDisplayedRecipesCount] = useState(4);
 
     const { setProfileData, handleFollow, handleUnfollow } = useSetProfileData();
     const { pageProfile } = useProfileData();
@@ -43,6 +44,7 @@ function ProfilePage() {
                 }));
                 setProfileFavorites(profileFavoritesResponse.data);
                 setProfileRecipes(recipesResponse.data);
+                
                 setHasLoaded(true);
             } catch (err) {
                 console.error("Error fetching data:", err);
@@ -53,7 +55,29 @@ function ProfilePage() {
 
     const handleLoadMore = () => {
         if (profileRecipes.next) {
-            fetchMoreData(profileRecipes.next, setProfileRecipes);
+            fetchMoreData(profileRecipes.next).then(newData => {
+                setProfileRecipes(prev => ({
+                    ...prev,
+                    results: [...prev.results, ...newData.results],
+                    next: newData.next,
+                }));
+            });
+        } else if (profileRecipes.results.length > displayedRecipesCount) {
+            setDisplayedRecipesCount(prevCount => prevCount + 4);
+        }
+    };
+
+    const handleLoadMoreFavorites = () => {
+        if (profileFavorites.next) {
+            fetchMoreData(profileFavorites.next).then(newData => {
+                setProfileFavorites(prev => ({
+                    ...prev,
+                    results: [...prev.results, ...newData.results],
+                    next: newData.next,
+                }));
+            });
+        } else if (profileFavorites.results.length > displayedFavoritesCount) {
+            setDisplayedFavoritesCount(prevCount => prevCount + 4);
         }
     };
 
@@ -104,26 +128,27 @@ function ProfilePage() {
         </>
     );
     const favoritedList = (
-    <>
-        <hr />
-        <h2 className="">{profile?.user}'s Favorite Recipes</h2>
+        <>
+            <hr />
+            <h2 className="">{profile?.user}'s Favorite Recipes</h2>
 
-        <Row>
-            {profileFavorites.results.length ? (
-                profileFavorites.results.map((recipe) => (
-                    <Col sm={6} md={4} lg={3} key={recipe.id}>
-                        <RecipeCard recipe={recipe} />
-                    </Col>
-                ))
-            ) : (
-                <Asset src={NoResults} message={`No results found, ${profile?.user} hasn't favorited any recipes yet.`} />
-            )}
-        </Row>
-        
-        {profileFavorites.next && (
-            <Button className="my-3" onClick={handleLoadMore}>Load More Recipes</Button>
-        )}
-    </>
+            <Row>
+                {profileFavorites.results.length ? (
+                    profileFavorites.results.slice(0, displayedFavoritesCount).map(recipe => (
+                        <Col sm={6} md={4} lg={3} key={recipe.id}>
+                            <RecipeCard recipe={recipe} />
+                        </Col>
+                    ))
+                ) : (
+                    <Asset src={NoResults} message={`No results found, ${profile?.user} hasn't favorited any recipes yet.`} />
+                )}
+            </Row>
+            <Row className="text-center">
+                {profileFavorites.results.length > displayedFavoritesCount && (
+                    <Button className="my-3" onClick={handleLoadMoreFavorites}>Load More Recipes</Button>
+                )}
+            </Row>
+        </>
     );
 
     const recipeList = (
@@ -133,7 +158,7 @@ function ProfilePage() {
 
             <Row>
                 {profileRecipes.results.length ? (
-                    profileRecipes.results.map((recipe) => (
+                    profileRecipes.results.slice(0, displayedRecipesCount).map(recipe => (
                         <Col sm={6} md={4} lg={3} key={recipe.id}>
                             <RecipeCard recipe={recipe} />
                         </Col>
@@ -142,8 +167,8 @@ function ProfilePage() {
                     <Asset src={NoResults} message={`No results found, ${profile?.user} hasn't posted any recipes yet.`} />
                 )}
             </Row>
-           
-            {profileRecipes.next && (
+
+            {profileRecipes.results.length > displayedRecipesCount && (
                 <Button className="my-3" onClick={handleLoadMore}>Load More Recipes</Button>
             )}
         </>
@@ -151,6 +176,9 @@ function ProfilePage() {
 
     return (
         <Row>
+            {displayedFavoritesCount}
+            {profileRecipes.results.length}
+            {displayedRecipesCount}
             <Col className="py-2 p-5 p-lg-5" lg={12}>
 
 

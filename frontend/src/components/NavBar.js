@@ -48,7 +48,7 @@ const NavBar = () => {
                 id="basic-nav-dropdown"
             >
                 <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to={`/profiles/${currentUser?.profile_id}`}> <i className="fa-solid fa-user"></i> Profile Page</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/liked"><i className="fa-solid fa-heart"></i>  Liked Recipes</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/favorited"><i className="fa-solid fa-heart"></i>  Favorited Recipes</NavDropdown.Item>
                 <NavDropdown.Item as={NavLink} activeClassName={styles.Active} to="/followed"><i className="fa-solid fa-users"></i>Followed Chefs</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item as={NavLink} to="/" onClick={handleSignOut}>
