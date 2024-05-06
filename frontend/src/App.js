@@ -17,20 +17,20 @@ function App() {
     <div className={styles.App}>
       <NavBar />
       <Container fluid className={styles.Main}>
-        <Switch>
-          <Route path="/" exact render={() => <h1>Welcome to the app!</h1>} />
-          <Route path="/signin" exact render={() => <SignInForm />} />
-          <Route path="/signup" exact render={() => <SignUpForm />} />
-          <Route path="/profiles/:id" exact render={() => <ProfilePage />} />
-          <Route path="/recipes" exact render={() => <RecipeGrid />} />
-          <Route path="/recipes/:id" exact render={() => <RecipePage />} />
-          <Route path="/recipes/edit/:id" exact render={() => <RecipeEditForm />} />
-          <Route path="/action" exact render={() => <h1>Perform an Action</h1>} />
-          <Route path="/something" exact render={() => <h1>Something Else</h1>} />
-          <Route path="/recipe/create" exact render={() => <RecipeCreateForm />} />
-          {/* Fallback route for unmatched paths */}
-          <Route render={() => <h1>404 Not Found</h1>} />
-        </Switch>
+          <Switch>
+            <Route path="/" exact render={() => <h1>Home</h1>} />
+            <Route path="/signin" exact render={() => <SignInForm />} />
+            <Route path="/signup" exact render={() => <SignUpForm />} />
+            <Route path="/profiles/:id" exact render={() => <ProfilePage />} />
+            <Route path="/recipes" exact render={() => <RecipeGrid />} />
+            <Route path="/recipes/:id" exact render={() => <RecipePage />} />
+            <Route path="/recipes/edit/:id" exact render={() => <RecipeEditForm />} />
+            <Route path="/favorited" exact render={() => <h1>Perform an Action</h1>} />
+            <Route path="/followed" exact render={() => <h1>Something Else</h1>} />
+            <Route path="/recipe/create" exact render={() => <RecipeCreateForm />} />
+            {/* Fallback route for unmatched paths */}
+            <Route render={() => <h1>404 Not Found</h1>} />
+          </Switch>
       </Container>
       <Footer />
     </div>

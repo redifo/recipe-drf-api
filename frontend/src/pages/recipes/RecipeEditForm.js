@@ -205,7 +205,7 @@ function RecipeEditForm() {
                         </Form.Group>
                         <Form.Group>
                             <Form.Label><strong>Tags</strong> (Select up to 3 tags for categorisation of your recipe)</Form.Label>
-                            {console.log(selectedTags)}
+                            
                             <div>{renderTags()}</div>
                         </Form.Group>
                         <Row>

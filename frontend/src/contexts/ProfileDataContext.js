@@ -77,7 +77,7 @@ export const ProfileDataProvider = ({ children }) => {
           popularProfiles: data,
         }));
       } catch (err) {
-        // console.log(err);
+          console.log(err);
       }
     };
 
@@ -86,10 +86,12 @@ export const ProfileDataProvider = ({ children }) => {
 
   return (
     <ProfileDataContext.Provider value={profileData}>
+      
       <SetProfileDataContext.Provider
         value={{ setProfileData, handleFollow, handleUnfollow }}
       >
         {children}
+        
       </SetProfileDataContext.Provider>
     </ProfileDataContext.Provider>
   );

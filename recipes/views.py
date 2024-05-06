@@ -12,7 +12,10 @@ class RecipeFilter(FilterSet):
 
     class Meta:
         model = Recipe
-        fields = []
+        fields ={
+            'user': ['exact'], 
+            'tags__id': ['in'],  
+        }
 class RecipeList(generics.ListCreateAPIView):
     """
     List all recipes or create a new recipe if logged in.
@@ -35,7 +38,8 @@ class RecipeList(generics.ListCreateAPIView):
         'user__followers__follower',  
         'user__following__followed', 
         'user__profile',
-        'tags__id',       
+        'tags__id',
+        'user',       
     ]
     search_fields = [
         'user__username',
