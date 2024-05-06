@@ -17,7 +17,19 @@ const ThreeDots = React.forwardRef(({ onClick }, ref) => (
   />
 ));
 
-
+const EditButton = React.forwardRef(({ onClick }, ref) => (
+  <Button 
+    ref={ref}
+    className={styles.EditProfileButton}
+    variant="outline-primary"
+    onClick={(e) => {
+    e.preventDefault();
+    onClick(e);}}
+    >Edit
+  </Button> 
+    
+  
+));
 export const MoreDropdown = ({ handleEdit, handleDelete }) => {
   const [show, setShow] = useState(false);
 
@@ -69,7 +81,7 @@ export const ProfileEditDropdown = ({ id }) => {
   const history = useHistory();
   return (
     <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
-      <Dropdown.Toggle as={ThreeDots} />
+      <Dropdown.Toggle as={EditButton} />
       <Dropdown.Menu>
         <Dropdown.Item
           onClick={() => history.push(`/profiles/${id}/edit`)}

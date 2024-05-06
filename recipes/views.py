@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, filters
 from django.db.models import Count, Avg
-from django_filters.rest_framework import DjangoFilterBackend, BaseInFilter, FilterSet
+from django_filters.rest_framework import DjangoFilterBackend, BaseInFilter, FilterSet, NumberFilter
 from .models import Recipe, Tag
 from .serializers import RecipeSerializer, TagSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
@@ -9,7 +9,13 @@ from drf_api.permissions import IsOwnerOrReadOnly
 #https://django-filter.readthedocs.io/en/stable/guide/usage.html
 class RecipeFilter(FilterSet):
     tags = BaseInFilter(field_name='tags__id', lookup_expr='in')
+    favorited_by = NumberFilter(method='filter_favorited_by')
 
+    def filter_favorited_by(self, queryset, name, value):
+        """
+        returns recipes that are favorited by a specific user
+        """
+        return queryset.filter(favorites__user_id=value)
     class Meta:
         model = Recipe
         fields ={

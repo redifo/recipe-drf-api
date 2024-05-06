@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { Col, Row, Container, Button, Image } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { Col, Row, Button, Image } from "react-bootstrap";
 
 import Asset from "../../components/Asset";
 import PopularProfiles from "./PopularProfiles";
@@ -10,7 +10,6 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useProfileData, useSetProfileData } from "../../contexts/ProfileDataContext";
 
 import styles from "../../styles/ProfilePage.module.css";
-import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import NoResults from "../../assets/img/no-results.png";
 
@@ -20,7 +19,7 @@ import { ProfileEditDropdown } from "../../components/MoreDropDown";
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [profileRecipes, setProfileRecipes] = useState({ results: [] });
-
+    const [profileFavorites, setProfileFavorites] = useState({ results: [] });
     const currentUser = useCurrentUser();
     const { id } = useParams();
 
@@ -37,10 +36,12 @@ function ProfilePage() {
             try {
                 const profileResponse = await axiosReq.get(`/profiles/${id}/`);
                 const recipesResponse = await axiosReq.get(`/recipes/?user=${id}`);
+                const profileFavoritesResponse = await axiosReq.get(`/recipes/?favorited_by=${id}`);
                 setProfileData((prevState) => ({
                     ...prevState,
                     pageProfile: { results: [profileResponse.data] },
                 }));
+                setProfileFavorites(profileFavoritesResponse.data);
                 setProfileRecipes(recipesResponse.data);
                 setHasLoaded(true);
             } catch (err) {
@@ -58,29 +59,22 @@ function ProfilePage() {
 
     const profileDetails = (
         <>
-            {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
             <Row noGutters className="px-3 text-center">
                 <Col lg={3} className="text-lg-left">
                     <Image className={styles.ProfileImage} roundedCircle src={profile?.image} />
+
+
                 </Col>
-                <Col lg={6}>
-                    <h3 className="m-2">{profile?.user}</h3>
-                    <Row className="justify-content-center no-gutters">
-                        <Col xs={3} className="my-2">
-                            <div>{profile?.recipes_count}</div>
-                            <div>recipes</div>
-                        </Col>
-                        <Col xs={3} className="my-2">
-                            <div>{profile?.followers_count}</div>
-                            <div>followers</div>
-                        </Col>
-                        <Col xs={3} className="my-2">
-                            <div>{profile?.following_count}</div>
-                            <div>following</div>
-                        </Col>
-                    </Row>
+                <Col lg={7}>
+                    <h3 className={styles.Username}>{profile?.user}</h3>
+                    <h5 className="mb-2">{profile?.bio}</h5>
+
                 </Col>
-                <Col lg={3} className="text-lg-right">
+
+
+
+                <Col lg={2} className="text-lg-right">
+                    <span className={styles.ProfileEditDropdown}>{profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}</span>
                     {currentUser && !is_owner && (profile?.following_id ? (
                         <Button className={`${btnStyles.Button} ${btnStyles.BlackOutline}`} onClick={() => handleUnfollow(profile)}>
                             unfollow
@@ -93,18 +87,54 @@ function ProfilePage() {
                 </Col>
                 {profile?.content && <Col className="p-3">{profile.content}</Col>}
             </Row>
+            <Row className="justify-content-center no-gutters">
+                <Col xs={3} className="my-2 text-center">
+                    <div>{profile?.recipes_count}</div>
+                    <div>recipes</div>
+                </Col>
+                <Col xs={3} className="my-2 text-center">
+                    <div>{profile?.followers_count}</div>
+                    <div>followers</div>
+                </Col>
+                <Col xs={3} className="my-2 text-center">
+                    <div>{profile?.following_count}</div>
+                    <div>following</div>
+                </Col>
+            </Row>
         </>
+    );
+    const favoritedList = (
+    <>
+        <hr />
+        <h2 className="">{profile?.user}'s Favorite Recipes</h2>
+
+        <Row>
+            {profileFavorites.results.length ? (
+                profileFavorites.results.map((recipe) => (
+                    <Col sm={6} md={4} lg={3} key={recipe.id}>
+                        <RecipeCard recipe={recipe} />
+                    </Col>
+                ))
+            ) : (
+                <Asset src={NoResults} message={`No results found, ${profile?.user} hasn't favorited any recipes yet.`} />
+            )}
+        </Row>
+        
+        {profileFavorites.next && (
+            <Button className="my-3" onClick={handleLoadMore}>Load More Recipes</Button>
+        )}
+    </>
     );
 
     const recipeList = (
         <>
             <hr />
-            <p className="text-center">{profile?.user}'s recipes</p>
-            <hr />
+            <h2 className="">{profile?.user}'s recipes</h2>
+
             <Row>
                 {profileRecipes.results.length ? (
                     profileRecipes.results.map((recipe) => (
-                        <Col sm={12} md={6} lg={4} key={recipe.id}>
+                        <Col sm={6} md={4} lg={3} key={recipe.id}>
                             <RecipeCard recipe={recipe} />
                         </Col>
                     ))
@@ -112,30 +142,32 @@ function ProfilePage() {
                     <Asset src={NoResults} message={`No results found, ${profile?.user} hasn't posted any recipes yet.`} />
                 )}
             </Row>
+           
             {profileRecipes.next && (
                 <Button className="my-3" onClick={handleLoadMore}>Load More Recipes</Button>
             )}
         </>
     );
-    console.log(profileRecipes.results);
 
     return (
         <Row>
-            <Col className="py-2 p-0 p-lg-2" lg={8}>
-                <PopularProfiles mobile />
-                <Container className={appStyles.Content}>
-                    {hasLoaded ? (
-                        <>
-                            {profileDetails}
-                            {recipeList}
-                        </>
-                    ) : (
-                        <Asset spinner />
-                    )}
-                </Container>
+            <Col className="py-2 p-5 p-lg-5" lg={12}>
+
+
+                {hasLoaded ? (
+                    <>
+                        {profileDetails}
+                        {recipeList}
+                        {favoritedList}
+                    </>
+                ) : (
+                    <Asset spinner />
+                )}
+
             </Col>
             <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
                 <PopularProfiles />
+                <PopularProfiles mobile />
             </Col>
         </Row>
     );
