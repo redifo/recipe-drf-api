@@ -15,7 +15,9 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import Home from './pages/home/HomePage';
+
 import NotFound from "./components/NotFound";
+import FollowedProfiles from './pages/profiles/FollowedProfiles';
 
 function App() {
   return (
@@ -31,7 +33,7 @@ function App() {
             <Route path="/recipes/:id" exact render={() => <RecipePage />} />
             <Route path="/recipes/edit/:id" exact render={() => <RecipeEditForm />} />
             <Route path="/favorited" exact render={() => <h1>Perform an Action</h1>} />
-            <Route path="/followed" exact render={() => <h1>Something Else</h1>} />
+            <Route path="/profiles/followed" exact render={() => <FollowedProfiles />} />
             <Route path="/recipe/create" exact render={() => <RecipeCreateForm />} />
             <Route path="/profiles/:id" exact render={() => <ProfilePage />} />
             <Route
