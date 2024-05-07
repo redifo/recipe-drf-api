@@ -1,7 +1,8 @@
 from django.db.models import Count
-from rest_framework import generics, filters
+from rest_framework import generics, filters, permissions
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Profile
+from followers.models import Follow
 from .serializers import ProfileSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
@@ -33,3 +34,17 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         following_count=Count('user__following', distinct=True)  
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
+
+class FollowedProfilesList(generics.ListAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        # Get profile IDs from Follow model where current user is the follower
+        followed_ids = Follow.objects.filter(follower=user).values_list('followed__id', flat=True)
+        return Profile.objects.filter(id__in=followed_ids).annotate(
+            recipes_count=Count('user__recipes', distinct=True),
+            followers_count=Count('user__followers', distinct=True),
+            following_count=Count('user__following', distinct=True)
+        )

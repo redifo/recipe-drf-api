@@ -24,6 +24,7 @@ class ProfileSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError(
                     'Image height larger than 4096px!'
                 )
+        return value
 
     def get_is_owner(self, obj):
         request = self.context['request']
