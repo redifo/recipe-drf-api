@@ -21,14 +21,10 @@ const NavBar = () => {
 
     const handleSignOut = async () => {
         try {
-            await axios.post("/dj-rest-auth/logout/", null, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': axios.defaults.xsrfHeaderName,
-                },
-            });
+            await axios.post("dj-rest-auth/logout/");
             setCurrentUser(null);
             removeTokenTimestamp();
+
         } catch (err) {
             console.log("Logout Error:", err);
         }

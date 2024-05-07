@@ -10,10 +10,11 @@ import pancakeImage from '../../assets/img/pancakes.webp';
 import { Form, Button, Image, Col, Row, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser();
-
+    useRedirect('loggedIn')
     const [SignInData, setSignInData] = useState({
         username: '',
         password: '',
@@ -37,8 +38,7 @@ const SignInForm = () => {
         try {
             const {data} = await axios.post('/dj-rest-auth/login/', SignInData)
             setCurrentUser(data.user)
-            history.push('/')
-
+            history.goBack();
         } catch (err) {
             setErrors(err.response?.data)
         }
