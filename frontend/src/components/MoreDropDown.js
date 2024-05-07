@@ -25,7 +25,7 @@ const EditButton = React.forwardRef(({ onClick }, ref) => (
     onClick={(e) => {
     e.preventDefault();
     onClick(e);}}
-    >Edit
+    >Edit Profile
   </Button> 
     
   

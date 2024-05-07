@@ -76,7 +76,16 @@ function RecipeEditForm() {
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop,
-        accept: 'image/*',
+        accept: {
+            'image/jpeg': ['.jpeg', '.jpg'],
+            'image/png': ['.png'],
+            'image/gif': ['.gif'],
+            'image/bmp': ['.bmp'],
+            'image/tiff': ['.tiff', '.tif'],
+            'image/x-icon': ['.ico'],
+            'image/svg+xml': ['.svg'],
+            'image/webp': ['.webp']
+        },
         maxSize: 10 * 1024 * 1024,
         maxFiles: 1
     });

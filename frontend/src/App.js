@@ -11,6 +11,7 @@ import RecipeGrid from './pages/recipes/RecipeGrid';
 import RecipePage from './pages/recipes/RecipePage';
 import RecipeEditForm from './pages/recipes/RecipeEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
+import Home from './pages/home/HomePage';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <NavBar />
       <Container fluid className={styles.Main}>
           <Switch>
-            <Route path="/" exact render={() => <h1>Home</h1>} />
+            <Route path="/" exact render={() => <Home />} />
             <Route path="/signin" exact render={() => <SignInForm />} />
             <Route path="/signup" exact render={() => <SignUpForm />} />
             <Route path="/profiles/:id" exact render={() => <ProfilePage />} />

@@ -176,9 +176,7 @@ function ProfilePage() {
 
     return (
         <Row>
-            {displayedFavoritesCount}
-            {profileRecipes.results.length}
-            {displayedRecipesCount}
+            
             <Col className="py-2 p-5 p-lg-5" lg={12}>
 
 
