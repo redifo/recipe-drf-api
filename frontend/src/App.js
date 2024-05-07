@@ -15,6 +15,7 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import Home from './pages/home/HomePage';
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -49,7 +50,7 @@ function App() {
             render={() => <ProfileEditForm />}
           />
             {/* Fallback route for unmatched paths */}
-            <Route render={() => <h1>404 Not Found</h1>} />
+            <Route render={() => <NotFound />} />
           </Switch>
       </Container>
       <Footer />
