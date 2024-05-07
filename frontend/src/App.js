@@ -11,6 +11,9 @@ import RecipeGrid from './pages/recipes/RecipeGrid';
 import RecipePage from './pages/recipes/RecipePage';
 import RecipeEditForm from './pages/recipes/RecipeEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
+import UsernameForm from "./pages/profiles/UsernameForm";
+import UserPasswordForm from "./pages/profiles/UserPasswordForm";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import Home from './pages/home/HomePage';
 
 function App() {
@@ -22,13 +25,29 @@ function App() {
             <Route path="/" exact render={() => <Home />} />
             <Route path="/signin" exact render={() => <SignInForm />} />
             <Route path="/signup" exact render={() => <SignUpForm />} />
-            <Route path="/profiles/:id" exact render={() => <ProfilePage />} />
+            
             <Route path="/recipes" exact render={() => <RecipeGrid />} />
             <Route path="/recipes/:id" exact render={() => <RecipePage />} />
             <Route path="/recipes/edit/:id" exact render={() => <RecipeEditForm />} />
             <Route path="/favorited" exact render={() => <h1>Perform an Action</h1>} />
             <Route path="/followed" exact render={() => <h1>Something Else</h1>} />
             <Route path="/recipe/create" exact render={() => <RecipeCreateForm />} />
+            <Route path="/profiles/:id" exact render={() => <ProfilePage />} />
+            <Route
+            exact
+            path="/profiles/:id/edit/username"
+            render={() => <UsernameForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit/password"
+            render={() => <UserPasswordForm />}
+          />
+          <Route
+            exact
+            path="/profiles/:id/edit"
+            render={() => <ProfileEditForm />}
+          />
             {/* Fallback route for unmatched paths */}
             <Route render={() => <h1>404 Not Found</h1>} />
           </Switch>
