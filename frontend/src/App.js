@@ -28,11 +28,9 @@ function App() {
             <Route path="/" exact render={() => <Home />} />
             <Route path="/signin" exact render={() => <SignInForm />} />
             <Route path="/signup" exact render={() => <SignUpForm />} />
-            
             <Route path="/recipes" exact render={() => <RecipeGrid />} />
             <Route path="/recipes/:id" exact render={() => <RecipePage />} />
             <Route path="/recipes/edit/:id" exact render={() => <RecipeEditForm />} />
-            <Route path="/favorited" exact render={() => <h1>Perform an Action</h1>} />
             <Route path="/profiles/followed" exact render={() => <FollowedProfiles />} />
             <Route path="/recipe/create" exact render={() => <RecipeCreateForm />} />
             <Route path="/profiles/:id" exact render={() => <ProfilePage />} />
