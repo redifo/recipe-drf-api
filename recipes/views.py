@@ -85,3 +85,20 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
 class TagList(generics.ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+
+class MostFavoritedRecipesList(generics.ListAPIView):
+    serializer_class = RecipeSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Recipe.objects.annotate(
+        ratings_average=Avg('ratings__score'),
+        reviews_count=Count('reviews', distinct=True),
+        ratings_count=Count('ratings', distinct=True),
+        favorites_count=Count('favorites', distinct=True),
+    ).order_by('-favorites_count', '-created_at') 
+
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter, DjangoFilterBackend]
+    filterset_class = RecipeFilter
+    ordering_fields = ['favorites_count', 'created_at']
+    search_fields = ['title', 'description', 'ingredients']
+
+

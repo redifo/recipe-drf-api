@@ -17,7 +17,7 @@ const PopularProfiles = ({ mobile, card }) => {
           {card ? (
             <Swiper
               spaceBetween={30}
-              slidesPerView={ mobile ? (window.innerWidth < 1300 ? 1 : 2) : 4 }
+              slidesPerView={ mobile ? (window.Width < 1600 ? 1 : 2) : 4 }
               navigation
               pagination={{ clickable: true }}
               scrollbar={{ draggable: true }}

@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import PopularProfiles from '../profiles/PopularProfiles';
 import styles from '../../styles/Home.module.css'
+import { axiosRes } from '../../api/axiosDefaults';
 function Home() {
   const history = useHistory();
   const [searchQuery, setSearchQuery] = useState("");
+  const [mostFavoritedRecipes, setMostFavoritedRecipes] = useState([]);
+  const [latestRecipes, setLatestRecipes] = useState([]);
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const [mostFavoritedResponse, latestResponse] = await Promise.all([
+          axiosRes.get("/recipes/most-favorited"),  
+          axiosRes.get("/recipes")           
+        ]);
+        setMostFavoritedRecipes(mostFavoritedResponse.data.results);
+        setLatestRecipes(latestResponse.data.results);
+      } catch (err) {
+        console.error("Failed to fetch recipes", err);
+      }
+    };
+    fetchRecipes();
+  }, []);
 
   const handleSearch = () => {
     // Redirect to the recipes page with the search term in the URL if the search field is not empty
