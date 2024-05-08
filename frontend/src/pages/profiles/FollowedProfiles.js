@@ -1,46 +1,41 @@
-import { axiosReq } from "../../api/axiosDefaults";
-import { useEffect, useState } from 'react';
-import { fetchMoreData } from '../../utils/utils';
+import React from 'react';
 import { Container, Button } from 'react-bootstrap';
-import Profile from './Profile'
-
+import { fetchMoreData } from '../../utils/utils';
+import Profile from './Profile';
+import { useProfileData } from "../../contexts/ProfileDataContext";
 
 function FollowedProfiles() {
-    const [profilesData, setProfilesData] = useState({ results: [], next: null });
+  const { followedProfiles, setProfileData } = useProfileData();
 
-    useEffect(() => {
-        const fetchFollowedProfiles = async () => {
-            try {
-                const response = await axiosReq.get('/profiles/followed/');
-                setProfilesData(response.data);
-            } catch (error) {
-                console.error('Failed to fetch followed profiles', error);
-            }
-        };
+  const handleLoadMore = () => {
+    if (followedProfiles.next) {
+      fetchMoreData(followedProfiles.next, newData => {
+        setProfileData(prev => ({
+          ...prev,
+          followedProfiles: {
+            ...prev.followedProfiles,
+            results: [...prev.followedProfiles.results, ...newData.results],
+            next: newData.next
+          }
+        }));
+      });
+    }
+  };
 
-        fetchFollowedProfiles();
-    }, []);
-
-    const handleLoadMore = () => {
-        if (profilesData.next) {
-            fetchMoreData(profilesData.next, setProfilesData);
-        }
-    };
-
-    return (
-        <Container>
-            {profilesData.results.length > 0 ? (
-                profilesData.results.map(profile => (
-                    <Profile key={profile.id} profile={profile} imageSize={75} mobile={false} />
-                ))
-            ) : (
-                <p>No followed profiles found.</p>
-            )}
-            {profilesData.next && (
-                <Button onClick={handleLoadMore} className="my-3">Load More</Button>
-            )}
-        </Container>
-    );
+  return (
+    <Container>
+      {followedProfiles.results.length > 0 ? (
+        followedProfiles.results.map(profile => (
+          <Profile key={profile.id} profile={profile} imageSize={75} mobile={false} />
+        ))
+      ) : (
+        <p>You are not following anyone at the moment.</p>
+      )}
+      {followedProfiles.next && (
+        <Button onClick={handleLoadMore} className="my-3">Load More</Button>
+      )}
+    </Container>
+  );
 }
 
 export default FollowedProfiles;

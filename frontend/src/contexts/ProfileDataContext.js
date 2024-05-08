@@ -14,6 +14,7 @@ export const ProfileDataProvider = ({ children }) => {
     
     pageProfile: { results: [] },
     popularProfiles: { results: [] },
+    followedProfiles: { results: [], next: null },
   });
 
   const currentUser = useCurrentUser();
@@ -34,6 +35,12 @@ export const ProfileDataProvider = ({ children }) => {
         popularProfiles: {
           ...prevState.popularProfiles,
           results: prevState.popularProfiles.results.map((profile) =>
+            followHelper(profile, clickedProfile, data.id)
+          ),
+        },
+        followedProfiles: {
+          ...prevState.followedProfiles,
+          results: prevState.followedProfiles.results.map((profile) =>
             followHelper(profile, clickedProfile, data.id)
           ),
         },
@@ -60,11 +67,32 @@ export const ProfileDataProvider = ({ children }) => {
             unfollowHelper(profile, clickedProfile)
           ),
         },
+        followedProfiles: {
+          ...prevState.followedProfiles,
+          results: prevState.followedProfiles.results.map((profile) =>
+            unfollowHelper(profile, clickedProfile)
+          ),
+        },
       }));
     } catch (err) {
        console.log(err);
     }
   };
+
+  useEffect(() => {
+    const fetchFollowedProfiles = async () => {
+      if (currentUser) {
+        try {
+          const response = await axiosReq.get('/profiles/followed/');
+          setProfileData(prev => ({ ...prev, followedProfiles: response.data }));
+        } catch (error) {
+          console.error('Failed to fetch followed profiles', error);
+        }
+      }
+    };
+
+    fetchFollowedProfiles();
+  }, [currentUser]);
 
   useEffect(() => {
     const handleMount = async () => {
