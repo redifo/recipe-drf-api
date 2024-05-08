@@ -1,6 +1,6 @@
 import React from "react";
-import {Container, Carousel} from "react-bootstrap";
-import appStyles from "../../App.module.css";
+import { Container, Carousel, Row, Col } from "react-bootstrap";
+import styles from "../../styles/PopularProfiles.module.css";
 import Asset from "../../components/Asset";
 import { useProfileData } from "../../contexts/ProfileDataContext";
 import Profile from "./Profile";
@@ -8,17 +8,32 @@ import Profile from "./Profile";
 const PopularProfiles = ({ mobile, card }) => {
   const { popularProfiles } = useProfileData();
 
+  //helper for creating carousels with different no of items according to screen size
+  const createCarouselSlides = (profiles, profilesPerSlide) => {
+    let slides = [];
+    for (let i = 0; i < profiles.length; i += profilesPerSlide) {
+      slides.push(profiles.slice(i, i + profilesPerSlide));
+    }
+    return slides.map((slideProfiles, index) => (
+      <Carousel.Item key={index}>
+        <Row className={`justify-content-center ${styles.CustomRow}`}>
+          {slideProfiles.map(profile => (
+            <Col className={`${styles.Card}`} key={profile.id} xs={12} md={6} lg={4}>
+              <Profile profile={profile} imageSize={75} mobile={mobile} card={card} />
+            </Col>
+          ))}
+        </Row>
+      </Carousel.Item>
+    ));
+  };
   return (
-    <Container className={`${appStyles.Content} ${mobile && "d-lg-none text-center mb-3"}`}>
+    <>
       {popularProfiles.results.length ? (
         <>
+          
           {card ? (
-            <Carousel interval={5000} indicators={false}>
-              {popularProfiles.results.map((profile) => (
-                <Carousel.Item key={profile.id}>
-                  <Profile profile={profile} mobile={mobile} card={card} />
-                </Carousel.Item>
-              ))}
+            <Carousel interval={4000} indicators={true} wrap={true}>
+              {createCarouselSlides(popularProfiles.results, mobile ? (window.innerWidth < 768 ? 1 : 2) : 4)}
             </Carousel>
           ) : (
             <div className="d-flex flex-wrap justify-content-around">
@@ -31,7 +46,7 @@ const PopularProfiles = ({ mobile, card }) => {
       ) : (
         <Asset spinner />
       )}
-    </Container>
+    </>
   );
 };
 

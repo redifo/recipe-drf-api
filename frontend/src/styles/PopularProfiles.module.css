@@ -1,0 +1,15 @@
+.Card{
+    background-color: antiquewhite;
+    
+    height: 120px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    overflow: hidden;
+    max-width: 400px;
+    
+}
+
+.CustomRow {
+    margin-right: -50px;
+    margin-left: -50px;
+}

@@ -32,8 +32,9 @@ const Profile = (props) => {
           <div>
             <p className="m-0 p-0">Recipes: {recipes_count}</p>
             <p className="m-0 p-0">Followers: {followers_count}</p>
-            {bio && <p>Bio: {bioSnippet}</p>}
+            {/* {bio && <p>Bio: {bioSnippet}</p>} */}
           </div>
+          
         )}
       </div>
       <div className={`text-right ${!mobile && "ml-auto"}`}>
