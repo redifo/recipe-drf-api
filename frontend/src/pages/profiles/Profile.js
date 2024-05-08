@@ -8,18 +8,19 @@ import Button from "react-bootstrap/Button";
 import { useSetProfileData } from "../../contexts/ProfileDataContext";
 
 const Profile = (props) => {
-  const { profile, mobile, imageSize = 55 } = props;
-  const { id, following_id, image, user } = profile;
+  const { profile, mobile, imageSize = 55, card } = props;
+  const { id, following_id, image, user, followers_count, recipes_count, bio } = profile;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === user;
 
   const { handleFollow, handleUnfollow } = useSetProfileData();
 
+  // Display snippet of bio if its too long
+  const bioSnippet = bio && bio.length > 100 ? `${bio.substring(0, 100)}...` : bio;
+
   return (
-    <div
-      className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
-    >
+    <div className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}>
       <div>
         <Link className="align-self-center" to={`/profiles/${id}`}>
           <Avatar src={image} height={imageSize} />
@@ -27,6 +28,13 @@ const Profile = (props) => {
       </div>
       <div className={`mx-2 ${styles.WordBreak}`}>
         <strong>{user}</strong>
+        {card && (
+          <div>
+            <p className="m-0 p-0">Recipes: {recipes_count}</p>
+            <p className="m-0 p-0">Followers: {followers_count}</p>
+            {bio && <p>Bio: {bioSnippet}</p>}
+          </div>
+        )}
       </div>
       <div className={`text-right ${!mobile && "ml-auto"}`}>
         {!mobile &&

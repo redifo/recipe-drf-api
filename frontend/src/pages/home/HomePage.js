@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
+import PopularProfiles from '../profiles/PopularProfiles';
 
 function Home() {
   const history = useHistory();
@@ -41,10 +42,7 @@ function Home() {
 
       <Row>
         <h2>Top Chefs</h2>
-        <Col>Chef1</Col>
-        <Col>Chef2</Col>
-        <Col>Chef3</Col>
-        <Col>Chef4</Col>
+        <PopularProfiles card={true}></PopularProfiles>
       </Row>
 
       <Row>

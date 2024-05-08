@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Col, Row, Button, Image } from "react-bootstrap";
 
 import Asset from "../../components/Asset";
-import PopularProfiles from "./PopularProfiles";
 import RecipeCard from "../recipes/RecipeCard";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
@@ -190,10 +189,6 @@ function ProfilePage() {
                     <Asset spinner />
                 )}
 
-            </Col>
-            <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-                <PopularProfiles />
-                <PopularProfiles mobile />
             </Col>
         </Row>
     );
