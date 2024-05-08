@@ -1,0 +1,13 @@
+.Container{
+    background-color: #e4bf8d;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 2px 3px 2px #695c4a98;
+
+}
+.WordBreak {
+    word-break: break-all;
+  }

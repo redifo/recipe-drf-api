@@ -20,7 +20,7 @@ const Profile = (props) => {
   const bioSnippet = bio && bio.length > 100 ? `${bio.substring(0, 100)}...` : bio;
 
   return (
-    <div className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}>
+    <div className={` ${styles.Container} d-flex align-items-center  ${mobile && "flex-column"}`}>
       <div>
         <Link className="align-self-center" to={`/profiles/${id}`}>
           <Avatar src={image} height={imageSize} />
@@ -30,8 +30,8 @@ const Profile = (props) => {
         <strong>{user}</strong>
         {card && (
           <div>
-            <p className="m-0 p-0">Recipes: {recipes_count}</p>
-            <p className="m-0 p-0">Followers: {followers_count}</p>
+            <p className="m-0 p-0">Recipes:{recipes_count}</p>
+            <p className="m-0 p-0">Followers:{followers_count}</p>
             {/* {bio && <p>Bio: {bioSnippet}</p>} */}
           </div>
           
@@ -42,15 +42,15 @@ const Profile = (props) => {
           currentUser &&
           !is_owner &&
           (following_id ? (
-            <Button
-              className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
+            <Button 
+              className={`mr-1 ${btnStyles.Button} ${btnStyles.BlackOutline}`}
               onClick={() => handleUnfollow(profile)}
             >
               unfollow
             </Button>
           ) : (
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Black}`}
+              className={`mr-1 ${btnStyles.Button} ${btnStyles.Black}`}
               onClick={() => handleFollow(profile)}
             >
               follow
