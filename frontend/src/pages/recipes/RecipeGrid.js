@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 
 import styles from "../../styles/RecipeGrid.module.css";
 import axios from 'axios';
@@ -7,10 +8,15 @@ import RecipeCard from './RecipeCard';
 
 import { fetchMoreData } from '../../utils/utils';
 
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+
 function RecipeGrid() {
+    const queryParam = useQuery().get('search') || "";
     const [recipes, setRecipes] = useState({ results: [], next: null });
     const [hasLoaded, setHasLoaded] = useState(false);
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState(queryParam);
     const [tags, setTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
 

@@ -7,8 +7,10 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
-    // Redirect to the recipes page with the search term in the URL
-    history.push(`/recipes?search=${encodeURIComponent(searchQuery)}`);
+    // Redirect to the recipes page with the search term in the URL if the search field is not empty
+    if (searchQuery.trim()) {
+      history.push(`/recipes?search=${encodeURIComponent(searchQuery)}`);
+    }
   };
 
   return (
