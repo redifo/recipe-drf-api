@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Container, Row, InputGroup, FormControl, Button } from 'react-bootstrap';
 import PopularProfiles from '../profiles/PopularProfiles';
 import styles from '../../styles/Home.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
@@ -56,7 +56,36 @@ function Home() {
       </Row>
       <h2>Most Favorited Recipes</h2>
       <Swiper
-        
+
+        spaceBetween={30}
+        slidesPerView={4}
+        breakpoints={{
+          320: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          992: { slidesPerView: 3 },
+          1200: { slidesPerView: 4 },
+        }}
+        navigation
+        pagination={{ clickable: true }}
+
+      >
+        {mostFavoritedRecipes.map(recipe => (
+          <SwiperSlide key={recipe.id}>
+            <RecipeCard recipe={recipe} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+
+
+      <h2 className='mt-4'>Most Followed Chefs</h2>
+
+      <PopularProfiles card={true}></PopularProfiles>
+
+
+
+      <h2 className='mt-3'>What's new</h2>
+      <Swiper
         spaceBetween={30}
         slidesPerView={4}
         breakpoints={{
@@ -69,27 +98,12 @@ function Home() {
         pagination={{ clickable: true }}
         
       >
-        {mostFavoritedRecipes.map(recipe => (
+        {latestRecipes.map(recipe => (
           <SwiperSlide key={recipe.id}>
             <RecipeCard recipe={recipe} />
           </SwiperSlide>
         ))}
       </Swiper>
-
-
-
-      <h2>Top Chefs</h2>
-
-      <PopularProfiles card={true}></PopularProfiles>
-
-
-      <Row>
-        <h2>What's new</h2>
-        <Col>Product1</Col>
-        <Col>Product2</Col>
-        <Col>Product3</Col>
-        <Col>Product4</Col>
-      </Row>
     </Container>
   );
 }
