@@ -4,6 +4,10 @@ import { Container, Row, Col, InputGroup, FormControl, Button } from 'react-boot
 import PopularProfiles from '../profiles/PopularProfiles';
 import styles from '../../styles/Home.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+import RecipeCard from '../recipes/RecipeCard';
+
 function Home() {
   const history = useHistory();
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,8 +18,8 @@ function Home() {
     const fetchRecipes = async () => {
       try {
         const [mostFavoritedResponse, latestResponse] = await Promise.all([
-          axiosRes.get("/recipes/most-favorited"),  
-          axiosRes.get("/recipes")           
+          axiosRes.get("/recipes/most-favorited"),
+          axiosRes.get("/recipes")
         ]);
         setMostFavoritedRecipes(mostFavoritedResponse.data.results);
         setLatestRecipes(latestResponse.data.results);
@@ -51,15 +55,27 @@ function Home() {
         </InputGroup>
       </Row>
       <h2>Most Favorited Recipes</h2>
-      <Row>
+      <Swiper
+        
+        spaceBetween={30}
+        slidesPerView={4}
+        breakpoints={{
+          320: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          992: { slidesPerView: 3 },
+          1200: { slidesPerView: 4 },
+        }}
+        navigation
+        pagination={{ clickable: true }}
+        
+      >
+        {mostFavoritedRecipes.map(recipe => (
+          <SwiperSlide key={recipe.id}>
+            <RecipeCard recipe={recipe} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-
-
-        <Col>Product1</Col>
-        <Col>Product2</Col>
-        <Col>Product3</Col>
-        <Col>Product4</Col>
-      </Row>
 
 
       <h2>Top Chefs</h2>

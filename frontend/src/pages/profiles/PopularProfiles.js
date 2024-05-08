@@ -17,10 +17,17 @@ const PopularProfiles = ({ mobile, card }) => {
           {card ? (
             <Swiper
               spaceBetween={30}
-              slidesPerView={ mobile ? (window.Width < 1600 ? 1 : 2) : 4 }
+
+              slidesPerView={4}
+              breakpoints={{
+                320: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                992: { slidesPerView: 3 },
+                1200: { slidesPerView: 4 },
+              }}
               navigation
               pagination={{ clickable: true }}
-              scrollbar={{ draggable: true }}
+              
             >
               {popularProfiles.results.map(profile => (
                 <SwiperSlide key={profile.id}>
