@@ -48,6 +48,7 @@ def create_review_notification(sender, instance, created, **kwargs):
         Notification.objects.create(
             notification_type=Notification.REVIEWED,
             recipient=instance.recipe.user,
+            recipe=instance.recipe,
             review=instance,
             sender=instance.user
         )
