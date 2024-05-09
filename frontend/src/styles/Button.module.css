@@ -39,7 +39,7 @@
   .Blue,
   .BlueOutline:hover,
   .Yellow:hover {
-    background-color: #cf8d12;
+    background-color: #c65c14 !important;
     color: #ffffff;
   }
   
@@ -68,8 +68,9 @@
   }
   
   .Yellow {
-    background-color: #ffc107;
+    background-color: #ffc107 !important;
     color: #000000;
+    border-color: #cf8d12 !important;
   }
 
   .TagButton{

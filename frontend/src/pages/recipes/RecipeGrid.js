@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
+import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/RecipeGrid.module.css";
 import axios from 'axios';
 import RecipeCard from './RecipeCard';
@@ -19,6 +20,7 @@ function RecipeGrid() {
     const [query, setQuery] = useState(queryParam);
     const [tags, setTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
+    const [showFilters, setShowFilters] = useState(true);
 
     useEffect(() => {
         // Fetch the tags from the backend
@@ -71,11 +73,17 @@ function RecipeGrid() {
         );
     };
 
+    const toggleFilters = () => {
+        setShowFilters(!showFilters);
+    };
+
     return (
         <Container fluid className='mt-5'>
-            <Row>
-                <Col className={styles.FilterCol} lg={3}>
+            <Button onClick={toggleFilters} className={`mb-1 ${btnStyles.Yellow}`}>{showFilters ? 'Hide Filters' : 'Show Filters'}</Button>
+            <Row className={styles.MainRow}> 
+                <Col className={styles.FilterCol} lg={3} style={{ display: showFilters ? 'block' : 'none' }}>
                     <h2>Filters</h2>
+                    
                     <p className='mb-0 '> <u>Filter by Tag</u></p>
                     {tags.map(tag => (
                         <Form.Check

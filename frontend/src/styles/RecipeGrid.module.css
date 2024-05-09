@@ -16,6 +16,10 @@
     @media (min-width: 992px) { 
         grid-template-columns: repeat(3, 1fr); 
     }
+
+    @media (min-width: 1700px) { 
+      grid-template-columns: repeat(4, 1fr); 
+  }
 }
 
 .SearchBar input {
@@ -40,3 +44,12 @@
   .LoadMoreBtnRow{
     justify-content: center;
   }
+
+  .MainRow{
+   
+      display: flex;
+      justify-content: center;
+  
+  }
+
+  
