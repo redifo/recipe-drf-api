@@ -90,7 +90,7 @@ function ProfilePage() {
                 </Col>
                 <Col lg={7}>
                     <h3 className={styles.Username}>{profile?.user}</h3>
-                    <h5 className={styles.UserBio}>{profile?.bio}</h5>
+                    <h5 className={styles.UserBio}>{profile?.bio || (is_owner && 'You can add a bio to your profile page by editing your profile.')}</h5>
 
                 </Col>
 
