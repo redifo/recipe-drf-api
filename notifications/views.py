@@ -2,6 +2,7 @@ from rest_framework import generics, permissions, filters
 from .models import Notification
 from .serializers import NotificationSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_api.permissions import IsRecipient
 class NotificationsList(generics.ListCreateAPIView):
     queryset = Notification.objects.all().order_by('-created_at')
     serializer_class = NotificationSerializer
@@ -21,7 +22,7 @@ class NotificationsList(generics.ListCreateAPIView):
 class NotificationsDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Notification.objects.all().order_by('-created_at')
     serializer_class = NotificationSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsRecipient]
 
     def perform_create(self, serializer):
         serializer.save(sender=self.request.user)

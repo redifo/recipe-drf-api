@@ -22,3 +22,12 @@ class IsSuperUser(permissions.BasePermission):
     """
     def has_permission(self, request, view):
         return request.user and request.user.is_superuser
+    
+class IsRecipient(permissions.BasePermission):
+    """
+    Custom permission to only allow recipients of an object to edit or delete it.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Permissions are only allowed to the recipient of the notification.
+        return obj.recipient == request.user
