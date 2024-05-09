@@ -3,6 +3,7 @@ import { Card, Button, Row } from 'react-bootstrap';
 import { axiosRes } from '../../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import styles from "../../styles/Recipe.module.css";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 function RecipeCard({ recipe }) {
     const { id, title, image, ratings_average, ratings_count, is_favorited: initialIsFavorited, favorite_id: initialFavoriteId } = recipe;
@@ -10,6 +11,7 @@ function RecipeCard({ recipe }) {
     const [isFavorited, setIsFavorited] = useState(initialIsFavorited);
     const [favoriteId, setFavoriteId] = useState(initialFavoriteId);
 
+    const currentUser = useCurrentUser();
 
     const handleFavorite = async (event) => {
         event.stopPropagation(); // Prevent the card click event
@@ -42,9 +44,12 @@ function RecipeCard({ recipe }) {
                         ))}
                         <span> ({ratings_count})</span>
                     </div>
-                    <Button className={`${styles.HeartButton} `} variant="link" onClick={(e) => handleFavorite(e)}>
-                        <i className={`fa fa-heart  ${isFavorited ? 'text-danger' : 'text-secondary'}`}></i>
-                    </Button>
+                    <>
+                        {currentUser ? <Button className={`${styles.HeartButton} `} variant="link" onClick={(e) => handleFavorite(e)}>
+                            <i className={`fa fa-heart  ${isFavorited ? 'text-danger' : 'text-secondary'}`}></i>
+                        </Button> : null}
+                    </>
+
                 </Row>
 
                 {/* content */}
