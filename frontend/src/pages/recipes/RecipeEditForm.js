@@ -91,6 +91,25 @@ function RecipeEditForm() {
     });
 
     const handleChange = (event) => {
+        const { name, value, type } = event.target;
+        
+        if (type === "text") {
+            if (name === "title" && value.length > 40) return;
+            if (name === "description" && value.length > 1000) return;
+            if (name === "ingredients" && value.length > 2000) return;
+            if (name === "instructions" && value.length > 3000) return;
+        } else if (type === "number") {
+            if (value === "") {
+                setRecipeData({
+                    ...recipeData,
+                    [name]: value,
+                });
+                return;
+            }
+            const numValue = Number(value);
+            if ((name === "preparation_time" || name === "cooking_time") && (numValue < 1 || numValue > 999)) return;
+            if (name === "servings" && (numValue < 1 || numValue > 50)) return;
+        }
         setRecipeData({
             ...recipeData,
             [event.target.name]: event.target.value,
