@@ -78,7 +78,7 @@ function Home() {
             1200: { slidesPerView: 4 },
           }}
           navigation
-          pagination={{ clickable: true }}
+          
 
         >
           {mostFavoritedRecipes.map(recipe => (
@@ -112,7 +112,7 @@ function Home() {
             1200: { slidesPerView: 4 },
           }}
           navigation
-          pagination={{ clickable: true }}
+          
 
         >
           {latestRecipes.map(recipe => (

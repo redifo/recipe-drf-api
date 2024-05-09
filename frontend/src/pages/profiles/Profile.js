@@ -9,15 +9,14 @@ import { useSetProfileData } from "../../contexts/ProfileDataContext";
 
 const Profile = (props) => {
   const { profile, mobile, imageSize = 55, card } = props;
-  const { id, following_id, image, user, followers_count, recipes_count, bio } = profile;
+  const { id, following_id, image, user, followers_count, recipes_count } = profile;
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === user;
 
   const { handleFollow, handleUnfollow } = useSetProfileData();
 
-  // Display snippet of bio if its too long
-  /* const bioSnippet = bio && bio.length > 100 ? `${bio.substring(0, 100)}...` : bio; */
+ 
 
   return (
     <div className={` ${styles.Container} d-flex align-items-center  ${mobile && "flex-column"}`}>
@@ -32,7 +31,7 @@ const Profile = (props) => {
           <div>
             <p className="m-0 p-0">Recipes:{recipes_count}</p>
             <p className="m-0 p-0">Followers:{followers_count}</p>
-            {/* {bio && <p>Bio: {bioSnippet}</p>} */}
+            
           </div>
           
         )}

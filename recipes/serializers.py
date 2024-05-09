@@ -43,11 +43,13 @@ class RecipeSerializer(serializers.ModelSerializer):
         Retrieve the initial rating value and ID for the current user if it exists.
         """
         request = self.context.get('request')
-        if request and hasattr(request, 'user'):
-            rating = Rating.objects.filter(user=request.user, recipe=obj).first()
-            if rating:
-                return {'score': rating.score, 'id': rating.id}
-        return None
+        user = self.context['request'].user
+        if user.is_authenticated:
+            if request and hasattr(request, 'user'):
+                rating = Rating.objects.filter(user=request.user, recipe=obj).first()
+                if rating:
+                    return {'score': rating.score, 'id': rating.id}
+            return None
 
     def get_is_favorited(self, obj):
         """Check if a recipe is favorited by the current user."""
