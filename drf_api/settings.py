@@ -29,6 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000', CLIENT_ORIGIN]
 
+
 authentication_class = 'rest_framework.authentication.SessionAuthentication' if 'DEVs' in os.environ else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -155,7 +156,7 @@ WSGI_APPLICATION = 'drf_api.wsgi.application'
 
 
 # CHANGE DEV FOR USING THE POSTGRE DB AT ALL TIMES
-if 'DEV' in os.environ:
+if 'DEVs' in os.environ:
     DATABASES = {
         'default': {
              'ENGINE': 'django.db.backends.sqlite3',
