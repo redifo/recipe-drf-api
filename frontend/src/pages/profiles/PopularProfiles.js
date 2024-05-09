@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import 'swiper/swiper-bundle.css';
 
 import Asset from "../../components/Asset";
@@ -9,13 +10,19 @@ import Profile from "./Profile";
 
 const PopularProfiles = ({ mobile, card }) => {
   const { popularProfiles } = useProfileData();
-
+  SwiperCore.use([Autoplay])
+  SwiperCore.use([Navigation])
+  SwiperCore.use([Pagination])
   return (
     <>
       {popularProfiles.results.length ? (
         <>
           {card ? (
             <Swiper
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+              }}
               spaceBetween={30}
 
               slidesPerView={4}
@@ -27,7 +34,7 @@ const PopularProfiles = ({ mobile, card }) => {
               }}
               navigation
               pagination={{ clickable: true }}
-              
+
             >
               {popularProfiles.results.map(profile => (
                 <SwiperSlide key={profile.id}>

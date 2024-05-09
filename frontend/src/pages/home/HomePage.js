@@ -5,6 +5,7 @@ import PopularProfiles from '../profiles/PopularProfiles';
 import styles from '../../styles/Home.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import 'swiper/swiper-bundle.css';
 import RecipeCard from '../recipes/RecipeCard';
 
@@ -13,6 +14,11 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [mostFavoritedRecipes, setMostFavoritedRecipes] = useState([]);
   const [latestRecipes, setLatestRecipes] = useState([]);
+
+  //https://stackoverflow.com/questions/63052586/react-swiperjs-autoplay-not-making-the-swiper-to-auto-swipe
+  SwiperCore.use([Autoplay])
+  SwiperCore.use([Navigation])
+  SwiperCore.use([Pagination])
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -58,7 +64,11 @@ function Home() {
       <Container fluid className={styles.Container}>
         <h2>Most Favorited Recipes</h2>
         <Swiper
-
+          
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
           spaceBetween={30}
           slidesPerView={4}
           breakpoints={{
@@ -88,6 +98,11 @@ function Home() {
 
         <h2 className='mt-3'>What's new</h2>
         <Swiper
+          
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
           spaceBetween={30}
           slidesPerView={4}
           breakpoints={{

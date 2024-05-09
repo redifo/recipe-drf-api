@@ -25,12 +25,10 @@
 
 .SearchButton {
     background-color: #c65c14;
-    /* Example color, change as needed */
     color: white;
 }
 
-/* Ensures the button height matches the input */
+
 .SearchInputGroup .btn {
     height: calc(1.5em + 0.75rem + 2px);
-    /* Adjust based on your theme */
 }
