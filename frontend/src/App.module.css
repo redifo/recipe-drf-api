@@ -18,6 +18,7 @@
 }
 
 .Main {
+    min-height: 85vh;
     padding-top: 76px;
     
 }

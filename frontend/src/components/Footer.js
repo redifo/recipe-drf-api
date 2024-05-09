@@ -55,8 +55,8 @@ const FooterPage = () => {
         <a href='https://www.linkedin.com/in/kaan-redif/' >
                   <MDBIcon className={styles.SocialIcon} fab icon="linkedin" />
                 </a>
-                <a href='https://github.com/redifo' className=' '>
-                  <MDBIcon fab icon="github" />
+                <a href='https://github.com/redifo' >
+                  <MDBIcon className={styles.SocialIcon}  fab icon="github" />
                 </a>
 
 
