@@ -1,5 +1,6 @@
 .NotificationsContainer {
-    max-height: 400px;
+    max-height: 500px;
+    max-width: 500px;
     overflow-y: auto;
     padding: 20px;
 }

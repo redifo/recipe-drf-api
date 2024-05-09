@@ -52,9 +52,11 @@ const NavBar = () => {
                 </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown
+                className={`${styles.NavDropdown} pl-1`}
                 ref={notificationRef}
                 title={<i className="fa-solid fa-bell"></i>}
                 id="nav-dropdown-notifications"
+                alignRight={false}
             >
                 <Notifications currentUser={currentUser} />
             </NavDropdown>

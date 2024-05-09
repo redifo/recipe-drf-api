@@ -59,9 +59,18 @@ a:hover i {
     color: #c65c14;
 }
 
-@media (max-width: 768px) {
+.NavDropdown [aria-labelledby = nav-dropdown-notifications]{
+    min-width: 350px;
+    left: auto !important;
+    right: -100px !important;
+}
+
+@media (max-width: 991px) {
 
     .NavDropdown [aria-labelledby = basic-nav-dropdown] {
+        position: absolute;
+    }
+    .NavDropdown [aria-labelledby = nav-dropdown-notifications] {
         position: absolute;
     }
 
