@@ -18,7 +18,7 @@
 }
 
 .Main {
-    padding-top: 108px;
+    padding-top: 76px;
     
 }
 
@@ -54,7 +54,7 @@ a:hover {
 }
 
 a:hover i {
-    color: #2142b2;
+    color: #c65c14;
     transition: color ease-in-out 0.3s;
 }
 

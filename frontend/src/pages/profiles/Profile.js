@@ -17,7 +17,7 @@ const Profile = (props) => {
   const { handleFollow, handleUnfollow } = useSetProfileData();
 
   // Display snippet of bio if its too long
-  const bioSnippet = bio && bio.length > 100 ? `${bio.substring(0, 100)}...` : bio;
+  /* const bioSnippet = bio && bio.length > 100 ? `${bio.substring(0, 100)}...` : bio; */
 
   return (
     <div className={` ${styles.Container} d-flex align-items-center  ${mobile && "flex-column"}`}>

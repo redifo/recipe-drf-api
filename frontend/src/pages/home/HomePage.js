@@ -38,73 +38,76 @@ function Home() {
   };
 
   return (
-    <Container fluid className={styles.Container}>
-      <Row className="justify-content-center my-4">
-        <InputGroup className="mb-3" style={{ maxWidth: '600px' }}>
+    <>
+      <Row className={`justify-content-center my-4 ${styles.SearchRow}`}>
+        <InputGroup className={`mb-3 ${styles.SearchInputGroup}`}>
           <FormControl
+            className={`${styles.SearchInput}`}
             placeholder="Search Recipes"
-            aria-label="Search Recipes"
+            aria-label="SearchRecipes"
             aria-describedby="basic-addon2"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyUp={(e) => e.key === 'Enter' && handleSearch()}
           />
           <InputGroup.Append>
-            <Button variant="outline-secondary" onClick={handleSearch}>Search</Button>
+            <Button variant="outline-secondary" className={styles.SearchButton} onClick={handleSearch}>Search</Button>
           </InputGroup.Append>
         </InputGroup>
       </Row>
-      <h2>Most Favorited Recipes</h2>
-      <Swiper
+      <Container fluid className={styles.Container}>
+        <h2>Most Favorited Recipes</h2>
+        <Swiper
 
-        spaceBetween={30}
-        slidesPerView={4}
-        breakpoints={{
-          320: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
-          992: { slidesPerView: 3 },
-          1200: { slidesPerView: 4 },
-        }}
-        navigation
-        pagination={{ clickable: true }}
+          spaceBetween={30}
+          slidesPerView={4}
+          breakpoints={{
+            320: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            992: { slidesPerView: 3 },
+            1200: { slidesPerView: 4 },
+          }}
+          navigation
+          pagination={{ clickable: true }}
 
-      >
-        {mostFavoritedRecipes.map(recipe => (
-          <SwiperSlide key={recipe.id}>
-            <RecipeCard recipe={recipe} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-
-
-      <h2 className='mt-4'>Most Followed Chefs</h2>
-
-      <PopularProfiles card={true}></PopularProfiles>
+        >
+          {mostFavoritedRecipes.map(recipe => (
+            <SwiperSlide key={recipe.id}>
+              <RecipeCard recipe={recipe} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
 
 
-      <h2 className='mt-3'>What's new</h2>
-      <Swiper
-        spaceBetween={30}
-        slidesPerView={4}
-        breakpoints={{
-          320: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
-          992: { slidesPerView: 3 },
-          1200: { slidesPerView: 4 },
-        }}
-        navigation
-        pagination={{ clickable: true }}
-        
-      >
-        {latestRecipes.map(recipe => (
-          <SwiperSlide key={recipe.id}>
-            <RecipeCard recipe={recipe} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </Container>
+        <h2 className='mt-4'>Most Followed Chefs</h2>
+
+        <PopularProfiles card={true}></PopularProfiles>
+
+
+
+        <h2 className='mt-3'>What's new</h2>
+        <Swiper
+          spaceBetween={30}
+          slidesPerView={4}
+          breakpoints={{
+            320: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            992: { slidesPerView: 3 },
+            1200: { slidesPerView: 4 },
+          }}
+          navigation
+          pagination={{ clickable: true }}
+
+        >
+          {latestRecipes.map(recipe => (
+            <SwiperSlide key={recipe.id}>
+              <RecipeCard recipe={recipe} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container>
+    </>
   );
 }
 

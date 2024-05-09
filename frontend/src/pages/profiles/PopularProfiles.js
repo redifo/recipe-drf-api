@@ -22,8 +22,8 @@ const PopularProfiles = ({ mobile, card }) => {
               breakpoints={{
                 320: { slidesPerView: 1 },
                 768: { slidesPerView: 2 },
-                992: { slidesPerView: 3 },
-                1200: { slidesPerView: 4 },
+                1200: { slidesPerView: 3 },
+                1800: { slidesPerView: 4 },
               }}
               navigation
               pagination={{ clickable: true }}
@@ -31,7 +31,7 @@ const PopularProfiles = ({ mobile, card }) => {
             >
               {popularProfiles.results.map(profile => (
                 <SwiperSlide key={profile.id}>
-                  <Profile profile={profile} imageSize={85} mobile={mobile} card={card} />
+                  <Profile profile={profile} imageSize={75} mobile={mobile} card={card} />
                 </SwiperSlide>
               ))}
             </Swiper>
