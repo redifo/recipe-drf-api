@@ -47,4 +47,4 @@ class FollowedProfilesList(generics.ListAPIView):
             recipes_count=Count('user__recipes', distinct=True),
             followers_count=Count('user__followers', distinct=True),
             following_count=Count('user__following', distinct=True)
-        )
+        ).order_by('-created_at')
