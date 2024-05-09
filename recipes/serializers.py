@@ -58,8 +58,9 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def get_favorite_id(self, obj):
         user = self.context['request'].user
-        favorite = obj.favorites.filter(user=user).first()
-        return favorite.id if favorite else None
+        if user.is_authenticated:
+            favorite = obj.favorites.filter(user=user).first()
+            return favorite.id if favorite else None
     
     def get_is_owner(self, obj):
         request = self.context['request']

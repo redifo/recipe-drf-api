@@ -46,7 +46,6 @@ function RecipeGrid() {
                 setHasLoaded(true);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
-                console.log(error.response.data);
                 setHasLoaded(true);
             }
         };
@@ -73,7 +72,7 @@ function RecipeGrid() {
     };
 
     return (
-        <Container fluid>
+        <Container fluid className='mt-5'>
             <Row>
                 <Col className={styles.FilterCol} lg={3}>
                     <h2>Filters</h2>
