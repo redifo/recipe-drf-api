@@ -5,6 +5,7 @@ import { Button, ListGroup } from 'react-bootstrap';
 import styles from '../styles/Notifications.module.css';
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { axiosRes } from "../api/axiosDefaults";
+import { showSuccess, showError } from '../utils/ToastManager';
 
 const Notifications = () => {
     const [notifications, setNotifications] = useState([]);
@@ -18,7 +19,7 @@ const Notifications = () => {
                     const response = await axiosRes.get(`/notifications/?recipient=${currentUser.profile_id}`);
                     setNotifications(response.data.results);
                 } catch (err) {
-                    console.error("Error fetching notifications:", err);
+                    showError("Error fetching notifications:", err);
                 }
             }
         };
@@ -31,8 +32,9 @@ const Notifications = () => {
             setNotifications(notifications.map(notif =>
                 notif.id === notificationId ? { ...notif, is_read: true } : notif
             ));
+            showSuccess("Succesfully marked as read")
         } catch (err) {
-            console.error("Failed to mark notification as read:", err);
+            showError("Failed to mark notification as read:", err);
         }
     };
 
@@ -40,8 +42,9 @@ const Notifications = () => {
         try {
             await axios.delete(`/notifications/${notificationId}/`);
             setNotifications(notifications.filter(notif => notif.id !== notificationId));
+            showSuccess("Deleted notification successfully")
         } catch (err) {
-            console.error("Failed to delete notification:", err);
+            showError("Failed to delete notification:", err);
         }
     };
 
@@ -54,14 +57,14 @@ const Notifications = () => {
             <ListGroup>
                 {notifications.map(notification => (
                     <ListGroup.Item key={notification.id} className={styles.NotificationItem}>
-                        <div onClick={() => navigateToRecipe(notification.recipe)}>
+                        <div className={styles.NotificationItemDiv} onClick={() => navigateToRecipe(notification.recipe)}>
                             <strong>{notification.sender_name}</strong> {notification.notification_type_display} on your recipe.
                         </div>
                         <div className={styles.ActionButtons}>
-                            <Button variant="outline-primary" size="sm" onClick={() => markAsRead(notification.id)}>
+                            <Button variant="outline-primary" size="xs" onClick={() => markAsRead(notification.id)}>
                                 Mark as Read
                             </Button>
-                            <Button variant="outline-danger" size="sm" onClick={() => deleteNotification(notification.id)}>
+                            <Button variant="outline-danger" size="xs" onClick={() => deleteNotification(notification.id)}>
                                 Delete
                             </Button>
                         </div>
