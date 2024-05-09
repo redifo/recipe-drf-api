@@ -10,6 +10,7 @@ import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
 import Notifications from './Notifications';
+import { showSuccess, showError } from '../utils/ToastManager';
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
@@ -23,10 +24,12 @@ const NavBar = () => {
     const handleSignOut = async () => {
         try {
             await axios.post("dj-rest-auth/logout/");
+            showSuccess("You have signed Out")
             setCurrentUser(null);
             removeTokenTimestamp();
 
         } catch (err) {
+            showError("Something went wrong signing out")
             console.log("Logout Error:", err);
         }
     };

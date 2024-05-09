@@ -18,7 +18,7 @@ import {
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
-import { showSuccess, showError } from '../../utils/ToastManager';
+import { showSuccess, showError, showWarning } from '../../utils/ToastManager';
 
 const ProfileEditForm = () => {
   const currentUser = useCurrentUser();
@@ -82,7 +82,7 @@ const ProfileEditForm = () => {
       history.goBack();
       showSuccess("Profile Updated Successfully")
     } catch (err) {
-      showError(err.response?.data)
+      showWarning(err.response?.data)
       setErrors(err.response?.data);
     }
   };
