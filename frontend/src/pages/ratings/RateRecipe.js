@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { axiosRes } from '../../api/axiosDefaults';
 import styles from '../../styles/Ratings.module.css';
+import { showError, showSuccess, showWarning } from '../../utils/ToastManager';
 
 const RateRecipe = ({ recipeId, currentUser, initialRating }) => {
     const [rating, setRating] = useState(initialRating);
@@ -17,30 +18,22 @@ const RateRecipe = ({ recipeId, currentUser, initialRating }) => {
             if (rating) {
                 if (rating.score === newScore) {
                     // The user clicked the same score
-                    console.log("Same score clicked, no action taken.");
+                    showWarning("Same score clicked, no action taken.");
                 } else {
                     // Update the existing rating
                     await axiosRes.put(`/ratings/${rating.id}/`, {recipe: recipeId, score: newScore });
                     setRating({ ...rating, score: newScore });
-
+                    showSuccess("Successfully rated the recipe:", newScore)
                 }
             } else {
                 // Create a new rating
                 const { data } = await axiosRes.post("/ratings/", { recipe: recipeId, score: newScore });
                 setRating({ id: data.id, score: newScore });
+                showSuccess("Successfully rated the recipe:", newScore)
             }
         } catch (err) {
 
-            if (err.response) {
-                console.log(err.response.data);
-                console.log(err.response.status);
-                console.log(err.response.headers);
-            } else if (err.request) {
-                console.log(err.request);
-            } else {
-                console.log('Error', err.message);
-            }
-            console.log(err.config);
+            showError(err.message)
         }
     };
 
@@ -49,8 +42,9 @@ const RateRecipe = ({ recipeId, currentUser, initialRating }) => {
             try {
                 await axiosRes.delete(`/ratings/${rating.id}/`);
                 setRating(null);
+                showSuccess("Successfully removed rating");
             } catch (err) {
-                console.error("Error removing rating", err);
+                showError("Error removing rating", err);
             }
         }
     };

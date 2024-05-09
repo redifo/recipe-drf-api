@@ -10,6 +10,7 @@ import pancakeImage from '../../assets/img/pancakes.webp';
 import { Form, Button, Image, Col, Row, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useRedirect } from "../../hooks/useRedirect";
+import { showSuccess } from "../../utils/ToastManager";
 
 const SignUpForm = () => {
     useRedirect('loggedout')
@@ -37,7 +38,7 @@ const SignUpForm = () => {
         try {
             await axios.post('/dj-rest-auth/registration/', signUpData)
             history.push('/signin')
-
+            showSuccess("Registered successfully you can now signin.")
         } catch (err) {
             setErrors(err.response?.data);
         }

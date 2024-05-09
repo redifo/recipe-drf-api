@@ -16,6 +16,7 @@ import {
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import { showSuccess } from "../../utils/ToastManager";
 
 const UsernameForm = () => {
   const [username, setUsername] = useState("");
@@ -45,9 +46,9 @@ const UsernameForm = () => {
         ...prevUser,
         username,
       }));
+      showSuccess("Username Changed Successfully")
       history.goBack();
     } catch (err) {
-      // console.log(err);
       setErrors(err.response?.data);
     }
   };
