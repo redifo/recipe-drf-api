@@ -18,6 +18,8 @@ import {
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
+import { showSuccess, showError } from '../../utils/ToastManager';
+
 const ProfileEditForm = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
@@ -41,8 +43,9 @@ const ProfileEditForm = () => {
           const { data } = await axiosReq.get(`/profiles/${id}/`);
           const { name, bio, image } = data;
           setProfileData({ name, bio, image });
+          
         } catch (err) {
-          // console.log(err);
+          showError(err)
           history.push("/");
         }
       } else {
@@ -77,8 +80,9 @@ const ProfileEditForm = () => {
         profile_image: data.image,
       }));
       history.goBack();
+      showSuccess("Profile Updated Successfully")
     } catch (err) {
-      // console.log(err);
+      showError(err.response?.data)
       setErrors(err.response?.data);
     }
   };
