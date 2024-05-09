@@ -77,5 +77,10 @@ a:hover i {
     .LoggedInIcons i {
         font-size: 1.2rem;
     }
-
+    .Brand{
+        font-size: 1rem;
+    }
+    .Brand img{
+        height: 55px;
+    }
 }
