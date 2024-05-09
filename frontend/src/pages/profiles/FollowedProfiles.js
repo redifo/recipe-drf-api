@@ -23,10 +23,10 @@ function FollowedProfiles() {
   };
 
   return (
-    <Container>
+    <Container className="mt-5">
       {followedProfiles.results.length > 0 ? (
         followedProfiles.results.map(profile => (
-          <Profile key={profile.id} profile={profile} imageSize={75} mobile={false} />
+          <Profile key={profile.id} profile={profile} imageSize={75} mobile={false} card={true} />
         ))
       ) : (
         <p>You are not following anyone at the moment.</p>
