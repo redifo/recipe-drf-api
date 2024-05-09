@@ -33,7 +33,7 @@ const PopularProfiles = ({ mobile, card }) => {
                 1800: { slidesPerView: 4 },
               }}
               navigation
-              pagination={{ clickable: true }}
+              
 
             >
               {popularProfiles.results.map(profile => (
