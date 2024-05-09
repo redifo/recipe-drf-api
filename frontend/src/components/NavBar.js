@@ -9,6 +9,7 @@ import Avatar from './Avatar';
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
+import Notifications from './Notifications';
 
 const NavBar = () => {
     const currentUser = useCurrentUser();
@@ -50,9 +51,13 @@ const NavBar = () => {
                     <i className="fa-solid fa-right-from-bracket"></i> Sign Out
                 </NavDropdown.Item>
             </NavDropdown>
-            <NavLink ref={notificationRef} className={styles.NavLink} to="/notifications">
-                <i className="fa-solid fa-bell"></i>
-            </NavLink>
+            <NavDropdown
+                ref={notificationRef}
+                title={<i className="fa-solid fa-bell"></i>}
+                id="nav-dropdown-notifications"
+            >
+                <Notifications currentUser={currentUser} />
+            </NavDropdown>
             <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/recipe/create">
                 <i className="fa-solid fa-plus fa-2xl"></i>
             </NavLink>
