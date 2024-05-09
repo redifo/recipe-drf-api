@@ -15,7 +15,7 @@ class ReviewList(generics.ListCreateAPIView):
     queryset = Review.objects.annotate(
         likes_count=Count('likes', filter=Q(likes__is_like=True)),
         dislikes_count=Count('likes', filter=Q(likes__is_like=False))
-    )
+    ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
         DjangoFilterBackend
