@@ -85,7 +85,7 @@ function RecipePage() {
     }
 
     return (
-        <Container fluid >
+        <Container className='mt-4' fluid >
             <Row className={styles.RecipeSummary}>
                 <Col xs={12} md={6} lg={5} xl={4} className={styles.RecipePageImageContainer}>
                     <img className={`${styles.RecipePageImage}`} src={recipe.image} alt={recipe.title} />
@@ -134,22 +134,22 @@ function RecipePage() {
 
             </Row>
             <Row className="mt-3">
-                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Description</h4> {recipe.description}</Col>
-                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Ingredients</h4> {recipe.ingredients}</Col>
-                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Instructions</h4> {recipe.instructions}</Col>
-                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Recipe Tags</h4> {tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Description</h4> <p className='ml-2'> {recipe.description}</p></Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Ingredients</h4> <p className='ml-2'>{recipe.ingredients}</p></Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Instructions</h4> <p className='ml-2'>{recipe.instructions}</p> </Col>
+                <Col lg={12} xxl={6}><h4 className={`${styles.Headings} p-1 mt-2`}>Recipe Tags</h4> <p className='ml-2'>{tags.map(tag => <span className={`${styles.TagsText} p-1 mr-2`} key={tag.id}>{tag.name} </span>)}</p></Col>
 
             </Row>
 
-            <h4 className={`${styles.Headings} mt-3 ml-1`} >Rate this recipe </h4>
-            {currentUser && (
+            <h4 className={`${styles.Headings} mt-3 ml-1`}> Rate this recipe</h4>
+            {currentUser? (
                 <RateRecipe
                     recipeId={id}
                     currentUser={currentUser}
                     initialRating={recipe.initial_rating}
                 />
 
-            )}
+            ): <p className='ml-2 mb-0'>Login to rate recipes.</p>}
             <Row>
 
                 <Col>
@@ -164,14 +164,14 @@ function RecipePage() {
                             setReviews={setReviews}
                             recipeId={id}
                         />
-                    ) : null}
+                    ) : <p className='ml-2'>You need to be logged in to create reviews.</p>}
 
                     {reviews.results.length > 0 ? (
                         reviews.results.map(review => (
                             <Review key={review.id} review={review} setReviews={setReviews} />
                         ))
                     ) : (
-                        <p className='ml-2'>No reviews yet. Be the first to review!</p>
+                        <p className='ml-2'>No reviews yet!</p>
                     )}
 
                     {reviews.next && (
