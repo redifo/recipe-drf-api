@@ -13,6 +13,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
+import { showSuccess } from "../../utils/ToastManager";
 
 const UserPasswordForm = () => {
   const history = useHistory();
@@ -46,8 +47,9 @@ const UserPasswordForm = () => {
     try {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
       history.goBack();
+      showSuccess("Password changed Successfully")
     } catch (err) {
-      // console.log(err);
+      
       setErrors(err.response?.data);
     }
   };

@@ -4,6 +4,7 @@ import { axiosRes } from '../../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import styles from "../../styles/Recipe.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { showError, showSuccess } from '../../utils/ToastManager';
 
 function RecipeCard({ recipe }) {
     const { id, title, image, ratings_average, ratings_count, is_favorited: initialIsFavorited, favorite_id: initialFavoriteId } = recipe;
@@ -21,15 +22,17 @@ function RecipeCard({ recipe }) {
                 await axiosRes.delete(`/favorites/${favoriteId}/`);
                 setIsFavorited(false);
                 setFavoriteId(null);
+                showSuccess("Removed from favorites")
             } else {
                 // If not favorited, favorite it
                 const { data } = await axiosRes.post("/favorites/", { recipe: id });
                 setIsFavorited(true);
                 setFavoriteId(data.id);
+                showSuccess("Added to favorites")
             }
 
         } catch (err) {
-            console.error("Error managing favorite", err);
+            showError("Error managing favorite", err.message);
         }
     };
     return (
@@ -49,10 +52,7 @@ function RecipeCard({ recipe }) {
                             <i className={`fa fa-heart  ${isFavorited ? 'text-danger' : 'text-secondary'}`}></i>
                         </Button> : null}
                     </>
-
                 </Row>
-
-                {/* content */}
             </Card.Body>
         </Card>
 

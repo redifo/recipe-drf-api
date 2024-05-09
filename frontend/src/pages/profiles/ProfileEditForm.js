@@ -45,7 +45,7 @@ const ProfileEditForm = () => {
           setProfileData({ name, bio, image });
           
         } catch (err) {
-          showError(err)
+          showError(err.message)
           history.push("/");
         }
       } else {

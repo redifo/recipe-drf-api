@@ -11,6 +11,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 import axios from "axios";
 import Asset from "../../components/Asset";
 import Upload from "../../assets/img/upload.png";
+import { showError, showSuccess } from "../../utils/ToastManager";
 
 function RecipeCreateForm() {
     useRedirect("loggedOut");
@@ -24,7 +25,7 @@ function RecipeCreateForm() {
     useEffect(() => {
         axios.get("/tags")
             .then(response => setAvailableTags(response.data.results))
-            .catch(error => console.error("Error fetching tags:", error));
+            .catch(error => showError("Failed to load tags:", error.message));
     }, []);
 
     const handleToggleTag = tagId => {
@@ -63,7 +64,7 @@ function RecipeCreateForm() {
         const file = acceptedFiles[0];
         setImageFile(file);
         setImagePreview(URL.createObjectURL(file));
-        console.log("Image File to be uploaded:", imageFile);
+        showSuccess("Image ready for upload:");
 
     };
 
@@ -101,7 +102,7 @@ function RecipeCreateForm() {
             }
             const numValue = Number(value);
             if ((name === "preparation_time" || name === "cooking_time") && (numValue < 1 || numValue > 999)) return;
-            if (name === "servings" && (numValue < 1 || numValue > 50)) return;
+            if (name === "servings" && (numValue < 1 || numValue > 99)) return;
         }
         setRecipeData({
             ...recipeData,
@@ -131,7 +132,12 @@ function RecipeCreateForm() {
                 },
             });
             history.push(`/recipes/${data.id}`);
+            showSuccess("Recipe created successfully")
         } catch (err) {
+            const errorMessages = err.response?.data;
+                Object.values(errorMessages).flat().forEach((message) => {
+                    showError(message);
+                });
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }

@@ -109,7 +109,7 @@ export const ProfileDataProvider = ({ children }) => {
           popularProfiles: data,
         }));
       } catch (err) {
-        showError(err);
+        showError(err.message);
       }
     };
 
