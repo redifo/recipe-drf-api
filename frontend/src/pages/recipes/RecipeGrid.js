@@ -8,6 +8,7 @@ import axios from 'axios';
 import RecipeCard from './RecipeCard';
 
 import { fetchMoreData } from '../../utils/utils';
+import { showError } from '../../utils/ToastManager';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -29,7 +30,7 @@ function RecipeGrid() {
                 const { data } = await axios.get(`/tags`);
                 setTags(data.results);
             } catch (error) {
-                console.error("Error fetching tags:", error);
+                showError("Error fetching tags:", error.message);
             }
         };
 
@@ -47,7 +48,7 @@ function RecipeGrid() {
                 });
                 setHasLoaded(true);
             } catch (error) {
-                console.error("Error fetching recipes:", error);
+                showError("Error fetching recipes:", error.message);
                 setHasLoaded(true);
             }
         };

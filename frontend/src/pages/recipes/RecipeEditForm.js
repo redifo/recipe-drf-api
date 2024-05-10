@@ -10,6 +10,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Asset from "../../components/Asset";
 import Upload from "../../assets/img/upload.png";
+import { showError } from '../../utils/ToastManager';
 
 function RecipeEditForm() {
     const history = useHistory();
@@ -57,7 +58,7 @@ function RecipeEditForm() {
                 });
                 setImagePreview(image);
             } catch (err) {
-                console.error("Error fetching data:", err);
+                showError("Error fetching data:", err.message);
             }
         };
 
@@ -72,6 +73,7 @@ function RecipeEditForm() {
         const file = acceptedFiles[0];
         setImageFile(file);
         setImagePreview(URL.createObjectURL(file));
+        showSuccess("Image ready for upload.");
     };
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -92,7 +94,7 @@ function RecipeEditForm() {
 
     const handleChange = (event) => {
         const { name, value, type } = event.target;
-        
+
         if (type === "text") {
             if (name === "title" && value.length > 40) return;
             if (name === "description" && value.length > 1000) return;
@@ -142,10 +144,11 @@ function RecipeEditForm() {
                 },
             });
             history.push(`/recipes/${id}`);
+            showSuccess("Recipe updated successfully.");
         } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data);
-            }
+            showError("Failed to update recipe: " + err.message);
+            setErrors(err.response?.data);
+
         }
     };
 
@@ -153,14 +156,15 @@ function RecipeEditForm() {
         try {
             await axiosReq.delete(`/recipes/${id}/`);
             history.push("/");
+            showSuccess("Recipe deleted successfully.");
             handleClose();
         } catch (err) {
-            console.error("Failed to delete the recipe", err);
+            showError("Failed to delete the recipe: " + err.message);
             setErrors(err.response?.data);
             handleClose();
         }
     };
-    
+
     const renderTags = () => {
         return availableTags.map(tag => (
             <Button
@@ -233,7 +237,7 @@ function RecipeEditForm() {
                         </Form.Group>
                         <Form.Group>
                             <Form.Label><strong>Tags</strong> (Select up to 3 tags for categorisation of your recipe)</Form.Label>
-                            
+
                             <div>{renderTags()}</div>
                         </Form.Group>
                         <Row>
@@ -245,7 +249,7 @@ function RecipeEditForm() {
                                     Save
                                 </Button>
                             </div>
-                            <Button 
+                            <Button
                                 variant="danger"
                                 className={` ${btnStyles.Delete}`}
                                 onClick={handleShow}

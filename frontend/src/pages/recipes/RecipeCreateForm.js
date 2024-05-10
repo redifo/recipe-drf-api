@@ -11,7 +11,7 @@ import { useRedirect } from "../../hooks/useRedirect";
 import axios from "axios";
 import Asset from "../../components/Asset";
 import Upload from "../../assets/img/upload.png";
-import { showError, showSuccess } from "../../utils/ToastManager";
+import { showError, showSuccess, showWarning } from "../../utils/ToastManager";
 
 function RecipeCreateForm() {
     useRedirect("loggedOut");
@@ -136,7 +136,7 @@ function RecipeCreateForm() {
         } catch (err) {
             const errorMessages = err.response?.data;
                 Object.values(errorMessages).flat().forEach((message) => {
-                    showError(message);
+                    showWarning(message);
                 });
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
