@@ -82,10 +82,39 @@ Font Optical Sizing (auto): Ensuring that the text is displayed optimally at dif
 - Recipe recommendations based on user preferences and past activities.
 
 ## Technologies Used
-- **Frontend**: React, Bootstrap for responsive design.
-- **Backend**: Django Rest Framework for handling API requests.
-- **Database**: PostgreSQL for storing user and recipe data.
-- **Additional Libraries**: 
+
+### Frontend
+- **React**: Utilized for building the user interface with interactive components.
+- **Bootstrap**: Employed for responsive design, ensuring the website adapts to various device sizes.
+- **React Bootstrap**: Extended Bootstrap functionalities within React applications for consistent styling and component behavior.
+- **React Router DOM**: Enabled dynamic client-side routing to improve user navigation and single-page application flow.
+- **React Dropzone**: Used for drag-and-drop file upload functionality, enhancing the user experience in uploading images.
+- **React Toastify**: Provided user-friendly notifications and feedback for actions like errors, successes, and warnings.
+- **Swiper**: Integrated for creating responsive, touch-friendly carousels to showcase recipes and other content attractively.
+- **MDBReact**: A Material Design UI kit for Bootstrap that adds material design styles and components.(only used for footer due to version compability issues)
+
+### Backend
+- **Django Rest Framework**: Served as the foundation for creating RESTful APIs to handle client-server interactions efficiently.
+- **JWT Authentication**: Ensured secure and scalable user authentication using JSON Web Tokens.
+- **Cloudinary**: Used for cloud-based image storage, simplifying the management of user-uploaded images.
+- **Django Filters**: Implemented for advanced querying capabilities, allowing users to filter recipes and other content based on various criteria.
+- **WhiteNoise**: Facilitated efficient static file serving in Django applications, especially when deployed.
+- **Django Rest Auth & Allauth**: Provided comprehensive user authentication, including registration and login functionalities.
+- **CORS Headers**: Configured to allow resource sharing between the frontend and backend, supporting cross-origin requests.
+
+### Database
+- **PostgreSQL**: Chosen for its robustness and scalability in storing and managing user and recipe data.
+
+### Utilities & Additional Tools
+- **Heroku**: Used for deploying the application, offering a platform-as-a-service environment that integrates with Git for continuous deployment.
+
+- **ESLint**: Assured code quality and consistency by detecting and correcting syntax and style issues in JavaScript code.
+
+### Libraries & Packages
+- **axios**: Facilitated making HTTP requests to the backend, simplifying data retrieval and submission.
+- **jwt-decode**: Decoded JWTs client-side to extract user information and manage authentication state.
+
+
 
 ## Testing
 
