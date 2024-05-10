@@ -16,16 +16,18 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             owner = obj.follower
         return owner == request.user
 
+
 class IsSuperUser(permissions.BasePermission):
     """
     Allows access only to superusers.
     """
     def has_permission(self, request, view):
         return request.user and request.user.is_superuser
-    
+
+
 class IsRecipient(permissions.BasePermission):
     """
-    Custom permission to only allow recipients of an object to edit or delete it.
+    Custom permission to only allow recipients of an object to edit or delete .
     """
 
     def has_object_permission(self, request, view, obj):
