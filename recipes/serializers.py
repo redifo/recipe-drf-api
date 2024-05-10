@@ -2,15 +2,19 @@ from rest_framework import serializers
 from .models import Recipe, Tag
 from ratings.models import Rating
 from favorites.models import Favorite
+
+
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ['id','name']
+        fields = ['id', 'name']
+
 
 class RecipeSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
     is_owner = serializers.SerializerMethodField()
-    tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all(), required=False)
+    tags = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Tag.objects.all(), required=False)
     profile_id = serializers.ReadOnlyField(source='user.profile.id')
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
     rating_id = serializers.SerializerMethodField()
@@ -37,16 +41,18 @@ class RecipeSerializer(serializers.ModelSerializer):
                     'Image height larger than 4096px!'
                 )
         return value
-    
+
     def get_initial_rating(self, obj):
         """
-        Retrieve the initial rating value and ID for the current user if it exists.
+        Retrieve the initial rating value and ID
+        for the current user if it exists.
         """
         request = self.context.get('request')
         user = self.context['request'].user
         if user.is_authenticated:
             if request and hasattr(request, 'user'):
-                rating = Rating.objects.filter(user=request.user, recipe=obj).first()
+                rating = Rating.objects.filter(
+                    user=request.user, recipe=obj).first()
                 if rating:
                     return {'score': rating.score, 'id': rating.id}
             return None
@@ -63,7 +69,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         if user.is_authenticated:
             favorite = obj.favorites.filter(user=user).first()
             return favorite.id if favorite else None
-    
+
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.user
@@ -76,13 +82,14 @@ class RecipeSerializer(serializers.ModelSerializer):
             ).first()
             return rating.id if rating else None
         return None
+
     class Meta:
         model = Recipe
         fields = [
             'id',
             'title',
             'description',
-            'ingredients', 
+            'ingredients',
             'preparation_time',
             'cooking_time',
             'servings',

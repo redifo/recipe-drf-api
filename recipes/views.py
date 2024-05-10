@@ -5,8 +5,10 @@ from .models import Recipe, Tag
 from .serializers import RecipeSerializer, TagSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
-#https://michaelprather.medium.com/inclusion-and-exclusion-filtering-with-django-rest-framework-and-django-filter-e90a597f2af5
-#https://django-filter.readthedocs.io/en/stable/guide/usage.html
+# https://michaelprather.medium.com/inclusion-and-exclusion-filtering-with-django-rest-framework-and-django-filter-e90a597f2af5
+# https://django-filter.readthedocs.io/en/stable/guide/usage.html
+
+
 class RecipeFilter(FilterSet):
     tags = BaseInFilter(field_name='tags__id', lookup_expr='in')
     favorited_by = NumberFilter(method='filter_favorited_by')
@@ -16,12 +18,15 @@ class RecipeFilter(FilterSet):
         returns recipes that are favorited by a specific user
         """
         return queryset.filter(favorites__user_id=value)
+
     class Meta:
         model = Recipe
-        fields ={
-            'user': ['exact'], 
-            'tags__id': ['in'],  
+        fields = {
+            'user': ['exact'],
+            'tags__id': ['in'],
         }
+
+
 class RecipeList(generics.ListCreateAPIView):
     """
     List all recipes or create a new recipe if logged in.
@@ -31,7 +36,7 @@ class RecipeList(generics.ListCreateAPIView):
     queryset = Recipe.objects.annotate(
         ratings_average=Avg('ratings__score'),
         reviews_count=Count('reviews', distinct=True),
-        ratings_count = Count('ratings', distinct=True),
+        ratings_count=Count('ratings', distinct=True),
         favorites_count=Count('favorites', distinct=True),
     ).order_by('-created_at')
     filter_backends = [
@@ -41,11 +46,11 @@ class RecipeList(generics.ListCreateAPIView):
     ]
     filterset_class = RecipeFilter
     filterset_fields = [
-        'user__followers__follower',  
-        'user__following__followed', 
+        'user__followers__follower',
+        'user__following__followed',
         'user__profile',
         'tags__id',
-        'user',       
+        'user',
     ]
     search_fields = [
         'user__username',
@@ -68,6 +73,7 @@ class RecipeList(generics.ListCreateAPIView):
         else:
             serializer.save(user=self.request.user)
 
+
 class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update, or delete a recipe instance.
@@ -75,7 +81,7 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.annotate(
         ratings_average=Avg('ratings__score'),
         reviews_count=Count('reviews', distinct=True),
-        ratings_count = Count('ratings', distinct=True),
+        ratings_count=Count('ratings', distinct=True),
         favorites_count=Count('favorites', distinct=True),
     ).order_by('-created_at')
     serializer_class = RecipeSerializer
@@ -86,9 +92,11 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
         self.check_object_permissions(self.request, obj)
         return obj
 
+
 class TagList(generics.ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+
 
 class MostFavoritedRecipesList(generics.ListAPIView):
     serializer_class = RecipeSerializer
@@ -98,11 +106,10 @@ class MostFavoritedRecipesList(generics.ListAPIView):
         reviews_count=Count('reviews', distinct=True),
         ratings_count=Count('ratings', distinct=True),
         favorites_count=Count('favorites', distinct=True),
-    ).order_by('-favorites_count', '-created_at') 
+    ).order_by('-favorites_count', '-created_at')
 
-    filter_backends = [filters.OrderingFilter, filters.SearchFilter, DjangoFilterBackend]
+    filter_backends = [
+        filters.OrderingFilter, filters.SearchFilter, DjangoFilterBackend]
     filterset_class = RecipeFilter
     ordering_fields = ['favorites_count', 'created_at']
     search_fields = ['title', 'description', 'ingredients']
-
-
