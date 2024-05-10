@@ -11,6 +11,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosRes } from "../../api/axiosDefaults";
 
 import { MoreDropdown } from "../../components/MoreDropDown";
+import { showError, showSuccess } from "../../utils/ToastManager";
 
 const Review = ({ review, setReviews }) => {
 
@@ -42,38 +43,45 @@ const Review = ({ review, setReviews }) => {
     const [showImageModal, setShowImageModal] = useState(false);
 
     const handleLikeToggle = async (newLikeState) => {
-        if (likeState.isLike === newLikeState) {
-            // Same state clicked, remove like/dislike
-            await axiosRes.delete(`/likes/${likeState.likeId}/`);
-            setLikeState(prev => ({
-                ...prev,
-                likeId: null,
-                isLike: null,
-                likesCount: newLikeState ? prev.likesCount - 1 : prev.likesCount,
-                dislikesCount: newLikeState ? prev.dislikesCount : prev.dislikesCount - 1
-            }));
-        } else {
-            if (likeState.likeId) {
-                // Update existing like/dislike
-                const { data } = await axiosRes.put(`/likes/${likeState.likeId}/`, { is_like: newLikeState });
+        try {
+            if (likeState.isLike === newLikeState) {
+                // Same state clicked, remove like/dislike
+                await axiosRes.delete(`/likes/${likeState.likeId}/`);
                 setLikeState(prev => ({
                     ...prev,
-                    likeId: data.id,
-                    isLike: newLikeState,
-                    likesCount: newLikeState ? prev.likesCount + 1 - (prev.isLike ? 1 : 0) : prev.likesCount - 1,
-                    dislikesCount: newLikeState ? prev.dislikesCount - 1 : prev.dislikesCount + 1 - (!prev.isLike ? 1 : 0)
+                    likeId: null,
+                    isLike: null,
+                    likesCount: newLikeState ? prev.likesCount - 1 : prev.likesCount,
+                    dislikesCount: newLikeState ? prev.dislikesCount : prev.dislikesCount - 1
                 }));
+                showSuccess("Review like removed");
             } else {
-                // Create new like/dislike
-                const { data } = await axiosRes.post("/likes/", { review: id, is_like: newLikeState });
-                setLikeState(prev => ({
-                    ...prev,
-                    likeId: data.id,
-                    isLike: newLikeState,
-                    likesCount: newLikeState ? prev.likesCount + 1 : prev.likesCount,
-                    dislikesCount: newLikeState ? prev.dislikesCount : prev.dislikesCount + 1
-                }));
+                if (likeState.likeId) {
+                    // Update existing like/dislike
+                    const { data } = await axiosRes.put(`/likes/${likeState.likeId}/`, { is_like: newLikeState });
+                    setLikeState(prev => ({
+                        ...prev,
+                        likeId: data.id,
+                        isLike: newLikeState,
+                        likesCount: newLikeState ? prev.likesCount + 1 - (prev.isLike ? 1 : 0) : prev.likesCount - 1,
+                        dislikesCount: newLikeState ? prev.dislikesCount - 1 : prev.dislikesCount + 1 - (!prev.isLike ? 1 : 0)
+                    }));
+                    showSuccess(`Review ${newLikeState ? "liked" : "disliked"}`);
+                } else {
+                    // Create new like/dislike
+                    const { data } = await axiosRes.post("/likes/", { review: id, is_like: newLikeState });
+                    setLikeState(prev => ({
+                        ...prev,
+                        likeId: data.id,
+                        isLike: newLikeState,
+                        likesCount: newLikeState ? prev.likesCount + 1 : prev.likesCount,
+                        dislikesCount: newLikeState ? prev.dislikesCount : prev.dislikesCount + 1
+                    }));
+                    showSuccess(`Review ${newLikeState ? "liked" : "disliked"}`);
+                }
             }
+        } catch (err) {
+            showError("Failed to update like/dislike: " + err.message);
         }
     };
 
@@ -84,9 +92,9 @@ const Review = ({ review, setReviews }) => {
                 ...prevReviews,
                 results: prevReviews.results.filter(review => review.id !== id),
             }));
-
+            showSuccess("Review deleted successfully.");
         } catch (err) {
-            console.error("Error deleting the review:", err);
+            showError("Failed to delete the review: " + err.message);
         }
     };
 

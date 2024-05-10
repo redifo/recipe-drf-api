@@ -15,6 +15,7 @@ import RateRecipe from '../ratings/RateRecipe';
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import { fetchMoreData } from "../../utils/utils";
+import { showError, showSuccess } from '../../utils/ToastManager';
 
 function RecipePage() {
     const history = useHistory();
@@ -49,7 +50,7 @@ function RecipePage() {
                 setFavoritesCount(recipeRes.data.favorites_count);
                 setIsLoading(false);
             } catch (err) {
-                console.error("Error fetching data:", err);
+                showError("Error fetching data:", err.message);
                 setIsLoading(false);
             }
         };
@@ -64,15 +65,16 @@ function RecipePage() {
                 setIsFavorited(false);
                 setFavoriteId(null);
                 setFavoritesCount(favoritesCount - 1);
-
+                showSuccess("Removed from favorites")
             } else {
                 const { data } = await axiosRes.post("/favorites/", { recipe: id });
                 setIsFavorited(true);
                 setFavoriteId(data.id);
                 setFavoritesCount(favoritesCount + 1);
+                showSuccess("Added to favorites")
             }
         } catch (err) {
-            console.error("Error managing favorite", err);
+            showError("Error managing favorite", err.message);
         }
     };
 

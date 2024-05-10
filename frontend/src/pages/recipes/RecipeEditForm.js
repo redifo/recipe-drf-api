@@ -10,7 +10,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Asset from "../../components/Asset";
 import Upload from "../../assets/img/upload.png";
-import { showError } from '../../utils/ToastManager';
+import { showError, showSuccess } from '../../utils/ToastManager';
 
 function RecipeEditForm() {
     const history = useHistory();
