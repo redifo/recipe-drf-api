@@ -53,8 +53,19 @@ Data models were planned alongside the wireframes. These are documented in the r
 
 ## Design
 ### Colours
-### Typography
+The primary goal for the color scheme of this project was to create a harmonious and visually appealing interface that promotes user engagement and comfort. The colors chosen reflect a blend of warmth and professionalism, suitable for a broad range of users.
 
+Primary Color (#e4bf8d): This soft, earthy hue is used throughout the site for key UI elements such as buttons, links, and active states. Its warm tone offers a welcoming and friendly vibe that enhances the user experience.
+Secondary Color (#e4bf8d): Employed consistently with the primary color, this shade adds a balanced, cohesive look across the site. It's used in less prominent but still significant UI components to maintain visual consistency.
+Accent Color (#dd9d72): This slightly darker shade complements the primary and secondary colors by providing a subtle contrast. It's used for specific highlights and to draw attention to particular features, enhancing the site's overall aesthetic.
+Follow Button Color (#242a3d): This deep, dark blue offers a striking contrast against the lighter shades of the primary and secondary colors. Used primarily for the 'follow' button, it stands out to encourage user interaction.
+Active Focus Color (#cf8d12): A bold, vibrant orange, this color is used to indicate active or focused states on certain buttons and icons. Its bright nature ensures that these elements catch the user's eye, guiding their navigation through the site.
+Base-200 (#ebebeb) and Base-300 (#d6d6d6): These slightly darker shades are used for secondary backgrounds and elements, providing depth and visual hierarchy without overwhelming the primary colors.
+### Typography
+For the typography, the choice of fonts and their application was aimed at complementing the color scheme and enhancing the site's readability and accessibility.
+
+Font Family ("Merriweather Sans", sans-serif): This font was selected for its modern and friendly appearance, which aligns well with the overall aesthetic of the site. It provides excellent readability across various devices and screen sizes.
+Font Optical Sizing (auto): Ensuring that the text is displayed optimally at different scales, this setting adjusts the font's weight and spacing based on the user's device or display settings.
 
 ## Features
 ### Essential Features
