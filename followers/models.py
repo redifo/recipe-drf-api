@@ -7,7 +7,7 @@ class Follow(models.Model):
     Follow model, related to 'follower' and 'followed'.
     'follower' is a User that is following a User.
     'followed' is a User that is followed by 'user'.
-   
+
     'unique_together' makes sure a user can't 'double follow' the same user.
     """
     follower = models.ForeignKey(

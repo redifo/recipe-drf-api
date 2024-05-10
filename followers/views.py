@@ -4,6 +4,7 @@ from .serializers import FollowSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
 
+
 class FollowListView(generics.ListCreateAPIView):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
@@ -11,6 +12,7 @@ class FollowListView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(follower=self.request.user)
+
 
 class FollowDetailView(generics.RetrieveDestroyAPIView):
     queryset = Follow.objects.all()
