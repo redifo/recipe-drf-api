@@ -26,8 +26,10 @@ class ReviewList(generics.ListCreateAPIView):
         'dislikes_count',
         'likes__created_at',
         ]
+
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user, image=self.request.FILES.get('image'))
+        serializer.save(
+            user=self.request.user, image=self.request.FILES.get('image'))
 
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):

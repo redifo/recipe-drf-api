@@ -3,11 +3,12 @@ from rest_framework import serializers
 from .models import Review
 from likes.models import Like
 
+
 class ReviewSerializer(serializers.ModelSerializer):
     """
     Serializer for the Review model
     """
-    user = serializers.ReadOnlyField(source='user.username') 
+    user = serializers.ReadOnlyField(source='user.username')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='user.profile.id')
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
@@ -17,7 +18,6 @@ class ReviewSerializer(serializers.ModelSerializer):
     dislikes_count = serializers.IntegerField(read_only=True)
     like_id = serializers.SerializerMethodField()
     is_like = serializers.SerializerMethodField()
-   
 
     def validate_image(self, value):
         if value is not None:
@@ -34,7 +34,7 @@ class ReviewSerializer(serializers.ModelSerializer):
                     'Image height larger than 4096px!'
                 )
         return value
-            
+
     def get_is_like(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
@@ -53,7 +53,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     def get_is_owner(self, obj):
         request = self.context['request']
-        return request.user == obj.user 
+        return request.user == obj.user
 
     def get_created_at(self, obj):
         return naturaltime(obj.created_at)
@@ -65,10 +65,12 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = [
             'id', 'user', 'is_owner', 'profile_id', 'profile_image',
-            'recipe', 'created_at', 'updated_at', 'text', 'image', 
+            'recipe', 'created_at', 'updated_at', 'text', 'image',
             'likes_count', 'dislikes_count', 'like_id', 'is_like'
         ]
         ordering = ['-created_at']
+
+
 class ReviewDetailSerializer(ReviewSerializer):
     """
     Serializer for the Review model used in Detail view
