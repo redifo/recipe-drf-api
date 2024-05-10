@@ -84,7 +84,7 @@ const Notifications = () => {
                         )
                     
                 ) : (
-                    <Asset spinner message="Loading latest recipes..." />
+                    <Asset spinner />
                 )}
             </ListGroup>
         </div>

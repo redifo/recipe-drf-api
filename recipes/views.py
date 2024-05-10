@@ -62,7 +62,11 @@ class RecipeList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user, image=self.request.FILES.get('image'))
+        image_file = self.request.FILES.get('image', None)
+        if image_file:
+            serializer.save(user=self.request.user, image=image_file)
+        else:
+            serializer.save(user=self.request.user)
 
 class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     """

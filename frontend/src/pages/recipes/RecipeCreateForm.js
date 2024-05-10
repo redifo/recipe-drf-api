@@ -121,18 +121,16 @@ function RecipeCreateForm() {
         formData.append("preparation_time", preparation_time);
         formData.append("cooking_time", cooking_time);
         formData.append("servings", servings);
-        if (imageFile) formData.append("image", imageFile);
+        if (imageFile){
+            formData.append("image", imageFile);
+        } 
         selectedTags.forEach(tag => {
             formData.append("tags", tag);
         });
         try {
-            const { data } = await axiosReq.post("/recipes/", formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const { data } = await axiosReq.post("/recipes/", formData);
             history.push(`/recipes/${data.id}`);
-            showSuccess("Recipe created successfully")
+            showSuccess("Recipe created successfully")     
         } catch (err) {
             const errorMessages = err.response?.data;
                 Object.values(errorMessages).flat().forEach((message) => {
