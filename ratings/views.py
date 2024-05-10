@@ -3,6 +3,7 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from ratings.models import Rating
 from ratings.serializers import RatingSerializer
 
+
 class RatingList(generics.ListCreateAPIView):
     """
     List ratings or create a rating if logged in.
@@ -12,8 +13,8 @@ class RatingList(generics.ListCreateAPIView):
     queryset = Rating.objects.all()
 
     def perform_create(self, serializer):
-        
-        serializer.save(user=self.request.user) 
+        serializer.save(user=self.request.user)
+
 
 class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
     """
@@ -22,8 +23,8 @@ class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = RatingSerializer
     queryset = Rating.objects.all()
-    
-    #https://www.django-rest-framework.org/api-guide/generic-views/
+
+    # https://www.django-rest-framework.org/api-guide/generic-views/
     def get_serializer_context(self):
         """
         Pass additional context to the serializer to handle the initial rating.
