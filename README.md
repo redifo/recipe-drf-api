@@ -43,15 +43,18 @@ This structured approach not only keeps the project organized but also aligns wi
 
 ## Planning
 
-### Mockups
+### Wireframes
 
-Wireframes were produced based on those user stories that had been identified as required for the MVP.
+Wireframes were produced based on those user stories that had been identified.
 
 ### Data models
 
 Data models were planned alongside the wireframes. These are documented in the read-me for the backend [README-BACKEND.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).
 
 ## Design
+### Colours
+### Typography
+
 
 ## Features
 ### Essential Features

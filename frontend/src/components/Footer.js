@@ -3,11 +3,11 @@ import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBIcon } from "mdbreact";
 import styles from "../styles/Footer.module.css"
 const FooterPage = () => {
   return (
-    <MDBFooter style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }} className='text-center text-lg-start text-muted'>
+    <MDBFooter style={{ backgroundColor: 'rgb(228 191 141)' }} className='text-center text-lg-start text-muted'>
       
 
       <section className=''>
-        <MDBContainer className='text-center text-md-start mt-5'>
+        <MDBContainer  className='text-center text-md-start mt-5'>
           <MDBRow className='mt-3'>
             <MDBCol md="7" className='mx-auto mb-4'>
               <h5 className='text-uppercase fw-bold mb-1 mt-3'>
@@ -26,20 +26,20 @@ const FooterPage = () => {
             </MDBCol>
 
             <MDBCol md="4" className='mx-auto mb-md-0 mb-4'>
-              <h5 className='text-uppercase fw-bold mb-1 mt-3'>Contact</h5>
-              <p className="m-0">
-                <MDBIcon icon="home" className="m-0" />
+              <h5 className='text-uppercase fw-bold mb-1 mt-3 mr-5'>Contact</h5>
+              <p className="m-0 text-left">
+                <MDBIcon icon="home" className={`  ${styles.SocialIcon}`} />
                 New York, NY 10012, US
               </p>
-              <p className="m-0">
-                <MDBIcon icon="envelope" className="me-1" />
+              <p className="m-0 text-left">
+                <MDBIcon icon="envelope" className={styles.SocialIcon}/>
                 info@example.com
               </p>
-              <p className="m-0">
-                <MDBIcon icon="phone" className="me-1" /> + 01 234 567 88
+              <p className="m-0 text-left">
+                <MDBIcon icon="phone" className={styles.SocialIcon} /> + 01 234 567 88
               </p>
-              <p className="m-0">
-                <MDBIcon icon="print" className="me-1" /> + 01 234 567 89
+              <p className="m-0 text-left">
+                <MDBIcon icon="print" className={styles.SocialIcon} /> + 01 234 567 89
               </p>
             </MDBCol>
           </MDBRow>
