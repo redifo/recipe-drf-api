@@ -9,6 +9,7 @@ import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import 'swiper/swiper-bundle.css';
 import RecipeCard from '../recipes/RecipeCard';
 import { showError } from '../../utils/ToastManager';
+import Asset from '../../components/Asset';
 
 function Home() {
   const history = useHistory();
@@ -16,6 +17,7 @@ function Home() {
   const [mostFavoritedRecipes, setMostFavoritedRecipes] = useState([]);
   const [latestRecipes, setLatestRecipes] = useState([]);
 
+  const [hasLoaded, setHasLoaded] = useState(false);
   //https://stackoverflow.com/questions/63052586/react-swiperjs-autoplay-not-making-the-swiper-to-auto-swipe
   SwiperCore.use([Autoplay])
   SwiperCore.use([Navigation])
@@ -30,8 +32,10 @@ function Home() {
         ]);
         setMostFavoritedRecipes(mostFavoritedResponse.data.results);
         setLatestRecipes(latestResponse.data.results);
+        setHasLoaded(true);
       } catch (err) {
         showError("Failed to fetch recipes", err.message);
+        setHasLoaded(true);
       }
     };
     fetchRecipes();
@@ -43,6 +47,8 @@ function Home() {
       history.push(`/recipes?search=${encodeURIComponent(searchQuery)}`);
     }
   };
+
+
 
   return (
     <>
@@ -64,30 +70,31 @@ function Home() {
       </Row>
       <Container fluid className={styles.Container}>
         <h2>Most Favorited Recipes</h2>
-        <Swiper
-          
-          autoplay={{
-            delay: 3500,
-            disableOnInteraction: false,
-          }}
-          spaceBetween={30}
-          slidesPerView={4}
-          breakpoints={{
-            320: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            992: { slidesPerView: 3 },
-            1200: { slidesPerView: 4 },
-          }}
-          navigation
-          
-
-        >
-          {mostFavoritedRecipes.map(recipe => (
-            <SwiperSlide key={recipe.id}>
-              <RecipeCard recipe={recipe} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {hasLoaded ? (
+          <Swiper
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            spaceBetween={30}
+            slidesPerView={4}
+            breakpoints={{
+              320: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              992: { slidesPerView: 3 },
+              1200: { slidesPerView: 4 },
+            }}
+            navigation
+          >
+            {mostFavoritedRecipes.map(recipe => (
+              <SwiperSlide key={recipe.id}>
+                <RecipeCard recipe={recipe} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <Asset spinner message="Loading most favorited recipes..." />
+        )}
 
 
 
@@ -98,30 +105,31 @@ function Home() {
 
 
         <h2 className='mt-3'>What's new</h2>
-        <Swiper
-          
-          autoplay={{
-            delay: 3500,
-            disableOnInteraction: false,
-          }}
-          spaceBetween={30}
-          slidesPerView={4}
-          breakpoints={{
-            320: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            992: { slidesPerView: 3 },
-            1200: { slidesPerView: 4 },
-          }}
-          navigation
-          
-
-        >
-          {latestRecipes.map(recipe => (
-            <SwiperSlide key={recipe.id}>
-              <RecipeCard recipe={recipe} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {hasLoaded ? (
+          <Swiper
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            spaceBetween={30}
+            slidesPerView={4}
+            breakpoints={{
+              320: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              992: { slidesPerView: 3 },
+              1200: { slidesPerView: 4 },
+            }}
+            navigation
+          >
+            {latestRecipes.map(recipe => (
+              <SwiperSlide key={recipe.id}>
+                <RecipeCard recipe={recipe} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <Asset spinner message="Loading latest recipes..." />
+        )}
       </Container>
     </>
   );
