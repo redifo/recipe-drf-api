@@ -1,5 +1,6 @@
 import jwtDecode from "jwt-decode";
 import { axiosReq } from "../api/axiosDefaults";
+import { showError } from "./ToastManager";
 
 export const fetchMoreData = async (resourceUrl, setResource) => {
   try {
@@ -10,7 +11,7 @@ export const fetchMoreData = async (resourceUrl, setResource) => {
       results: [...prevResource.results, ...data.results]
     }));
   } catch (err) {
-    console.error("Error loading more data:", err);
+    showError("Error loading more data:", err.message);
   }
 };
 

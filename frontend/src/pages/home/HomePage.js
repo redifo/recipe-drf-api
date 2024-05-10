@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import 'swiper/swiper-bundle.css';
 import RecipeCard from '../recipes/RecipeCard';
+import { showError } from '../../utils/ToastManager';
 
 function Home() {
   const history = useHistory();
@@ -30,7 +31,7 @@ function Home() {
         setMostFavoritedRecipes(mostFavoritedResponse.data.results);
         setLatestRecipes(latestResponse.data.results);
       } catch (err) {
-        console.error("Failed to fetch recipes", err);
+        showError("Failed to fetch recipes", err.message);
       }
     };
     fetchRecipes();

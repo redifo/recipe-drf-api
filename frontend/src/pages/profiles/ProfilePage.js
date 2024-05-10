@@ -14,6 +14,7 @@ import NoResults from "../../assets/img/no-results.png";
 
 import { fetchMoreData } from "../../utils/utils";
 import { ProfileEditDropdown } from "../../components/MoreDropDown";
+import { showError } from "../../utils/ToastManager";
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);
@@ -46,7 +47,7 @@ function ProfilePage() {
                 
                 setHasLoaded(true);
             } catch (err) {
-                console.error("Error fetching data:", err);
+                showError("Error fetching data:", err.message);
             }
         };
         fetchData();

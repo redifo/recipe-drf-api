@@ -7,6 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import styles from "../../styles/ReviewCreateEditForm.module.css";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
+import { showError, showSuccess } from "../../utils/ToastManager";
 
 function ReviewCreateForm({ recipeId, setRecipe, setReviews, profileImage, profileId }) {
   const [text, setText] = useState("");
@@ -52,9 +53,10 @@ function ReviewCreateForm({ recipeId, setRecipe, setReviews, profileImage, profi
       setText("");
       setImage(null);
       setPreview(null);
+      showSuccess("Review posted successfully")
 
     } catch (err) {
-      console.error("Error creating review:", err);
+      showError("Error creating review:", err.message);
     }
   };
 

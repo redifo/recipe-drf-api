@@ -29,8 +29,8 @@ const NavBar = () => {
             removeTokenTimestamp();
 
         } catch (err) {
-            showError("Something went wrong signing out")
-            console.log("Logout Error:", err);
+            showError("Something went wrong signing out:", err.message)
+           
         }
     };
 

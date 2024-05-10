@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { axiosRes } from "../../api/axiosDefaults";
 
 import styles from "../../styles/ReviewCreateEditForm.module.css";
+import { showError, showSuccess } from "../../utils/ToastManager";
 
 function ReviewEditForm(props) {
   const { id, content, setShowEditForm, setReviews } = props;
@@ -32,9 +33,10 @@ function ReviewEditForm(props) {
             : review;
         }),
       }));
+      showSuccess("Successfully edited the review")
       setShowEditForm(false);
     } catch (err) {
-        console.log(err);
+        showError(err.message);
     }
   };
 
