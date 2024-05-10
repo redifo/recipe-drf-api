@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.db import IntegrityError
 from .models import Favorite
 
+
 class FavoriteSerializer(serializers.ModelSerializer):
     """
     Serializer for the favorite model
@@ -15,9 +16,8 @@ class FavoriteSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'recipe', 'recipe_title', 'created_at']
 
     def create(self, validated_data):
-            try:
-                return super().create(validated_data)
-            except IntegrityError:
-                raise serializers.ValidationError({
-                    'detail': 'possible duplicate'
-                })
+        try:
+            return super().create(validated_data)
+        except IntegrityError:
+            raise serializers.ValidationError({
+                'detail': 'possible duplicate'})

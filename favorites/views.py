@@ -4,6 +4,7 @@ from .serializers import FavoriteSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 
+
 class FavoriteList(generics.ListCreateAPIView):
     """
     List favorites or create a favorite if logged in.
@@ -15,7 +16,8 @@ class FavoriteList(generics.ListCreateAPIView):
     filterset_fields = ['user__username', 'recipe__id']
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)  
+        serializer.save(user=self.request.user)
+
 
 class FavoriteDetail(generics.RetrieveDestroyAPIView):
     """
