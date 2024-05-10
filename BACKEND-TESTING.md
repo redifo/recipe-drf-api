@@ -18,3 +18,72 @@ Numerous unit tests were devised for the recipes endpoint, located in `recipes/t
 
 These tests collectively ensure the integrity and functionality of the recipes management in the application, covering critical aspects from creation, update, to access control.
 
+## Code Quality and Linting
+
+Throughout the development process, all Python files were meticulously checked using the Code Institute Python Linter to ensure adherence to best practices and coding standards. Here's a comprehensive list of the linting results for each app within the project:
+
+- **likes**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+
+- **followers**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+
+- **favorites**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+
+- **drf_api (mainapp)**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+  - `settings.py`: lines longer than 80 characters
+
+- **notifications**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+
+- **profiles**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+
+- **ratings**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+
+- **recipes**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+
+- **reviews**:
+  - `admin.py`: no errors found
+  - `models.py`: no errors found
+  - `serializers.py`: no errors found
+  - `urls.py`: no errors found
+  - `views.py`: no errors found
+
+This approach to code quality has ensured that the entire application adheres to the highest standards of Python coding practices, with only a minor issue in the main app's `settings.py` file related to line length.
