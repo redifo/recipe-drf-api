@@ -55,21 +55,27 @@ const Notifications = () => {
     return (
         <div className={styles.NotificationsContainer}>
             <ListGroup>
-                {notifications.map(notification => (
-                    <ListGroup.Item key={notification.id} className={styles.NotificationItem}>
-                        <div className={styles.NotificationItemDiv} onClick={() => navigateToRecipe(notification.recipe)}>
-                            <strong>{notification.sender_name}</strong> {notification.notification_type_display} on your recipe.
-                        </div>
-                        <div className={styles.ActionButtons}>
-                            <Button variant="outline-primary" size="xs" onClick={() => markAsRead(notification.id)}>
-                                Mark as Read
-                            </Button>
-                            <Button variant="outline-danger" size="xs" onClick={() => deleteNotification(notification.id)}>
-                                Delete
-                            </Button>
-                        </div>
+                {notifications.length > 0 ? (
+                    notifications.map(notification => (
+                        <ListGroup.Item key={notification.id} className={styles.NotificationItem}>
+                            <div className={styles.NotificationItemDiv} onClick={() => navigateToRecipe(notification.recipe)}>
+                                <strong>{notification.sender_name}</strong> {notification.notification_type_display} on your recipe.
+                            </div>
+                            <div className={styles.ActionButtons}>
+                                <Button variant="outline-primary" size="xs" onClick={() => markAsRead(notification.id)}>
+                                    Mark as Read
+                                </Button>
+                                <Button variant="outline-danger" size="xs" onClick={() => deleteNotification(notification.id)}>
+                                    Delete
+                                </Button>
+                            </div>
+                        </ListGroup.Item>
+                    ))
+                ) : (
+                    <ListGroup.Item className={styles.NoNotifications}>
+                        No notifications right now.
                     </ListGroup.Item>
-                ))}
+                )}
             </ListGroup>
         </div>
     );
