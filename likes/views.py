@@ -3,6 +3,7 @@ from .models import Like
 from .serializers import LikeSerializer
 from drf_api.permissions import IsOwnerOrReadOnly
 
+
 class LikeList(generics.ListCreateAPIView):
     """
     List likes or create a like if logged in.
@@ -12,7 +13,8 @@ class LikeList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)  
+        serializer.save(user=self.request.user)
+
 
 class LikeDetail(generics.RetrieveUpdateDestroyAPIView):
     """
