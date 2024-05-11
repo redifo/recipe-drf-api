@@ -126,18 +126,77 @@ Font Family ("Merriweather Sans", sans-serif): This font was selected for its mo
 Font Optical Sizing (auto): Ensuring that the text is displayed optimally at different scales, this setting adjusts the font's weight and spacing based on the user's device or display settings.
 
 ## Features
-### Essential Features
-- **Recipe Search**: Users can search for recipes based on keywords, ingredients, or tags.
-- **Filter Recipes**: Users can filter recipes based on criteria such as cook time, and tags.
-- **Recipe Management**: Users can create, edit, and delete their own recipes.
-- **User Profiles**: Users can create profiles to manage their recipes and preferences.
-- **Social Interaction**: Users can share recipes and interact with other users.
 
-### Re-use of Components
+### User-Friendly Home Page
+Recipe Domain offers a simple, intuitive interface that allows users to navigate the platform with ease. Users can create accounts, create recipes, and browse a most favorited and latest recipes along with most followed chefs.
+
+<p align="center">
+    <img src="readme-documentation/features/home.png" width=100%>
+</p>
+
+### Recipe Creation and Management
+Users can easily add new recipes by filling out a form with fields for the recipe title, description, ingredients, and instructions, accompanied by an image upload feature. Each recipe can be edited or updated at any time, providing flexibility for users to improve or correct their submissions.
+
+<p align="center">
+    <img src="readme-documentation/features/add-recipe.png" width=100%>
+</p>
+
+### Recipe Search and Filtering
+The platform includes a robust search functionality that allows users to search for recipes based on title, ingredients, or tags. This makes it easy for users to find exactly what they're looking for, whether they want a quick dinner idea or something specific like a vegetarian dish.Users can filter recipes based on their tags.
+
+<p align="center">
+    <img src="readme-documentation/features/recipe-grid.png" width=100%>
+</p>
+
+### Dynamic Recipe Rating and Reviews
+Each recipe can be rated on a five-star scale and reviewed by users. This community feedback system helps users to choose recipes based on community endorsements and personal tastes.
+
+<p align="center">
+    <img src="readme-documentation/features/recipe-page.png" width=100%>
+</p>
+
+### Social Interaction and Engagement
+Users can follow other chefs and food enthusiasts, allowing them to stay updated on new recipes posted by their favorite creators. The "Most Followed Chefs" section highlights popular contributors, fostering a community of engaged food lovers.
+
+<p align="center">
+    <img src="readme-documentation/features/followed-chefs.png" width=100%>
+</p>
+
+### Mobile Responsive Design
+Recipe Domain is fully responsive, ensuring that users have a seamless experience on both desktop and mobile devices. This accessibility enhances user engagement and allows users to interact with the platform anywhere, at any time.
+
+### Security Features
+Sign-up and sign-in forms incorporate error handling to guide users for a secure account creation process. Password strength requirements and feedback ensure that user accounts are protected against unauthorized access.
+
+<p align="center">
+    <img src="readme-documentation/features/signup-err.png" width=100%>
+</p>
+
+For defensive measures all form fileds are defensive both on the backend and frontend. On the front end users cannot tpye more than that is accepted by the backend (both for numbers and text fields) and on the backend the fileds are limited by the use of valuevalidators. 
+
+### Recipe Tag Filtering
+Recipe Domain includes a user-friendly drop-down menu that enables users to filter recipes based on specific tags such as Appetizers, Dinner, Healthy, Lunch, Pasta & Noodle, Quick & Easy, Soup, and Vegetarian. This feature allows users to quickly find recipes that match their dietary preferences or meal planning needs.
+
+### Personalized User Profiles with Enhanced Customization
+Users can create personalized profiles that not only display their recipes and favorite dishes but also allow them to add a profile bio text. This personal bio gives others insight into the user’s culinary interests or expertise. Profile customization options include the ability to change the username and password, providing users with full control over their account settings and enhancing security.
+
+<p align="center">
+    <img src="readme-documentation/features/user-profile.png" width=100%>
+</p>
+
+### Favorite Recipes Feature
+Recipe Domain incorporates a "Favorite Recipes" feature, which enables users to mark recipes they love and want to easily access again. Each user’s profile page displays a section dedicated to their favorited recipes, allowing for quick retrieval and viewing.
+
+<p align="center">
+    <img src="readme-documentation/features/recipe-page.png" width=100%>
+</p>
+
+
+## Re-use of Components
 
 A number of reusable React components were created with the intention of reducing code duplication and ensuring a consistent look and feel across the application.
 
-#### **Asset.js**
+### **Asset.js**
 - **Purpose**: Used to display a spinner, image, or message based on the props it receives. This component is utilized across the application to handle loading states, display images, or show messages when data is being fetched or no content is available.
 - **Props**:
   - `spinner`: Boolean to decide if a loading spinner should be shown.
@@ -145,7 +204,7 @@ A number of reusable React components were created with the intention of reducin
   - `message`: String message to display below the image or spinner.
 - **Usage**: This component is embedded in various parts of the application like error pages (NotFound.js) and during loading states across different views.
 
-#### **Avatar.js**
+### **Avatar.js**
 - **Purpose**: Displays user avatars in various sizes throughout the application, enhancing user recognition and personalization.
 - **Props**:
   - `src`: Source URL of the avatar image.
@@ -153,74 +212,74 @@ A number of reusable React components were created with the intention of reducin
   - `text`: Optional text to display alongside the avatar.
 - **Usage**: Utilized in user-related components such as profile views, comments, and wherever user identity is important.
 
-#### **MoreDropdown.js**
+### **MoreDropdown.js**
 - **Purpose**: Provides a customizable dropdown menu for editing and deleting actions, complete with a confirmation modal for deletions.
 - **Props**:
   - `handleEdit`: Function to trigger when the edit action is selected.
   - `handleDelete`: Function to trigger when the delete action is confirmed.
 - **Usage**: Commonly used in components that require user interaction for modifying or deleting content, such as profiles and recipe details.
 
-#### **Notifications.js**
+### **Notifications.js**
 - **Purpose**: Manages and displays notifications to the user, allowing actions like marking notifications as read or deleting them.
 - **Props**: Uses internal state and context to fetch and manage notifications based on the current user.
 - **Usage**: Embedded in user-centric areas like the NavBar to show real-time updates about user interactions, recipe updates, and more.
 
-#### **NavBar.js**
+### **NavBar.js**
 - **Purpose**: Serves as the primary navigation bar for the application, dynamically adjusting its content based on the user's login status.
 - **Props**: Utilizes the `useCurrentUser` context to determine which set of navigation options to display.
 - **Usage**: Placed at the top of every page, providing consistent navigation and access to user profiles, recipe creation, and authentication options.
 
-#### **NotFound.js**
+### **NotFound.js**
 - **Purpose**: Displays a user-friendly message and image when a requested page or content is not found.
 - **Props**: Utilizes the Asset component to present a consistent not-found message.
 - **Usage**: Used in routing to handle unknown URLs or inaccessible content, ensuring a better user experience in error scenarios.
 
-#### **FooterPage.js**
+### **FooterPage.js**
 - **Purpose**: Provides a consistent footer across all pages with about, contact information, and social links.
 - **Props**: None specific, but maintains a consistent look and feel with links and information about the platform.
 - **Usage**: Appears at the bottom of every page, offering additional information and navigation options related to the platform and its creator.
 
-#### **ProfileDataContext**
+### **ProfileDataContext**
 - **Purpose**: Manages profile data throughout the application, providing centralized access and manipulation functions for profile information.
 - **Usage**: Embedded in components that require real-time updates to profile data, such as follow/unfollow actions, and updating popular or followed profiles.
 - **Props**: Provides `handleFollow` and `handleUnfollow` methods to manage follow states and updates the relevant parts of the profile data accordingly.
 
-#### **CurrentUserContext**
+### **CurrentUserContext**
 - **Purpose**: Provides and manages the current user's data across the application, ensuring that user-specific features and restrictions are applied consistently.
 - **Usage**: Used throughout the application to determine user access levels, personalize content, and handle authentication states.
 - **Props**: Offers `currentUser` for accessing the current user's information and `setCurrentUser` for updating this information as needed.
 
-#### **SignInForm**
+### **SignInForm**
 - **Purpose**: Allows users to sign in to their accounts, handling credential verification and user session initiation.
 - **Usage**: Used on the sign-in page to authenticate users and provide them access to their personalized content.
 - **Props**: Accepts user input for username and password and displays relevant errors or redirects upon successful login.
 
-#### **SignUpForm**
+### **SignUpForm**
 - **Purpose**: Facilitates new user registration by collecting necessary information and creating a new user account.
 - **Usage**: Placed on the sign-up page to allow new users to create accounts and join the community.
 - **Props**: Collects user inputs for username, password, and password confirmation and handles account creation with appropriate error handling.
 
-#### **PopularProfiles**
+### **PopularProfiles**
 - **Purpose**: Displays a list or a swiper slider of popular profiles based on follower count, enhancing user discovery of prominent community members.
 - **Usage**: Utilized in community sections or dashboards where showcasing popular profiles can encourage user interaction and engagement.
 - **Props**: Can be rendered in a card layout or as a standard list, depending on the `card` prop, to suit different design needs.
 
-#### **Profile**
+### **Profile**
 - **Purpose**: Represents individual profiles in various sections of the application, offering follow/unfollow functionality and displaying key profile metrics.
 - **Usage**: Used in lists or galleries where individual profile summaries are needed, such as in search results or community highlights.
 - **Props**: Accepts `profile`, `mobile`, `imageSize`, and `card` to customize the display according to the context and user device.
 
-#### **RecipeCard**
+### **RecipeCard**
 - **Purpose**: Showcases individual recipes with key details such as title, image, and ratings, and allows users to favorite or unfavorite the recipe.
 - **Usage**: Embedded in search results, user profiles, and recipe collections to provide a consistent recipe preview experience.
 - **Props**: Manages favorite states with `isFavorited` and `favoriteId`, and allows interaction through a heart button for adding or removing recipes from favorites.
 
-#### **RecipePage**
+### **RecipePage**
 - **Purpose**: Provides a detailed view of a single recipe, including description, ingredients, instructions, and user interactions like rating and reviewing.
 - **Usage**: Displayed when a user selects a recipe to view more details, offering a comprehensive overview and interactive features.
 - **Props**: Dynamically fetches and displays recipe data, tags, and reviews, and allows users to rate, favorite, and review the recipe if logged in.
 
-#### **ToastManager**
+### **ToastManager**
 - **Purpose**: Provides feedback to users by displaying success, error, and warning messages using the `react-toastify` library.
 - **Usage**: Integrated across the application to show user-friendly messages after actions like liking a review, following/unfollowing profiles, managing recipe favorites, and more.
 - **Methods**:
@@ -228,7 +287,7 @@ A number of reusable React components were created with the intention of reducin
   - `showError(message)`: Displays an error message.
   - `showWarning(message)`: Displays a warning message.
 
-#### **Utilities**
+### **Utilities**
 - **fetchMoreData(resourceUrl, setResource)**: Fetches additional data from a specified URL and appends it to the current state, facilitating pagination or infinite scrolling.
 - **followHelper(profile, clickedProfile, following_id)**: Adjusts the follow count and state based on user actions to follow another profile.
 - **unfollowHelper(profile, clickedProfile)**: Adjusts the follow count and state when a user unfollows another profile.
@@ -236,25 +295,25 @@ A number of reusable React components were created with the intention of reducin
 - **shouldRefreshToken()**: Checks if the refresh token needs to be updated based on stored timestamps.
 - **removeTokenTimestamp()**: Clears the stored token timestamp from local storage to manage logout and session expiration.
 
-#### **Review**
+### **Review**
 - **Purpose**: Displays individual reviews with options to like, dislike, edit, or delete the review based on user permissions and review ownership.
 - **Usage**: Used in recipe detail pages to show user reviews and provide interactive elements like liking/disliking and editing.
 - **Props**:
   - `review`: The review object containing details like user, text, likes, and dislikes.
   - `setReviews`: Function to update the list of reviews after actions like deletion or editing.
 
-#### **RateRecipe**
+### **RateRecipe**
 - **Purpose**: Allows users to rate a recipe by selecting a score from 1 to 5 stars, with the ability to remove a rating if one exists.
 - **Usage**: Appears on recipe detail pages to let users rate recipes and manage existing ratings.
 - **Props**:
   - `recipeId`: The ID of the recipe being rated.
   - `currentUser`: The current user object to determine if the user is logged in and permitted to rate.
   - `initialRating`: The initial rating of the recipe by the current user to display the current score.
-  
+
 Each component and context provider is designed to reduce redundancy, streamline development, and ensure that the user interface remains consistent and responsive throughout the application.
 
 
-### Future Enhancements
+## Future Enhancements
 - Integration with grocery shopping lists.
 - Meal planning tools.
 - Advanced dietary filtering.
