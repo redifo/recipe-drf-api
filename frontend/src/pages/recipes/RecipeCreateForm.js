@@ -86,7 +86,7 @@ function RecipeCreateForm() {
 
     const handleChange = (event) => {
         const { name, value, type } = event.target;
-        
+
         if (type === "text") {
             if (name === "title" && value.length > 40) return;
             if (name === "description" && value.length > 1000) return;
@@ -114,6 +114,7 @@ function RecipeCreateForm() {
     const removeImage = () => {
         setImageFile(null);
         setImagePreview(null);
+        showWarning("Image Removed")
     };
 
     const handleSubmit = async (event) => {
@@ -126,21 +127,21 @@ function RecipeCreateForm() {
         formData.append("preparation_time", preparation_time);
         formData.append("cooking_time", cooking_time);
         formData.append("servings", servings);
-        if (imageFile){
+        if (imageFile) {
             formData.append("image", imageFile);
-        } 
+        }
         selectedTags.forEach(tag => {
             formData.append("tags", tag);
         });
         try {
             const { data } = await axiosReq.post("/recipes/", formData);
             history.push(`/recipes/${data.id}`);
-            showSuccess("Recipe created successfully")     
+            showSuccess("Recipe created successfully")
         } catch (err) {
             const errorMessages = err.response?.data;
-                Object.values(errorMessages).flat().forEach((message) => {
-                    showWarning(message);
-                });
+            Object.values(errorMessages).flat().forEach((message) => {
+                showWarning(message);
+            });
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
             }
@@ -212,10 +213,12 @@ function RecipeCreateForm() {
                         <div {...getRootProps({ className: 'dropzone' })}>
                             <input {...getInputProps()} />
                             {imagePreview ? (
+                            <>
                                 <FormLabel>Click on the photo or drop another photo here to change the photo<br></br>
                                     <Image src={imagePreview} alt="Preview" rounded className={appStyles.Image} />
-                                    <Button className="mt-3" onClick={removeImage}>Remove Image</Button>
                                 </FormLabel>
+                                <Button className="mt-3" onClick={removeImage}>Remove Image</Button> 
+                                </>
                             ) : (
                                 <Asset src={Upload} message="Drag and drop a photo here, or click to select a photo" />
                             )}
