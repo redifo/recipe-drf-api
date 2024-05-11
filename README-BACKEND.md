@@ -1,5 +1,12 @@
 # Recipe Domain Backend 
 ## Project Goals
+The primary objective of the backend for Recipe Domain is to support a dynamic and engaging platform for culinary enthusiasts. This involves:
+
+1) Establishing a robust API that enables efficient searching, filtering, and retrieval of recipes based on diverse criteria such as ingredients, preparation time, and user preferences.
+2) Facilitating user interactions, including the ability to save, organize, and manage favorite recipes, enhancing the personalization of the culinary experience.
+3) Supporting a community-oriented environment where users can share their culinary creations, post reviews, and engage with other food lovers, fostering a vibrant network of recipe exchange and feedback.
+4) Ensuring a seamless and secure user experience with reliable authentication, notification systems, and user profile management to maintain a high level of usability and accessibility for all users, regardless of their technical expertise.
+
 
 ## Table of contents
 - [Recipe Domain Backend](#recipe-domain-backend)
