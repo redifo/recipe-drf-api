@@ -167,3 +167,15 @@ This hands-on testing approach ensured that the Recipe Domain API was thoroughly
 | N2      | Authenticated user tries to access another user's notification     | Should receive HTTP 403 Forbidden.                           | PASS    |
 | N3      | Authenticated user marks a notification as read.                   | Should mark the notification as read and return HTTP 200 OK. | PASS    |
 | N4      | Authenticated user deletes a notification they own.                | Should delete the notification and return HTTP 204 No Content| PASS    |
+
+| Test ID | Test Description                                               | Expected Outcome                                                 | Result  |
+|---------|----------------------------------------------------------------|------------------------------------------------------------------|---------|
+| L1      | Unauthenticated user tries to list likes.                      | Should receive HTTP 200 OK with likes list.                      | PASS    |
+| L2      | Authenticated user lists likes.                                | Should receive HTTP 200 OK with list of likes.                   | PASS    |
+| L3      | Authenticated user creates a like for a review.                | Should successfully create a like and return HTTP 201 Created.   | PASS    |
+| L4      | Authenticated user tries to create a duplicate like for a review.| Should return HTTP 400 with a duplicate like error message.    | PASS    |
+| L5      | Authenticated user updates a like they own.                    | Should update the like status and return HTTP 200 OK.            | PASS    |
+| L6      | Authenticated user tries to update a like they don't own.      | Should receive HTTP 403 Forbidden.                               | PASS    |
+| L7      | Authenticated user deletes a like they own.                    | Should delete the like and return HTTP 204 No Content.           | PASS    |
+| L8      | Authenticated user tries to delete a like they don't own.      | Should receive HTTP 403 Forbidden.                               | PASS    |
+| L9      | Unauthenticated user tries to create a likes for a review.     | Should receive HTTP 403 Forbidden.                               | PASS    |
