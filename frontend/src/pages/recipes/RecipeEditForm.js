@@ -88,7 +88,7 @@ function RecipeEditForm() {
             'image/svg+xml': ['.svg'],
             'image/webp': ['.webp']
         },
-        maxSize: 10 * 1024 * 1024,
+        maxSize: 4 * 1024 * 1024,
         maxFiles: 1
     });
 

@@ -111,3 +111,5 @@ All tests were conducted using the Django Rest Framework HTML interface on a tes
 - **Performance**: Observing the response times and stability during operations involving complex queries or large image files to ensure the application's performance remained robust.
 
 This hands-on testing approach ensured that the Recipe Domain API was thoroughly evaluated, simulating a variety of user interactions to validate functionality, security, and performance before deployment.
+
+
