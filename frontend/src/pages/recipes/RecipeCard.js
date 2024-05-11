@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Card, Button, Row } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 import { axiosRes } from '../../api/axiosDefaults';
 import { useHistory } from 'react-router-dom';
 import styles from "../../styles/Recipe.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { showError, showSuccess } from '../../utils/ToastManager';
+
 
 function RecipeCard({ recipe }) {
     const { id, title, image, ratings_average, ratings_count, is_favorited: initialIsFavorited, favorite_id: initialFavoriteId } = recipe;

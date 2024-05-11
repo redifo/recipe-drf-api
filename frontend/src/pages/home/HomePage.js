@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Row, InputGroup, FormControl, Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
 import PopularProfiles from '../profiles/PopularProfiles';
 import btnStyles from '../../styles/Button.module.css'
 import styles from '../../styles/Home.module.css'
@@ -12,6 +16,7 @@ import RecipeCard from '../recipes/RecipeCard';
 import { showError } from '../../utils/ToastManager';
 import Asset from '../../components/Asset';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
+
 
 function Home() {
   const history = useHistory();

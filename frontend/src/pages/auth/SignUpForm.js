@@ -7,10 +7,16 @@ import appStyles from "../../App.module.css";
 
 import pancakeImage from '../../assets/img/pancakes.webp';
 
-import { Form, Button, Image, Col, Row, Alert } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Alert from "react-bootstrap/Alert";
 import axios from "axios";
 import { useRedirect } from "../../hooks/useRedirect";
 import { showSuccess } from "../../utils/ToastManager";
+
 
 const SignUpForm = () => {
     useRedirect('loggedout')

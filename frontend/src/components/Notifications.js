@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Button, ListGroup } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 import styles from '../styles/Notifications.module.css';
 import { useCurrentUser } from "../contexts/CurrentUserContext";
 import { axiosRes } from "../api/axiosDefaults";
 import { showSuccess, showError } from '../utils/ToastManager';
 import Asset from './Asset';
+
 
 const Notifications = () => {
     const [notifications, setNotifications] = useState([]);

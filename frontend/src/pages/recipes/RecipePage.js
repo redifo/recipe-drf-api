@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import styles from "../../styles/Recipe.module.css";
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { axiosReq } from '../../api/axiosDefaults';
@@ -16,6 +19,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 import { fetchMoreData } from "../../utils/utils";
 import { showError, showSuccess } from '../../utils/ToastManager';
+
 
 function RecipePage() {
     const history = useHistory();

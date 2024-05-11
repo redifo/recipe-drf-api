@@ -8,6 +8,7 @@ import Asset from "../../components/Asset";
 import { useProfileData } from "../../contexts/ProfileDataContext";
 import Profile from "./Profile";
 
+
 const PopularProfiles = ({ mobile, card }) => {
   const { popularProfiles } = useProfileData();
   SwiperCore.use([Autoplay])

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import styles from "../styles/MoreDropdown.module.css";
 import { useHistory } from "react-router";
-import { Modal, Button } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu

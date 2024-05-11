@@ -1,5 +1,8 @@
 import React, { useRef } from 'react';
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../assets/img/logo-removebg.png';
 import styles from '../styles/NavBar.module.css';
 import { NavLink } from 'react-router-dom';
@@ -11,6 +14,7 @@ import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
 import { removeTokenTimestamp } from "../utils/utils";
 import Notifications from './Notifications';
 import { showSuccess, showError } from '../utils/ToastManager';
+
 
 const NavBar = () => {
     const currentUser = useCurrentUser();

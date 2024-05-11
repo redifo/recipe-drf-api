@@ -1,8 +1,10 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 import { fetchMoreData } from '../../utils/utils';
 import Profile from './Profile';
 import { useProfileData } from "../../contexts/ProfileDataContext";
+
 
 function FollowedProfiles() {
   const { followedProfiles, setProfileData } = useProfileData();

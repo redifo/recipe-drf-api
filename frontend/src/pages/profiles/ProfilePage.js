@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Col, Row, Button, Image } from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 
 import Asset from "../../components/Asset";
 import RecipeCard from "../recipes/RecipeCard";
@@ -15,6 +18,7 @@ import NoResults from "../../assets/img/no-results.png";
 import { fetchMoreData } from "../../utils/utils";
 import { ProfileEditDropdown } from "../../components/MoreDropDown";
 import { showError } from "../../utils/ToastManager";
+
 
 function ProfilePage() {
     const [hasLoaded, setHasLoaded] = useState(false);

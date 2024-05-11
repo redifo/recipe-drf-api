@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Media from "react-bootstrap/Media";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
-import { Modal, Image } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
+import Image from 'react-bootstrap/Image';
 
 import ReviewEditForm from "./ReviewEditForm";
 
@@ -12,6 +13,7 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 import { MoreDropdown } from "../../components/MoreDropDown";
 import { showError, showSuccess } from "../../utils/ToastManager";
+
 
 const Review = ({ review, setReviews }) => {
 

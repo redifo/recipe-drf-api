@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, Row, Col, Form } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
 import { useLocation } from 'react-router-dom';
 
 import btnStyles from "../../styles/Button.module.css";
@@ -9,6 +13,7 @@ import RecipeCard from './RecipeCard';
 
 import { fetchMoreData } from '../../utils/utils';
 import { showError } from '../../utils/ToastManager';
+
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
