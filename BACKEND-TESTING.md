@@ -179,3 +179,15 @@ This hands-on testing approach ensured that the Recipe Domain API was thoroughly
 | L7      | Authenticated user deletes a like they own.                    | Should delete the like and return HTTP 204 No Content.           | PASS    |
 | L8      | Authenticated user tries to delete a like they don't own.      | Should receive HTTP 403 Forbidden.                               | PASS    |
 | L9      | Unauthenticated user tries to create a likes for a review.     | Should receive HTTP 403 Forbidden.                               | PASS    |
+
+| Test ID | Test Description                                               | Expected Outcome                                                 | Result  |
+|---------|----------------------------------------------------------------|------------------------------------------------------------------|---------|
+| F1      | Unauthenticated user tries to list follows.                    | Should receive HTTP 200 OK with follows list.                    | PASS    |
+| F2      | Authenticated user lists follows.                              | Should receive HTTP 200 OK with list of follows.                 | PASS    |
+| F3      | Authenticated user creates a follow relationship.              | Should successfully create a follow and return HTTP 201 Created. | PASS    |
+| F4      | Authenticated user tries to follow themselves.                 | Should return HTTP 400 with an error message.                    | PASS    |
+| F5      | Authenticated user updates a follow they own.                  | Should update the notify_on_new_post and return HTTP 200 OK.     | PASS    |
+| F6      | Authenticated user tries to update a follow they don't own.    | Should receive HTTP 403 Forbidden.                               | PASS    |
+| F7      | Authenticated user deletes a follow they own.                  | Should delete the follow and return HTTP 204 No Content.         | PASS    |
+| F8      | Authenticated user tries to delete a follow they don't own.    | Should receive HTTP 403 Forbidden.                               | PASS    |
+| F9      | Unauthenticated user tries to creates a follow relationship.   | Should receive HTTP 403 Forbidden.                               | PASS    |
