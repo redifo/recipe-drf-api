@@ -172,17 +172,17 @@ function RecipeCreateForm() {
 
             <Form.Group>
                 <Form.Label><strong>Preparation Time <i className="fa-solid fa-clock fa-lg"></i>(minutes)</strong></Form.Label>
-                <Form.Control type="number" name="preparation_time" value={preparation_time} onChange={handleChange} />
+                <Form.Control placeholder="Please input a time between 1-999 minutes" type="number" name="preparation_time" value={preparation_time} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group>
                 <Form.Label><strong>Cooking Time <i className="fa-solid fa-clock fa-lg"></i> (minutes)</strong></Form.Label>
-                <Form.Control type="number" name="cooking_time" value={cooking_time} onChange={handleChange} />
+                <Form.Control placeholder="Please input a time between 1-999 minutes" type="number" name="cooking_time" value={cooking_time} onChange={handleChange} />
             </Form.Group>
 
             <Form.Group>
                 <Form.Label><strong>Servings</strong></Form.Label>
-                <Form.Control type="number" name="servings" value={servings} onChange={handleChange} placeholder="Number of servings" />
+                <Form.Control placeholder="Please input a serving size between 1-99" type="number" name="servings" value={servings} onChange={handleChange} />
             </Form.Group>
             <Form.Group>
                 <Form.Label><strong>Tags</strong> (Select up to 3 tags for categorisation of your recipe)</Form.Label>
