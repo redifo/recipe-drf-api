@@ -110,6 +110,11 @@ function RecipeCreateForm() {
         });
     };
 
+    // Function to remove the added photo
+    const removeImage = () => {
+        setImageFile(null);
+        setImagePreview(null);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -200,7 +205,7 @@ function RecipeCreateForm() {
     return (
         <Form onSubmit={handleSubmit}>
 
-            <Col className="py-2 p-0 p-md-2" md={12}>
+            <Col className="py-2 p-0 p-md-2 mt-4" md={12}>
                 <Container className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center mb-2`}>
                     <Form.Group className="text-center">
 
@@ -209,6 +214,7 @@ function RecipeCreateForm() {
                             {imagePreview ? (
                                 <FormLabel>Click on the photo or drop another photo here to change the photo<br></br>
                                     <Image src={imagePreview} alt="Preview" rounded className={appStyles.Image} />
+                                    <Button className="mt-3" onClick={removeImage}>Remove Image</Button>
                                 </FormLabel>
                             ) : (
                                 <Asset src={Upload} message="Drag and drop a photo here, or click to select a photo" />

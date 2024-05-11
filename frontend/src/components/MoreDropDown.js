@@ -68,7 +68,7 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
             Cancel
           </Button>
           <Button variant="danger" onClick={handleDelete}>
-            Delete Recipe
+            Delete Review
           </Button>
         </Modal.Footer>
       </Modal>
