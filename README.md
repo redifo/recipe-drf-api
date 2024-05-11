@@ -1,5 +1,9 @@
 # Recipe Domain
 
+<p align="center">
+    <img src="readme-documentation/responsive.png" width=100%>
+</p>
+
 Recipe Domain is an interactive web application designed to simplify the process of finding, organizing, and sharing culinary recipes. It serves as a central hub for food enthusiasts to discover new recipes, manage their favorites, and share their culinary creations with others. The platform aims to provide a user-friendly environment where users can easily search, filter, and interact with a wide variety of recipes.
 
 ***Links to other readme and testing files.***
