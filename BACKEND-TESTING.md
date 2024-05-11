@@ -137,3 +137,14 @@ This hands-on testing approach ensured that the Recipe Domain API was thoroughly
 | RV6     | Authenticated user tries to delete a review they don't own.              | Should receive HTTP 403 Forbidden.                                 | PASS    |
 | RV7     | User likes a review for the first time.                                  | Should increment like count and return HTTP 201 Created.           | PASS    |
 | RV8     | User dislikes a review they previously liked.                            | Should update like status and adjust counts, returning HTTP 200 OK.| PASS    |
+
+| Test ID | Test Description                                                    | Expected Outcome                                               | Result  |
+|---------|---------------------------------------------------------------------|----------------------------------------------------------------|---------|
+| RA1     | Unauthenticated user tries to list ratings.                         | Should receive HTTP 200 OK with ratings list.                  | PASS    |
+| RA2     | Authenticated user lists ratings.                                   | Should receive HTTP 200 OK with list of ratings.               | PASS    |
+| RA3     | Authenticated user creates a rating for a recipe.                   | Should successfully create a rating and return HTTP 201 Created.| PASS    |
+| RA4     | Authenticated user tries to create a duplicate rating for a recipe. | Should return HTTP 400 with a duplicate rating error message.  | PASS    |
+| RA5     | Authenticated user updates a rating they own.                       | Should update the rating and return HTTP 200 OK.               | PASS    |
+| RA6     | Authenticated user tries to update a rating they don't own.         | Should receive HTTP 403 Forbidden.                             | PASS    |
+| RA7     | Authenticated user deletes a rating they own.                       | Should delete the rating and return HTTP 204 No Content.       | PASS    |
+| RA8     | Authenticated user tries to delete a rating they don't own.         | Should receive HTTP 403 Forbidden.                             | PASS    |
