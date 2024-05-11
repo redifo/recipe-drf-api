@@ -37,17 +37,22 @@
 |All website pages| No errors | <details><summary>Screenshot of result</summary>![Result](/readme-documentation/tests/html-validator.png)</details>| :check_mark:
 
 ### W3C CSS validator
+
 [W3C Jigsaw](https://jigsaw.w3.org/css-validator/) is a tool by the W3C for validating CSS code, ensuring compliance with web standards and promoting interoperability and accessibility.
 
+The validator have shown that there were some issues in some of the css files (only 3 files and all the errors were due to the way i have used @media) and all errors have been fixed in the end. An example of the error can be seen below. 
 
+<p align="center">
+    <img src="readme-documentation/tests/recipe-css.png" width=400>
+</p>
 
 | **Tested** | **Result** | **View Result** | **Pass** |
 --- | --- | --- | :---:
-| all style files | no errors | <details><summary>Screenshot of result</summary>![Result](/readme-documentation/tests/)</details>| :check_mark:
+| all style files | no errors | <details><summary>Screenshot of result</summary>![Result](/readme-documentation/tests/css-success.png)</details>| :check_mark:
 
 ### ESLint JavaScript validator
 
-All JavaScript files were validated using the ESLint JavaScript validator. Identified issues were addressed accordingly.
+All JavaScript files were validated using the ESLint JavaScript validator duting development and all warning and errors ahve been solved as sson as they appear or as soon as possoible. Identified issues were addressed accordingly.
 
 ## Web Accessability Testing
 ### WAVE web accessability testing
