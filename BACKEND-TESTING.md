@@ -54,7 +54,7 @@ Throughout the development process, all Python files were meticulously checked u
   - `serializers.py`: no errors found
   - `urls.py`: no errors found
   - `views.py`: no errors found
-  - `settings.py`: lines longer than 80 characters
+  - `settings.py`: 3 lines longer than 80 characters
 
 - **notifications**:
   - `admin.py`: no errors found
