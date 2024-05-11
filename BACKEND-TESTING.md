@@ -112,10 +112,7 @@ All tests were conducted using the Django Rest Framework HTML interface on a tes
 
 This hands-on testing approach ensured that the Recipe Domain API was thoroughly evaluated, simulating a variety of user interactions to validate functionality, security, and performance before deployment.
 
-
-## Manual Tests
-
-## Manual Tests for Recipe and Reviews Application
+### Manual Tests 
 
 | Test ID | Test Description                                                        | Expected Outcome                                                   | Result  |
 |---------|-------------------------------------------------------------------------|--------------------------------------------------------------------|---------|
