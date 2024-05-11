@@ -154,8 +154,16 @@ This hands-on testing approach ensured that the Recipe Domain API was thoroughly
 
 | Test ID | Test Description                                         | Expected Outcome                                               | Result  |
 |---------|----------------------------------------------------------|----------------------------------------------------------------|---------|
-| PR1     | Unauthenticated user tries to list profiles.             | Should receive HTTP 200 OK with profiles list.                 | PASS    |
-| PR2     | Authenticated user views their own profile detail.       | Should receive HTTP 200 OK with their profile details.         | PASS    |
-| PR3     | Authenticated user updates their own profile.            | Should update the profile and return HTTP 200 OK.              | PASS    |
-| PR4     | Authenticated user tries to update another user's profile| Should receive HTTP 403 Forbidden.                             | PASS    |
-| PR5     | Authenticated user views profiles they follow.           | Should receive HTTP 200 OK with followed profiles list.        | PASS    |
+| PR1     | Unauthenticated user tries to list profiles.  | Should receive HTTP 200 OK with profiles list.          | PASS    |
+| PR2     | Authenticated user views their own profile detail.   | Should receive HTTP 200 OK with their profile details.    | PASS    |
+| PR3     | Authenticated user updates their own profile.   | Should update the profile and return HTTP 200 OK.       | PASS    |
+| PR4     | Authenticated user tries to update another user's profile| Should receive HTTP 403 Forbidden.           | PASS    |
+| PR5     | Authenticated user views profiles they follow.      | Should receive HTTP 200 OK with followed profiles list.        | PASS    |
+
+
+| Test ID | Test Description                                                   | Expected Outcome                                             | Result  |
+|---------|--------------------------------------------------------------------|--------------------------------------------------------------|---------|
+| N1      | Authenticated user receives a notification for a review left by someoneelse on a recipe they own   | Should receive the notification and return HTTP 201 Created. | PASS    |
+| N2      | Authenticated user tries to access another user's notification     | Should receive HTTP 403 Forbidden.                           | PASS    |
+| N3      | Authenticated user marks a notification as read.                   | Should mark the notification as read and return HTTP 200 OK. | PASS    |
+| N4      | Authenticated user deletes a notification they own.                | Should delete the notification and return HTTP 204 No Content| PASS    |
