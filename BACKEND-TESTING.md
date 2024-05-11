@@ -45,7 +45,7 @@ Throughout the development process, all Python files were meticulously checked u
 
 - **drf_api (mainapp)**:
   - `admin.py`: no errors found
-  - `models.py`: no errors found
+  - `permissions.py`: no errors found
   - `serializers.py`: no errors found
   - `urls.py`: no errors found
   - `views.py`: no errors found
@@ -87,3 +87,27 @@ Throughout the development process, all Python files were meticulously checked u
   - `views.py`: no errors found
 
 This approach to code quality has ensured that the entire application adheres to the highest standards of Python coding practices, with only a minor issue in the main app's `settings.py` file related to line length.
+
+## API Manual Testing
+
+### Methodology
+The testing methodology for the Recipe Domain was carefully structured to ensure that all aspects of the application behaved as expected. This included a comprehensive series of manual tests focusing on the application's core functionalities, which are pivotal to the user experience. These functionalities include creating recipes, rating them, marking them as favorites, reviewing recipes with optional images, following users, and managing notifications.
+
+Given the absence of multiple user roles, the tests primarily differentiated between actions performed by the recipe/review owner and other authenticated users. The default Django admin superuser managed administrative tasks without any special roles affecting the main application.
+
+The tests aimed to validate the following key behaviors:
+- **Recipe Ownership**: Only the creator of a recipe can edit or delete it.
+- **Review Management**: Only the author of a review can edit or delete it, and reviews can include images.
+- **User Interactions**: Users can follow others, like or dislike reviews, and receive notifications when their recipes are reviewed.
+- **Notifications**: Users can delete a notification or mark it as read, ensuring that the notification system supports user engagement without becoming intrusive.
+- **Profile Updates**: Users can update their profile information, including their bio, username, and password.
+
+### Testing Approach
+All tests were conducted using the Django Rest Framework HTML interface on a test server. This approach allowed for direct interaction with the API endpoints in a controlled environment, ensuring that each function could be tested in isolation and in combination.
+
+### Special Considerations
+- **Image Handling**: Tests verified that images could be added, updated, or removed both in recipes and reviews, checking for any issues in file handling or display.
+- **Security and Privacy**: Ensuring that users could only access and modify their own content, testing the privacy and security configurations extensively.
+- **Performance**: Observing the response times and stability during operations involving complex queries or large image files to ensure the application's performance remained robust.
+
+This hands-on testing approach ensured that the Recipe Domain API was thoroughly evaluated, simulating a variety of user interactions to validate functionality, security, and performance before deployment.
