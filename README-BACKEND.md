@@ -37,16 +37,17 @@
 
 ## Frameworks, Libraries, and Dependencies
 
-- **Django Rest Framework**: Serves as the foundation for creating RESTful APIs, handling client-server interactions efficiently. Utilized for all data management and CRUD operations within the app.
-- **JWT Authentication**: Ensures secure and scalable user authentication using JSON Web Tokens, integrated through `dj_rest_auth` and Django's authentication systems.
-- **Cloudinary**: Used for cloud-based image storage, simplifying the management of user-uploaded images like profile pictures and recipe photos. Configured through `cloudinary_storage` to handle media files.
-- **Django Filters**: Implemented for advanced querying capabilities, allowing users to filter recipes and other content based on various criteria. Enabled in the app through `django_filters`.
-- **WhiteNoise**: Facilitates efficient static file serving in Django applications, especially when deployed. Integrated to manage static files seamlessly.
-- **Django Rest Auth & Allauth**: Provide comprehensive user authentication, including registration and login functionalities, connected with `dj_rest_auth` and `allauth`.
-- **CORS Headers**: Configured to allow resource sharing between the frontend and backend, supporting cross-origin requests. Essential for interactions between different domains during development and production.
+- **Django Rest Framework (3.15.1)**: Serves as the foundation for creating RESTful APIs, handling client-server interactions efficiently. Utilized for all data management and CRUD operations within the app.
+- **JWT Authentication**: Ensures secure and scalable user authentication using JSON Web Tokens, integrated through `dj_rest_auth (2.1.9)` and Django's authentication systems.
+- **Cloudinary (1.39.1)**: Used for cloud-based image storage, simplifying the management of user-uploaded images like profile pictures and recipe photos. Configured through `dj3-cloudinary-storage (0.0.6)` to handle media files.
+- **Django Filters (2.4.0)**: Implemented for advanced querying capabilities, allowing users to filter recipes and other content based on various criteria. Enabled in the app through `django_filters`.
+- **WhiteNoise (6.4.0)**: Facilitates efficient static file serving in Django applications, especially when deployed. Integrated to manage static files seamlessly.
+- **Django Rest Auth & Allauth (0.44.0)**: Provide comprehensive user authentication, including registration and login functionalities, connected with `dj_rest_auth` and `allauth`.
+- **CORS Headers (django-cors-headers 4.3.1)**: Configured to allow resource sharing between the frontend and backend, supporting cross-origin requests. Essential for interactions between different domains during development and production.
 
 ### Database
-- **PostgreSQL**: Chosen for its robustness and scalability in storing and managing user and recipe data. Connected through `dj_database_url` to parse database URLs.
+- **Neon Database**: Utilized [Neon](https://neon.tech/) for the database to leverage its cloud-native PostgreSQL capabilities, ensuring scalable and efficient data management.
+- **PostgreSQL**: Chosen for its robustness and scalability in storing and managing user and recipe data. 
 
 ### Key Settings and Configurations
 - `SECRET_KEY`, `DEBUG`, and `ALLOWED_HOSTS` are standard Django settings adjusted for security and operational context.
