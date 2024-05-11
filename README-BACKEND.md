@@ -1,4 +1,5 @@
 # Recipe Domain Backend 
+
 ## Project Goals
 The primary objective of the backend for Recipe Domain is to support a dynamic and engaging platform for culinary enthusiasts. This involves:
 
@@ -6,7 +7,6 @@ The primary objective of the backend for Recipe Domain is to support a dynamic a
 2) Facilitating user interactions, including the ability to save, organize, and manage favorite recipes, enhancing the personalization of the culinary experience.
 3) Supporting a community-oriented environment where users can share their culinary creations, post reviews, and engage with other food lovers, fostering a vibrant network of recipe exchange and feedback.
 4) Ensuring a seamless and secure user experience with reliable authentication, notification systems, and user profile management to maintain a high level of usability and accessibility for all users, regardless of their technical expertise.
-
 
 ## Table of contents
 - [Recipe Domain Backend](#recipe-domain-backend)
@@ -55,12 +55,15 @@ Data models were developed in parallel with API endpoints, using an entity relat
 #### **Profile**
 - A one-to-one relationship with the User model, automatically created upon user registration.
 - Stores additional user information such as bio, name, email, and profile image.
+- The `image` field is constrained by size validators to ensure that uploads do not exceed 4MB, maintaining performance and storage efficiency.
 - Fields: `id`, `user_id`, `bio`, `name`, `email`, `image`, `created_at`, `updated_at`.
 
 #### **Recipe**
 - Central to the application, holding detailed information about each recipe.
 - Many-to-one relationship with User to track recipe ownership.
 - Many-to-many relationship with Tag via `recipe_tags` for categorization.
+- Validators ensure that `preparation_time` and `cooking_time` fall within a reasonable range (e.g., 1 to 999 minutes) to prevent unrealistic entries.
+- The `image` field is constrained by size validators to ensure that uploads do not exceed 4MB, maintaining performance and storage efficiency.
 - Fields: `id`, `title`, `user_id`, `description`, `preparation_time`, `cooking_time`, `servings`, `instructions`, `created_at`, `updated_at`, `image`, `ingredients`.
 
 #### **Tag**
@@ -70,6 +73,7 @@ Data models were developed in parallel with API endpoints, using an entity relat
 #### **Review**
 - Allows users to provide feedback on recipes with textual content and optional images.
 - Many-to-one relationship with User and Recipe.
+- Validators on the `image` field restrict file size to a maximum of 4MB and enforce dimension constraints, ensuring both quality and efficiency of storage.
 - Fields: `id`, `user_id`, `recipe_id`, `text`, `image`, `created_at`, `updated_at`.
 
 #### **Rating**
@@ -87,7 +91,7 @@ Data models were developed in parallel with API endpoints, using an entity relat
 - Fields: `id`, `user_id`, `review_id`, `is_like`, `created_at`.
 
 #### **Follow**
-- Captures the follow relationship between users, enabling social features like updates on new posts.
+- Captures the follow relationship between users.
 - Fields: `id`, `follower_id`, `followed_id`, `notify_on_new_post`, `created_at`.
 
 #### **Favorite**
@@ -144,7 +148,6 @@ Each model is designed to support the core functionalities of the app, from user
 - `CORS_ALLOWED_ORIGINS` and `CORS_ALLOW_CREDENTIALS` are set to ensure the frontend can interact with the API without CORS issues.
 - `INSTALLED_APPS` includes several custom apps like `profiles`, `recipes`, `reviews`, `ratings`, `followers`, `likes`, `notifications`, and `favorites` which define the core functionality of the application.
 - Static and media file handling are configured with Django's standard settings and `WhiteNoise` for production readiness.
-
 
 ## Resolved bugs
 
