@@ -1,8 +1,6 @@
-
-
 .RecipeCard {
     max-height: 400px;
-    
+
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -13,15 +11,15 @@
 
 .RecipeCard img {
     height: 250px;
-    object-fit: cover; 
+    object-fit: cover;
     width: 100%;
 }
 
-.CardBottom{
-    display: flex;    
-   justify-content: space-between;
-   align-items: center;
-    
+.CardBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 
@@ -34,48 +32,55 @@
     color: #ffd700;
 }
 
-.TagsText{
+.TagsText {
     background-color: #ebc76b;
     border-radius: 10px;
 }
 
 .Headings {
     text-decoration: underline;
-    
-}
-.HeartButton{
-    padding: 0px; 
-    
-    
+
 }
 
-.HeartButton:hover{
-    cursor: pointer;   
-    box-shadow: none !important;
+.HeartButton {
+    padding: 0px;
+
+
 }
-.HeartButton:focus{
-    
+
+.HeartButton:hover {
+    cursor: pointer;
     box-shadow: none !important;
 }
 
-.RecipePageImage{
+.HeartButton:focus {
+
+    box-shadow: none !important;
+}
+
+.RecipePageImage {
     max-height: 400px;
     max-width: 100%;
 }
 
-.RecipeSummary{
+.RecipeSummary {
     position: relative;
-    
+
 }
 
-.RecipePageImageContainer{
+.RecipePageImageContainer {
+
     text-align: left;
-    @media (max-width: 768px) {
+
+}
+
+@media (max-width: 768px) {
+    .RecipePageImageContainer {
         text-align: center;
     }
 }
 
-.RatingCounter{
+.RatingCounter {
     vertical-align: middle;
     font-size: 1.3rem;
 }
