@@ -138,12 +138,10 @@ function RecipeCreateForm() {
             history.push(`/recipes/${data.id}`);
             showSuccess("Recipe created successfully")
         } catch (err) {
-            const errorMessages = err.response?.data;
-            Object.values(errorMessages).flat().forEach((message) => {
-                showWarning(message);
-            });
+            
             if (err.response?.status !== 401) {
                 setErrors(err.response?.data);
+                showWarning(err.message)
             }
         }
     };

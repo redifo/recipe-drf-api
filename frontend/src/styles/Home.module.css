@@ -17,7 +17,7 @@
     max-width: 600px;
 }
 
-.SearchInput:focus{
+.SearchInput:focus {
     border-color: #f0ac19;
     outline: 0;
     box-shadow: 0 0 0 .2rem rgba(240, 161, 15, 0.25);
@@ -31,4 +31,9 @@
 
 .SearchInputGroup .btn {
     height: calc(1.5em + 0.75rem + 2px);
+}
+
+.CreateRecipeBox {
+    background-color: #ebebebea;
+    border-radius: 8px;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, InputGroup, FormControl, Button } from 'react-bootstrap';
 import PopularProfiles from '../profiles/PopularProfiles';
+import btnStyles from '../../styles/Button.module.css'
 import styles from '../../styles/Home.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,12 +11,14 @@ import 'swiper/swiper-bundle.css';
 import RecipeCard from '../recipes/RecipeCard';
 import { showError } from '../../utils/ToastManager';
 import Asset from '../../components/Asset';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 function Home() {
   const history = useHistory();
   const [searchQuery, setSearchQuery] = useState("");
   const [mostFavoritedRecipes, setMostFavoritedRecipes] = useState([]);
   const [latestRecipes, setLatestRecipes] = useState([]);
+  const currentUser = useCurrentUser();
 
   const [hasLoaded, setHasLoaded] = useState(false);
   //https://stackoverflow.com/questions/63052586/react-swiperjs-autoplay-not-making-the-swiper-to-auto-swipe
@@ -67,7 +70,21 @@ function Home() {
             <Button variant="outline-secondary" className={styles.SearchButton} onClick={handleSearch}>Search</Button>
           </InputGroup.Append>
         </InputGroup>
+        {currentUser && (
+
+          <Container className={`${styles.CreateRecipeBox} p-3 text-center`}>
+            <p>Use the button below or click the '+' icon in the navigation bar/menu to create and share a new recipe.</p>
+            <Button
+              className={btnStyles.Yellow}
+              onClick={() => history.push('/recipe/create')}
+            >
+              Create Recipe
+            </Button>
+          </Container>
+
+        )}
       </Row>
+
       <Container fluid className={styles.Container}>
         <h2>Most Favorited Recipes</h2>
         {hasLoaded ? (
