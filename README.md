@@ -130,8 +130,54 @@ A more detailed list of technologies used (with versions used for the project) f
 
 ## Testing
 
+Please refer to the links below for backend and frontend testing documentation.
+[FRONTEND-TESTING](https://github.com/redifo/recipe-drf-api/blob/main/FRONTEND-TESTING.md).
+[BACKEND-TESTING](https://github.com/redifo/recipe-drf-api/blob/main/BACKEND-TESTING.md).
+
 ## Deployment
-Recipe Domain is deployed on 
+## Deployment Process
+
+To deploy this project, which consists of both a backend and a frontend within the same GitHub directory, follow these steps to ensure a smooth setup and deployment on Heroku. This guide assumes you're familiar with basic GitHub operations and have a Heroku account.
+
+### Step 1: Fork or Clone the Repository
+1. **Fork or clone** the repository from GitHub to get your own copy or version.
+   - If you are forking, use the GitHub interface to create a fork under your account.
+   - If cloning, use `git clone` followed by the repository URL.
+
+### Step 2: Set Up Cloudinary
+2. **Set up a Cloudinary account** for hosting user profile images.
+   - Log in to [Cloudinary](https://cloudinary.com/).
+   - Navigate to the 'dashboard'.
+   - Copy the value of the 'API Environment variable' (starts with `cloudinary://`). Click the eye icon to reveal the full variable if necessary. Keep this value safe as it will be used shortly (but ensure it is securely destroyed after deployment).
+
+### Step 3: Deploy to Heroku
+3. **Log in to Heroku** and set up your application.
+   - Select 'Create new app' from the 'New' menu at the top right of the Heroku dashboard.
+   - Enter a name for your app and choose the appropriate region.
+   - Click 'Create app'.
+
+### Step 4: Configure Environment Variables in Heroku
+4. **Configure environment variables** in Heroku to connect your app with necessary services.
+   - In the Heroku dashboard for your app, go to the 'Settings' tab.
+   - Click 'Reveal Config Vars'.
+   - Add the following keys and their respective values:
+     - `CLOUDINARY_URL`: Paste the Cloudinary URL you copied earlier.
+     - `DATABASE_URL`: Set this to your PostgreSQL database URL. If using a service like ElephantSQL, copy the URL from their dashboard.
+     - `SECRET_KEY`: Your Django application's secret key.
+     - `ALLOWED_HOST`: The URL of your Heroku app, but without the `https://` prefix.
+     - `CLIENT_ORIGIN`: The URL where your frontend will be accessed, typically the same as `ALLOWED_HOST` but includes `https://`.
+
+### Step 5: Deploy Backend and Frontend
+5. **Deploy the backend and frontend** from your GitHub repository.
+   - Go to the 'Deploy' tab in the Heroku dashboard.
+   - Under 'Deployment method', select 'GitHub' and confirm you want to connect to GitHub. You may need to authenticate.
+   - Use the search box under 'Connect to GitHub' to find your forked or cloned repository.
+   - Click 'Connect' next to the correct repository.
+   - For automatic deployment upon new pushes to GitHub, under 'Automatic Deploys', choose the main branch and click 'Enable Automatic Deploys'.
+   - To deploy immediately, find the 'Manual Deploy' section, choose 'main' as the branch, and click 'Deploy Branch'.
+
+After completing these steps, Heroku will build and deploy your application. Once the process is finished, you'll receive a link to the deployed site. This link gives you and others access to the fully functional application hosted online.
+
 
 ## Credits
 - **Code**: 
