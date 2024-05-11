@@ -180,7 +180,79 @@ A number of reusable React components were created with the intention of reducin
 - **Props**: None specific, but maintains a consistent look and feel with links and information about the platform.
 - **Usage**: Appears at the bottom of every page, offering additional information and navigation options related to the platform and its creator.
 
-By leveraging these components, your application ensures that common functionalities and design elements are centralized, making the UI more consistent and easier to maintain and update.
+#### **ProfileDataContext**
+- **Purpose**: Manages profile data throughout the application, providing centralized access and manipulation functions for profile information.
+- **Usage**: Embedded in components that require real-time updates to profile data, such as follow/unfollow actions, and updating popular or followed profiles.
+- **Props**: Provides `handleFollow` and `handleUnfollow` methods to manage follow states and updates the relevant parts of the profile data accordingly.
+
+#### **CurrentUserContext**
+- **Purpose**: Provides and manages the current user's data across the application, ensuring that user-specific features and restrictions are applied consistently.
+- **Usage**: Used throughout the application to determine user access levels, personalize content, and handle authentication states.
+- **Props**: Offers `currentUser` for accessing the current user's information and `setCurrentUser` for updating this information as needed.
+
+#### **SignInForm**
+- **Purpose**: Allows users to sign in to their accounts, handling credential verification and user session initiation.
+- **Usage**: Used on the sign-in page to authenticate users and provide them access to their personalized content.
+- **Props**: Accepts user input for username and password and displays relevant errors or redirects upon successful login.
+
+#### **SignUpForm**
+- **Purpose**: Facilitates new user registration by collecting necessary information and creating a new user account.
+- **Usage**: Placed on the sign-up page to allow new users to create accounts and join the community.
+- **Props**: Collects user inputs for username, password, and password confirmation and handles account creation with appropriate error handling.
+
+#### **PopularProfiles**
+- **Purpose**: Displays a list or a swiper slider of popular profiles based on follower count, enhancing user discovery of prominent community members.
+- **Usage**: Utilized in community sections or dashboards where showcasing popular profiles can encourage user interaction and engagement.
+- **Props**: Can be rendered in a card layout or as a standard list, depending on the `card` prop, to suit different design needs.
+
+#### **Profile**
+- **Purpose**: Represents individual profiles in various sections of the application, offering follow/unfollow functionality and displaying key profile metrics.
+- **Usage**: Used in lists or galleries where individual profile summaries are needed, such as in search results or community highlights.
+- **Props**: Accepts `profile`, `mobile`, `imageSize`, and `card` to customize the display according to the context and user device.
+
+#### **RecipeCard**
+- **Purpose**: Showcases individual recipes with key details such as title, image, and ratings, and allows users to favorite or unfavorite the recipe.
+- **Usage**: Embedded in search results, user profiles, and recipe collections to provide a consistent recipe preview experience.
+- **Props**: Manages favorite states with `isFavorited` and `favoriteId`, and allows interaction through a heart button for adding or removing recipes from favorites.
+
+#### **RecipePage**
+- **Purpose**: Provides a detailed view of a single recipe, including description, ingredients, instructions, and user interactions like rating and reviewing.
+- **Usage**: Displayed when a user selects a recipe to view more details, offering a comprehensive overview and interactive features.
+- **Props**: Dynamically fetches and displays recipe data, tags, and reviews, and allows users to rate, favorite, and review the recipe if logged in.
+
+#### **ToastManager**
+- **Purpose**: Provides feedback to users by displaying success, error, and warning messages using the `react-toastify` library.
+- **Usage**: Integrated across the application to show user-friendly messages after actions like liking a review, following/unfollowing profiles, managing recipe favorites, and more.
+- **Methods**:
+  - `showSuccess(message)`: Displays a success message.
+  - `showError(message)`: Displays an error message.
+  - `showWarning(message)`: Displays a warning message.
+
+#### **Utilities**
+- **fetchMoreData(resourceUrl, setResource)**: Fetches additional data from a specified URL and appends it to the current state, facilitating pagination or infinite scrolling.
+- **followHelper(profile, clickedProfile, following_id)**: Adjusts the follow count and state based on user actions to follow another profile.
+- **unfollowHelper(profile, clickedProfile)**: Adjusts the follow count and state when a user unfollows another profile.
+- **setTokenTimestamp(data)**: Stores the refresh token expiration time in local storage to manage user session longevity.
+- **shouldRefreshToken()**: Checks if the refresh token needs to be updated based on stored timestamps.
+- **removeTokenTimestamp()**: Clears the stored token timestamp from local storage to manage logout and session expiration.
+
+#### **Review**
+- **Purpose**: Displays individual reviews with options to like, dislike, edit, or delete the review based on user permissions and review ownership.
+- **Usage**: Used in recipe detail pages to show user reviews and provide interactive elements like liking/disliking and editing.
+- **Props**:
+  - `review`: The review object containing details like user, text, likes, and dislikes.
+  - `setReviews`: Function to update the list of reviews after actions like deletion or editing.
+
+#### **RateRecipe**
+- **Purpose**: Allows users to rate a recipe by selecting a score from 1 to 5 stars, with the ability to remove a rating if one exists.
+- **Usage**: Appears on recipe detail pages to let users rate recipes and manage existing ratings.
+- **Props**:
+  - `recipeId`: The ID of the recipe being rated.
+  - `currentUser`: The current user object to determine if the user is logged in and permitted to rate.
+  - `initialRating`: The initial rating of the recipe by the current user to display the current score.
+  
+Each component and context provider is designed to reduce redundancy, streamline development, and ensure that the user interface remains consistent and responsive throughout the application.
+
 
 ### Future Enhancements
 - Integration with grocery shopping lists.
