@@ -1,9 +1,24 @@
+# Backend Testing
+
 ***Links to other readme and testing files.***
 [Frontend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README.md).
 
 [FRONTEND-TESTING](https://github.com/redifo/recipe-drf-api/blob/main/FRONTEND-TESTING.md).
 
 [Backend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).
+
+## Table of Contents
+- [Backend Testing](#backend-testing)
+  * [Table of Contents](#table-of-contents)
+  * [Automated Tests](#automated-tests)
+  * [Code Quality and Linting](#code-quality-and-linting)
+  * [API Manual Testing](#api-manual-testing)
+    + [Methodology](#methodology)
+    + [Testing Approach](#testing-approach)
+    + [Special Considerations](#special-considerations)
+    + [Manual Tests](#manual-tests)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## Automated Tests
 
