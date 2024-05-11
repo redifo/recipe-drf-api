@@ -56,6 +56,50 @@ This structured approach not only keeps the project organized but also aligns wi
 
 Wireframes were produced based on those user stories that had been identified.
 
+#### Home
+<p align="center">
+    <img src="readme-documentation/wireframe/home.png" width=100%>
+</p>
+
+#### Recipes Page
+
+Single recipe Page
+
+<p align="center">
+    <img src="readme-documentation/wireframe/recipe-page.png" width=100%>
+</p>
+
+Recipe Grid page 
+
+<p align="center">
+    <img src="readme-documentation/wireframe/recipe-grid.png" width=100%>
+</p>
+
+Recipe Create page
+
+<p align="center">
+    <img src="readme-documentation/wireframe/create-recipe.png" width=100%>
+</p>
+
+#### Signup/Login
+
+<p align="left">
+    <img src="readme-documentation/wireframe/signin.png" width=45%>
+</p>
+<p align="right">
+    <img src="readme-documentation/wireframe/signup.png" width=45%>
+</p>
+
+#### Edit Profile
+<p align="center">
+    <img src="readme-documentation/wireframe/edit-profile.png" width=100%>
+</p>
+
+#### Profile Page
+<p align="center">
+    <img src="readme-documentation/wireframe/profile.png" width=100%>
+</p>
+
 ### Data models
 
 Data models were planned alongside the wireframes. These are documented in the read-me for the backend [README-BACKEND.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).

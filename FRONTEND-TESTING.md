@@ -70,6 +70,8 @@ Due to the limited time constraint for this project the user stories listed in t
 
 ## Automated tests
 
+No automated tests were written for the front end due to the limited timeframe of the project and unseen circumtances taking longer than expected.
+
 ## Validator testing
 ### W3C HTML Validation
 [W3C Markup Validation](https://validator.w3.org/) is a service provided by the W3C that validates HTML code against official specifications, ensuring syntax correctness and adherence to web standards.
@@ -96,9 +98,8 @@ The validator have shown that there were some issues in some of the css files (o
 
 All JavaScript files were validated using the ESLint JavaScript validator duting development and all warning and errors ahve been solved as sson as they appear or as soon as possoible. Identified issues were addressed accordingly.
 
-## Web Accessability Testing
-### WAVE web accessability testing
-### Lighthouse testing
+
+## Lighthouse testing
 
 ## Resolved bugs
 
