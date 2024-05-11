@@ -1,5 +1,10 @@
 # Recipe Domain Backend 
 
+***Links to other readme and testing files.***
+[Frontend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README.md).
+[FRONTEND-TESTING](https://github.com/redifo/recipe-drf-api/blob/main/FRONTEND-TESTING.md).
+[BACKEND-TESTING](https://github.com/redifo/recipe-drf-api/blob/main/BACKEND-TESTING.md).
+
 ## Project Goals
 The primary objective of the backend for Recipe Domain is to support a dynamic and engaging platform for culinary enthusiasts. This involves:
 

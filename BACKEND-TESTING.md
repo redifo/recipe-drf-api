@@ -1,3 +1,8 @@
+***Links to other readme and testing files.***
+[Frontend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README.md).
+[FRONTEND-TESTING](https://github.com/redifo/recipe-drf-api/blob/main/FRONTEND-TESTING.md).
+[Backend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).
+
 ## Automated Tests
 
 Numerous unit tests were devised for the recipes endpoint, located in `recipes/tests.py`. All tests successfully passed, ensuring robust functionality:

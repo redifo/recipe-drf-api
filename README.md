@@ -2,6 +2,11 @@
 
 Recipe Domain is an interactive web application designed to simplify the process of finding, organizing, and sharing culinary recipes. It serves as a central hub for food enthusiasts to discover new recipes, manage their favorites, and share their culinary creations with others. The platform aims to provide a user-friendly environment where users can easily search, filter, and interact with a wide variety of recipes.
 
+***Links to other readme and testing files.***
+[Backend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).
+[FRONTEND-TESTING](https://github.com/redifo/recipe-drf-api/blob/main/FRONTEND-TESTING.md).
+[BACKEND-TESTING](https://github.com/redifo/recipe-drf-api/blob/main/BACKEND-TESTING.md).
+
 ## Project Goals
 The main goals of Recipe Domain are:
 1) Provide a platform for users to easily find recipes based on various criteria such as ingredients or cooking time.
@@ -78,7 +83,7 @@ Font Optical Sizing (auto): Ensuring that the text is displayed optimally at dif
 ### Future Enhancements
 - Integration with grocery shopping lists.
 - Meal planning tools.
-- Advanced dietary filtering, including allergen-free options.
+- Advanced dietary filtering.
 - Recipe recommendations based on user preferences and past activities.
 
 ## Technologies Used
@@ -91,9 +96,12 @@ Font Optical Sizing (auto): Ensuring that the text is displayed optimally at dif
 - **React Dropzone**: Used for drag-and-drop file upload functionality, enhancing the user experience in uploading images.
 - **React Toastify**: Provided user-friendly notifications and feedback for actions like errors, successes, and warnings.
 - **Swiper**: Integrated for creating responsive, touch-friendly carousels to showcase recipes and other content attractively.
-- **MDBReact**: A Material Design UI kit for Bootstrap that adds material design styles and components.(only used for footer due to version compability issues)
+- **MDBReact**: A Material Design UI kit for Bootstrap that adds material design styles and components.(only used for footer due to version compability issues and other usefull components requiring paid subscription)
 
 ### Backend
+
+A more detailed list of techologies used (with versions used for the project) for the backend can be found in [Backend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).
+
 - **Django Rest Framework**: Served as the foundation for creating RESTful APIs to handle client-server interactions efficiently.
 - **JWT Authentication**: Ensured secure and scalable user authentication using JSON Web Tokens.
 - **Cloudinary**: Used for cloud-based image storage, simplifying the management of user-uploaded images.
