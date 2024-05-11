@@ -13,14 +13,28 @@ The primary objective of the backend for Recipe Domain is to support a dynamic a
   * [Project Goals](#project-goals)
   * [Table of contents](#table-of-contents)
   * [Planning](#planning)
-    + [Data models](#data-models)
+    + [Data Models](#data-models)
+      - [**User**](#--user--)
+      - [**Profile**](#--profile--)
+      - [**Recipe**](#--recipe--)
+      - [**Tag**](#--tag--)
+      - [**Review**](#--review--)
+      - [**Rating**](#--rating--)
+      - [**Notification**](#--notification--)
+      - [**Like**](#--like--)
+      - [**Follow**](#--follow--)
+      - [**Favorite**](#--favorite--)
   * [API endpoints](#api-endpoints)
-  * [Frameworks, libraries and dependencies](#frameworks--libraries-and-dependencies)
+  * [Authentication Endpoints](#authentication-endpoints)
+  * [Frameworks, Libraries, and Dependencies](#frameworks--libraries--and-dependencies)
+    + [Database](#database)
+    + [Key Settings and Configurations](#key-settings-and-configurations)
   * [Resolved bugs](#resolved-bugs)
   * [Unresolved bugs](#unresolved-bugs)
   * [Credits](#credits)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 ## Planning
 The planning phase of the project began with defining epics and user stories to shape the frontend application based on project objectives. These user stories informed the creation of wireframes that outlined the intended functionality and user flow through the application. 
