@@ -16,7 +16,71 @@
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## Planning
-### Data models
+The planning phase of the project began with defining epics and user stories to shape the frontend application based on project objectives. These user stories informed the creation of wireframes that outlined the intended functionality and user flow through the application. For detailed insights into the user stories and their corresponding wireframes, refer to the frontend React app's [repository](https://github.com/andy-guttridge/tribehub_react).
+
+To ensure a robust backend support, these user stories were mapped to API endpoints necessary for the MVP. The user stories and their related API endpoints are documented in [this Google sheet](https://docs.google.com/spreadsheets/d/11wcDHeqr85VaHXdJjATod_WECRY03IRUlGgT_L_ikIw/edit#gid=0), with specific details on API mappings available on [a second worksheet](https://docs.google.com/spreadsheets/d/11wcDHeqr85VaHXdJjATod_WECRY03IRUlGgT_L_ikIw/edit#gid=311853659).
+
+### Data Models
+Data models were developed in parallel with API endpoints, using an entity relationship diagram to ensure seamless integration and functionality. Here’s an overview of the custom models designed for this project:
+
+#### **User**
+- Represents the core user model for authentication and identification within the system.
+- Fields: `id`, `username`, `password`, `first_name`, `last_name`, `email`.
+
+#### **Profile**
+- A one-to-one relationship with the User model, automatically created upon user registration.
+- Stores additional user information such as bio, name, email, and profile image.
+- Fields: `id`, `user_id`, `bio`, `name`, `email`, `image`, `created_at`, `updated_at`.
+
+#### **Recipe**
+- Central to the application, holding detailed information about each recipe.
+- Many-to-one relationship with User to track recipe ownership.
+- Many-to-many relationship with Tag via `recipe_tags` for categorization.
+- Fields: `id`, `title`, `user_id`, `description`, `preparation_time`, `cooking_time`, `servings`, `instructions`, `created_at`, `updated_at`, `image`, `ingredients`.
+
+#### **Tag**
+- Used for categorizing recipes for enhanced searchability and organization.
+- Fields: `id`, `name`.
+
+#### **Review**
+- Allows users to provide feedback on recipes with textual content and optional images.
+- Many-to-one relationship with User and Recipe.
+- Fields: `id`, `user_id`, `recipe_id`, `text`, `image`, `created_at`, `updated_at`.
+
+#### **Rating**
+- Facilitates scoring of recipes by users to reflect quality or preference.
+- Many-to-one relationship with User and Recipe to ensure each rating is unique per user-recipe pair.
+- Fields: `id`, `user_id`, `recipe_id`, `score`, `created_at`, `updated_at`.
+
+#### **Notification**
+- Manages alerts and updates for users regarding recipe reviews, follows, and likes.
+- Fields: `id`, `recipient_id`, `sender_id`, `review_id`, `user_followed_id`, `recipe_id`, `notification_type`, `is_read`, `created_at`.
+
+#### **Like**
+- Represents user endorsements (likes) for reviews.
+- Many-to-one relationship with User and Review.
+- Fields: `id`, `user_id`, `review_id`, `is_like`, `created_at`.
+
+#### **Follow**
+- Captures the follow relationship between users, enabling social features like updates on new posts.
+- Fields: `id`, `follower_id`, `followed_id`, `notify_on_new_post`, `created_at`.
+
+#### **Favorite**
+- Allows users to mark recipes as favorites for easy access and reference.
+- Many-to-one relationship with User and Recipe.
+- Fields: `id`, `user_id`, `recipe_id`, `created_at`.
+
+Each model is designed to support the core functionalities of the app, from user interactions with recipes to social features and notifications. This structured approach ensures a comprehensive and efficient user experience across the platform.
+
+<p align="center">
+    <img src="readme-documentation/db.png" width=400>
+</p>
+
+<p align="center">
+    For a detailed view of the database schema, visit:
+    <a href="readme-documentation/db.png" target="_rel">Full-Size DB Schema</a>
+</p>
+
 ## API endpoints
 
 | Resources     | Methods | PROFILES (name, bio, avatar, etc.) | RECIPES (title, ingredients, instructions, etc.) | REVIEWS (text, images, likes) | RATINGS (score) | FOLLOWS (follower_id, followed_id) | FAVORITES (recipe_id) | LIKES (review_id, is_like) | NOTIFICATIONS (type, sender, recipient) |
