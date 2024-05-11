@@ -129,6 +129,9 @@ This hands-on testing approach ensured that the Recipe Domain API was thoroughly
 | R8      | Authenticated user tries to delete a recipe they don't own.             | Should receive HTTP 403 Forbidden.                                 | PASS    |
 | R9      | Authenticated user lists most favorited recipes.                        | Should receive HTTP 200 OK with recipes sorted by favorites.       | PASS    |
 | R10     | Unauthenticated user tries to list most favorited recipes.               | Should receive HTTP                                  |     |
+
+| Test ID | Test Description                                                    | Expected Outcome                                               | Result  |
+|---------|---------------------------------------------------------------------|----------------------------------------------------------------|---------|
 | RV1     | Authenticated user creates a review for a recipe.                        | Should successfully create a review and return HTTP 201 Created.   | PASS    |
 | RV2     | Authenticated user creates a review with an image over 4MB.              | Should return HTTP 400 with an image size error message.           | PASS    |
 | RV3     | Authenticated user updates a review they own.                            | Should update the review and return HTTP 200 OK.                   | PASS    |
@@ -148,3 +151,11 @@ This hands-on testing approach ensured that the Recipe Domain API was thoroughly
 | RA6     | Authenticated user tries to update a rating they don't own.         | Should receive HTTP 403 Forbidden.                             | PASS    |
 | RA7     | Authenticated user deletes a rating they own.                       | Should delete the rating and return HTTP 204 No Content.       | PASS    |
 | RA8     | Authenticated user tries to delete a rating they don't own.         | Should receive HTTP 403 Forbidden.                             | PASS    |
+
+| Test ID | Test Description                                         | Expected Outcome                                               | Result  |
+|---------|----------------------------------------------------------|----------------------------------------------------------------|---------|
+| PR1     | Unauthenticated user tries to list profiles.             | Should receive HTTP 200 OK with profiles list.                 | PASS    |
+| PR2     | Authenticated user views their own profile detail.       | Should receive HTTP 200 OK with their profile details.         | PASS    |
+| PR3     | Authenticated user updates their own profile.            | Should update the profile and return HTTP 200 OK.              | PASS    |
+| PR4     | Authenticated user tries to update another user's profile| Should receive HTTP 403 Forbidden.                             | PASS    |
+| PR5     | Authenticated user views profiles they follow.           | Should receive HTTP 200 OK with followed profiles list.        | PASS    |
