@@ -11,6 +11,7 @@ import { Form, Button, Image, Col, Row, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/useRedirect";
+import { setTokenTimestamp } from "../../utils/utils";
 
 const SignInForm = () => {
     const setCurrentUser = useSetCurrentUser();
@@ -36,8 +37,9 @@ const SignInForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const {data} = await axios.post('/dj-rest-auth/login/', SignInData)
-            setCurrentUser(data.user)
+            const {data} = await axios.post('/dj-rest-auth/login/', SignInData);
+            setCurrentUser(data.user);
+            setTokenTimestamp(data);
             history.push('/');
         } catch (err) {
             setErrors(err.response?.data)
