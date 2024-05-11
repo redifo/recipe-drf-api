@@ -94,39 +94,38 @@ Font Optical Sizing (auto): Ensuring that the text is displayed optimally at dif
 ## Technologies Used
 
 ### Frontend
-- **React**: Utilized for building the user interface with interactive components.
-- **Bootstrap**: Employed for responsive design, ensuring the website adapts to various device sizes.
-- **React Bootstrap**: Extended Bootstrap functionalities within React applications for consistent styling and component behavior.
-- **React Router DOM**: Enabled dynamic client-side routing to improve user navigation and single-page application flow.
-- **React Dropzone**: Used for drag-and-drop file upload functionality, enhancing the user experience in uploading images.
-- **React Toastify**: Provided user-friendly notifications and feedback for actions like errors, successes, and warnings.
-- **Swiper**: Integrated for creating responsive, touch-friendly carousels to showcase recipes and other content attractively.
-- **MDBReact**: A Material Design UI kit for Bootstrap that adds material design styles and components.(only used for footer due to version compability issues and other usefull components requiring paid subscription)
+- **React**: Utilized for building the user interface with interactive components. [React](https://reactjs.org/)
+- **Bootstrap**: Employed for responsive design, ensuring the website adapts to various device sizes. [Bootstrap](https://getbootstrap.com/)
+- **React Bootstrap**: Extended Bootstrap functionalities within React applications for consistent styling and component behavior. [React Bootstrap](https://react-bootstrap.github.io/)
+- **React Router DOM**: Enabled dynamic client-side routing to improve user navigation and single-page application flow. [React Router DOM](https://reactrouter.com/)
+- **React Dropzone**: Used for drag-and-drop file upload functionality, enhancing the user experience in uploading images. [React Dropzone](https://react-dropzone.js.org/)
+- **React Toastify**: Provided user-friendly notifications and feedback for actions like errors, successes, and warnings. [React Toastify](https://fkhadra.github.io/react-toastify/)
+- **Swiper**: Integrated for creating responsive, touch-friendly carousels to showcase recipes and other content attractively. [Swiper](https://swiperjs.com/)
+- **MDBReact**: A Material Design UI kit for Bootstrap that adds material design styles and components (only used for footer due to version compatibility issues and other useful components requiring paid subscription). [MDBReact](https://mdbootstrap.com/docs/react/)
 
 ### Backend
 
-A more detailed list of techologies used (with versions used for the project) for the backend can be found in [Backend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).
+A more detailed list of technologies used (with versions used for the project) for the backend can be found in [Backend README.md](https://github.com/redifo/recipe-drf-api/blob/main/README-BACKEND.md).
 
-- **Django Rest Framework**: Served as the foundation for creating RESTful APIs to handle client-server interactions efficiently.
-- **JWT Authentication**: Ensured secure and scalable user authentication using JSON Web Tokens.
-- **Cloudinary**: Used for cloud-based image storage, simplifying the management of user-uploaded images.
-- **Django Filters**: Implemented for advanced querying capabilities, allowing users to filter recipes and other content based on various criteria.
-- **WhiteNoise**: Facilitated efficient static file serving in Django applications, especially when deployed.
-- **Django Rest Auth & Allauth**: Provided comprehensive user authentication, including registration and login functionalities.
-- **CORS Headers**: Configured to allow resource sharing between the frontend and backend, supporting cross-origin requests.
+- **Django Rest Framework**: Served as the foundation for creating RESTful APIs to handle client-server interactions efficiently. [Django Rest Framework](https://www.django-rest-framework.org/)
+- **JWT Authentication**: Ensured secure and scalable user authentication using JSON Web Tokens. [JWT.io](https://jwt.io/)
+- **Cloudinary**: Used for cloud-based image storage, simplifying the management of user-uploaded images. [Cloudinary](https://cloudinary.com/)
+- **Django Filters**: Implemented for advanced querying capabilities, allowing users to filter recipes and other content based on various criteria. [Django Filters](https://django-filter.readthedocs.io/en/stable/)
+- **WhiteNoise**: Facilitated efficient static file serving in Django applications, especially when deployed. [WhiteNoise](http://whitenoise.evans.io/)
+- **Django Rest Auth & Allauth**: Provided comprehensive user authentication, including registration and login functionalities. [Django Rest Auth](https://dj-rest-auth.readthedocs.io/en/latest/), [Allauth](https://django-allauth.readthedocs.io/en/latest/)
+- **CORS Headers**: Configured to allow resource sharing between the frontend and backend, supporting cross-origin requests. [Django CORS Headers](https://github.com/adamchainz/django-cors-headers)
 
 ### Database
-- **PostgreSQL**: Chosen for its robustness and scalability in storing and managing user and recipe data.
+- **Neon Database**: Utilized [Neon](https://neon.tech/) for the database to leverage its cloud-native PostgreSQL capabilities, ensuring scalable and efficient data management.
+- **PostgreSQL**: Chosen for its robustness and scalability in storing and managing user and recipe data. [PostgreSQL](https://www.postgresql.org/)
 
 ### Utilities & Additional Tools
-- **Heroku**: Used for deploying the application, offering a platform-as-a-service environment that integrates with Git for continuous deployment.
-
-- **ESLint**: Assured code quality and consistency by detecting and correcting syntax and style issues in JavaScript code.
+- **Heroku**: Used for deploying the application, offering a platform-as-a-service environment that integrates with Git for continuous deployment. [Heroku](https://www.heroku.com/)
+- **ESLint**: Assured code quality and consistency by detecting and correcting syntax and style issues in JavaScript code. [ESLint](https://eslint.org/)
 
 ### Libraries & Packages
-- **axios**: Facilitated making HTTP requests to the backend, simplifying data retrieval and submission.
-- **jwt-decode**: Decoded JWTs client-side to extract user information and manage authentication state.
-
+- **axios**: Facilitated making HTTP requests to the backend, simplifying data retrieval and submission. [Axios](https://axios-http.com/)
+- **jwt-decode**: Decoded JWTs client-side to extract user information and manage authentication state. [JWT Decode](https://www.npmjs.com/package/jwt-decode)
 
 
 ## Testing
