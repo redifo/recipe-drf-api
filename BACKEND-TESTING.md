@@ -191,3 +191,12 @@ This hands-on testing approach ensured that the Recipe Domain API was thoroughly
 | F7      | Authenticated user deletes a follow they own.                  | Should delete the follow and return HTTP 204 No Content.         | PASS    |
 | F8      | Authenticated user tries to delete a follow they don't own.    | Should receive HTTP 403 Forbidden.                               | PASS    |
 | F9      | Unauthenticated user tries to creates a follow relationship.   | Should receive HTTP 403 Forbidden.                               | PASS    |
+
+| Test ID | Test Description                                                 | Expected Outcome                                                 | Result  |
+|---------|------------------------------------------------------------------|------------------------------------------------------------------|---------|
+| FA1     | Unauthenticated user tries to list most favorited recipes.       | Should receive HTTP 200 OK with favorites list.                  | PASS    |
+| FA2     | Authenticated user lists favorites.                              | Should receive HTTP 200 OK with list of favorites.               | PASS    |
+| FA3     | Authenticated user creates a favorite for a recipe.              | Should successfully create a favorite and return HTTP 201 Created.| PASS    |
+| FA4     | Authenticated user tries to create a duplicate favorite for a recipe.| Should return HTTP 400 with a duplicate favorite error message. | PASS    |
+| FA5     | Authenticated user deletes a favorite they own.                  | Should delete the favorite and return HTTP 204 No Content.       | PASS    |
+| FA6     | Authenticated user tries to delete a favorite they don't own.    | Should receive HTTP 403 Forbidden.                               | PASS    |
