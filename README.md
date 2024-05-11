@@ -85,10 +85,10 @@ Recipe Create page
 
 <p align="left">
     <img src="readme-documentation/wireframe/signin.png" width=45%>
-</p>
-<p align="right">
+</p><p align="right">
     <img src="readme-documentation/wireframe/signup.png" width=45%>
 </p>
+
 
 #### Edit Profile
 <p align="center">
@@ -132,6 +132,55 @@ Font Optical Sizing (auto): Ensuring that the text is displayed optimally at dif
 - **Recipe Management**: Users can create, edit, and delete their own recipes.
 - **User Profiles**: Users can create profiles to manage their recipes and preferences.
 - **Social Interaction**: Users can share recipes and interact with other users.
+
+### Re-use of Components
+
+A number of reusable React components were created with the intention of reducing code duplication and ensuring a consistent look and feel across the application.
+
+#### **Asset.js**
+- **Purpose**: Used to display a spinner, image, or message based on the props it receives. This component is utilized across the application to handle loading states, display images, or show messages when data is being fetched or no content is available.
+- **Props**:
+  - `spinner`: Boolean to decide if a loading spinner should be shown.
+  - `src`: String URL for the image to display.
+  - `message`: String message to display below the image or spinner.
+- **Usage**: This component is embedded in various parts of the application like error pages (NotFound.js) and during loading states across different views.
+
+#### **Avatar.js**
+- **Purpose**: Displays user avatars in various sizes throughout the application, enhancing user recognition and personalization.
+- **Props**:
+  - `src`: Source URL of the avatar image.
+  - `height`: Height of the avatar image, with a default of 45 pixels.
+  - `text`: Optional text to display alongside the avatar.
+- **Usage**: Utilized in user-related components such as profile views, comments, and wherever user identity is important.
+
+#### **MoreDropdown.js**
+- **Purpose**: Provides a customizable dropdown menu for editing and deleting actions, complete with a confirmation modal for deletions.
+- **Props**:
+  - `handleEdit`: Function to trigger when the edit action is selected.
+  - `handleDelete`: Function to trigger when the delete action is confirmed.
+- **Usage**: Commonly used in components that require user interaction for modifying or deleting content, such as profiles and recipe details.
+
+#### **Notifications.js**
+- **Purpose**: Manages and displays notifications to the user, allowing actions like marking notifications as read or deleting them.
+- **Props**: Uses internal state and context to fetch and manage notifications based on the current user.
+- **Usage**: Embedded in user-centric areas like the NavBar to show real-time updates about user interactions, recipe updates, and more.
+
+#### **NavBar.js**
+- **Purpose**: Serves as the primary navigation bar for the application, dynamically adjusting its content based on the user's login status.
+- **Props**: Utilizes the `useCurrentUser` context to determine which set of navigation options to display.
+- **Usage**: Placed at the top of every page, providing consistent navigation and access to user profiles, recipe creation, and authentication options.
+
+#### **NotFound.js**
+- **Purpose**: Displays a user-friendly message and image when a requested page or content is not found.
+- **Props**: Utilizes the Asset component to present a consistent not-found message.
+- **Usage**: Used in routing to handle unknown URLs or inaccessible content, ensuring a better user experience in error scenarios.
+
+#### **FooterPage.js**
+- **Purpose**: Provides a consistent footer across all pages with about, contact information, and social links.
+- **Props**: None specific, but maintains a consistent look and feel with links and information about the platform.
+- **Usage**: Appears at the bottom of every page, offering additional information and navigation options related to the platform and its creator.
+
+By leveraging these components, your application ensures that common functionalities and design elements are centralized, making the UI more consistent and easier to maintain and update.
 
 ### Future Enhancements
 - Integration with grocery shopping lists.
