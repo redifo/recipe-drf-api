@@ -16,9 +16,13 @@
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## Planning
-The planning phase of the project began with defining epics and user stories to shape the frontend application based on project objectives. These user stories informed the creation of wireframes that outlined the intended functionality and user flow through the application. For detailed insights into the user stories and their corresponding wireframes, refer to the frontend React app's [repository](https://github.com/andy-guttridge/tribehub_react).
+The planning phase of the project began with defining epics and user stories to shape the frontend application based on project objectives. These user stories informed the creation of wireframes that outlined the intended functionality and user flow through the application. 
 
-To ensure a robust backend support, these user stories were mapped to API endpoints necessary for the MVP. The user stories and their related API endpoints are documented in [this Google sheet](https://docs.google.com/spreadsheets/d/11wcDHeqr85VaHXdJjATod_WECRY03IRUlGgT_L_ikIw/edit#gid=0), with specific details on API mappings available on [a second worksheet](https://docs.google.com/spreadsheets/d/11wcDHeqr85VaHXdJjATod_WECRY03IRUlGgT_L_ikIw/edit#gid=311853659).
+The initial project plan aimed to replicate the structure and functionality of the Moments walkthrough project provided by the Code Institute. However, after a preliminary meeting with my mentor, Jubril Akole, it became evident that adding a notifications table and an image field to reviews would significantly enrich the user experience. This enhancement was incorporated into the development phase, extending the app's capabilities beyond the original blueprint.
+
+During the development process, it was recognized that using a text field for ingredients lacked the intuitiveness and flexibility users typically expect. A more sophisticated approach, allowing users to specify quantities for each ingredient, was considered to improve usability. This feature would enable users to filter recipes based on ingredients from a comprehensive list, offering a more tailored experience. However, due to the constrained timeline of the project, this enhancement was not implemented but is earmarked for future development.
+
+Furthermore, the `email` and `name` fields in the profile table are currently not utilized in the frontend application. These fields were designed with future enhancements in mind, providing a foundation for extending the app's functionality. As the project evolves, these fields can be leveraged to introduce additional features, enhancing the overall user experience and interaction within the app.
 
 ### Data Models
 Data models were developed in parallel with API endpoints, using an entity relationship diagram to ensure seamless integration and functionality. Here’s an overview of the custom models designed for this project:
