@@ -34,7 +34,7 @@
 
 | **Tested** | **Result** | **View Result** | **Pass** |
 --- | --- | --- | :---:
-|All website pages| No errors | <details><summary>Screenshot of result</summary>![Result](/readme-documentation/tests/html-validator.png)</details>| :white_check_mark:
+|All website pages| No errors | <details><summary>Screenshot of result</summary>![Result](/readme-documentation/tests/html-validator.png)</details>| :check_mark:
 
 ### W3C CSS validator
 [W3C Jigsaw](https://jigsaw.w3.org/css-validator/) is a tool by the W3C for validating CSS code, ensuring compliance with web standards and promoting interoperability and accessibility.
@@ -43,7 +43,7 @@
 
 | **Tested** | **Result** | **View Result** | **Pass** |
 --- | --- | --- | :---:
-| | | <details><summary>Screenshot of result</summary>![Result](/readme-documentation/tests/)</details>| :white_check_mark:
+| all style files | no errors | <details><summary>Screenshot of result</summary>![Result](/readme-documentation/tests/)</details>| :check_mark:
 
 ### ESLint JavaScript validator
 

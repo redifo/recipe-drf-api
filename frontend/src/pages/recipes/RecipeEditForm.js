@@ -10,7 +10,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Asset from "../../components/Asset";
 import Upload from "../../assets/img/upload.png";
-import { showError, showSuccess } from '../../utils/ToastManager';
+import { showError, showSuccess, showWarning } from '../../utils/ToastManager';
 
 function RecipeEditForm() {
     const history = useHistory();
@@ -177,6 +177,13 @@ function RecipeEditForm() {
         ));
     };
 
+    // Function to remove the added photo
+    const removeImage = () => {
+        setImageFile(null);
+        setImagePreview(null);
+        showWarning("Image Removed")
+    };
+
     return (
         <Form onSubmit={handleSubmit}>
             <Container>
@@ -186,9 +193,12 @@ function RecipeEditForm() {
                             <div {...getRootProps({ className: 'dropzone' })}>
                                 <input {...getInputProps()} />
                                 {imagePreview ? (
-                                    <FormLabel>Click on the photo or drop another photo here to change the photo<br></br>
-                                        <Image src={imagePreview} alt="Preview" rounded className={appStyles.Image} />
-                                    </FormLabel>
+                                    <>
+                                        <FormLabel>Click on the photo or drop another photo here to change the photo<br></br>
+                                            <Image src={imagePreview} alt="Preview" rounded className={appStyles.Image} />
+                                        </FormLabel>
+                                        <Button className="mt-3" onClick={removeImage}>Remove Image</Button>
+                                    </>
                                 ) : (
                                     <Asset src={Upload} message="Drag and drop a photo here, or click to select a photo" />
                                 )}

@@ -1,18 +1,13 @@
 .App {
     font-family: "Merriweather Sans", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     min-height: 100vh;
     background-color: #ececec70;
 }
 
-/*  <uniquifier>: Use a unique and descriptive class name
-    <weight>: Use a value from 300 to 800 */
-
 .font-merriweather-sans {
     font-family: "Merriweather Sans", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
 }
@@ -20,7 +15,6 @@
 .Main {
     min-height: 85vh;
     padding-top: 76px;
-    
 }
 
 .Content {
@@ -63,7 +57,6 @@ i {
     color: #cfced3;
     font-size: 1.6rem;
     padding: 7px;
-
 }
 
 i:hover {
@@ -76,18 +69,18 @@ i:hover {
 figure {
     text-align: center;
     display: inline-block;
-  }
+}
   
-  /* scrollbar */
-  *::-webkit-scrollbar {
+/* scrollbar */
+*::-webkit-scrollbar {
     width: 7px;
-  }
-  *::-webkit-scrollbar-track {
+}
+*::-webkit-scrollbar-track {
     background: #f1f1f1;
-  }
-  *::-webkit-scrollbar-thumb {
+}
+*::-webkit-scrollbar-thumb {
     background: #888;
-  }
-  *::-webkit-scrollbar-thumb:hover {
+}
+*::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
+}
