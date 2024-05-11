@@ -314,10 +314,39 @@ Each component and context provider is designed to reduce redundancy, streamline
 
 
 ## Future Enhancements
-- Integration with grocery shopping lists.
-- Meal planning tools.
-- Advanced dietary filtering.
-- Recipe recommendations based on user preferences and past activities.
+-### Short-Term Improvements
+
+#### Notifications
+- **Issue Resolution**: Address the current limitation where marking notifications as read has no visible effect on the front end. Implement a clear visual indicator or a different section for read vs. unread notifications to enhance user experience.
+- **Expand Notification Triggers**: Broaden the scope of events that trigger notifications. Include notifications for when users like a recipe, follow a user, or comment on recipes, not just for reviews on owned recipes.
+
+#### Recipe Filters
+- **Enhanced Filtering Options**: Improve the recipe tag filtering feature by adding more specific categories and dietary preferences like vegan, gluten-free, or low-carb options.
+- **Dynamic Filter Updates**: Ensure that the recipe list updates dynamically when filters are applied, without needing a page refresh, to provide a smoother user experience.
+
+#### User Interface
+- **Responsive Design Tweaks**: Conduct a thorough review of the mobile and tablet views to fix any inconsistencies or usability issues that hinder the mobile-first experience.
+- **Improved Form Feedback**: Enhance error handling in sign-in and sign-up forms to provide more specific and helpful feedback for common issues like incorrect credentials or weak passwords.
+- **Collect More User Data**: Update registration and profile settings forms to collect additional information, such as culinary preferences and dietary restrictions, to personalize the user experience further.
+
+### Long-Term Improvements
+
+#### Advanced Personalization
+- **Recipe Recommendations**: Develop a machine learning or algorithm-based system to recommend recipes based on user preferences, previous interactions, and popular trends.
+- **Customizable User Dashboards**: Allow users to customize their dashboards to highlight their favorite types of recipes, followed chefs, and any upcoming food-related events or news.
+
+#### Social Features
+- **Recipe Sharing and Collaboration**: Enable users to collaborate on recipes, share modifications, and create joint collections or cookbooks with friends or community members.
+
+#### Security and Privacy
+- **Two-Factor Authentication (2FA)**: Implement 2FA to enhance account security, especially for users who manage or share sensitive dietary information.
+
+#### Performance and Scalability
+- **Optimize Backend Processes**: Review and optimize database queries and server responses to handle increasing traffic and data as the user base grows.
+- **Microservices Architecture**: Consider adopting a microservices architecture for better load handling and improved application scalability.
+
+These improvements aim to address immediate concerns and set the foundation for sustained growth and user satisfaction. By continuously refining features and infrastructure, Recipe Domain can enhance its market position and user loyalty.
+
 
 ## Technologies Used
 
