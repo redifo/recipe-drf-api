@@ -113,3 +113,27 @@ All tests were conducted using the Django Rest Framework HTML interface on a tes
 This hands-on testing approach ensured that the Recipe Domain API was thoroughly evaluated, simulating a variety of user interactions to validate functionality, security, and performance before deployment.
 
 
+## Manual Tests
+
+## Manual Tests for Recipe and Reviews Application
+
+| Test ID | Test Description                                                        | Expected Outcome                                                   | Result  |
+|---------|-------------------------------------------------------------------------|--------------------------------------------------------------------|---------|
+| R1      | Unauthenticated user tries to list recipes.                             | Should receive HTTP 200 OK and list of recipes.                                 | PASS    |
+| R2      | Authenticated user lists recipes.                                       | Should receive HTTP 200 OK and list of recipes.                    | PASS    |
+| R3      | Authenticated user creates a recipe without image.                      | Should successfully create a recipe and return HTTP 201 Created.   | PASS    |
+| R4      | Authenticated user tries to create a recipe with an image over 4MB.     | Should return HTTP 400 with an image size error message.           | PASS    |
+| R5      | Authenticated user updates a recipe they own.                           | Should update the recipe and return HTTP 200 OK.                   | PASS    |
+| R6      | Authenticated user tries to update a recipe they don't own.             | Should receive HTTP 403 Forbidden.                                 | PASS    |
+| R7      | Authenticated user deletes a recipe they own.                           | Should delete the recipe and return HTTP 204 No Content.           | PASS    |
+| R8      | Authenticated user tries to delete a recipe they don't own.             | Should receive HTTP 403 Forbidden.                                 | PASS    |
+| R9      | Authenticated user lists most favorited recipes.                        | Should receive HTTP 200 OK with recipes sorted by favorites.       | PASS    |
+| R10     | Unauthenticated user tries to list most favorited recipes.               | Should receive HTTP                                  |     |
+| RV1     | Authenticated user creates a review for a recipe.                        | Should successfully create a review and return HTTP 201 Created.   | PASS    |
+| RV2     | Authenticated user creates a review with an image over 4MB.              | Should return HTTP 400 with an image size error message.           | PASS    |
+| RV3     | Authenticated user updates a review they own.                            | Should update the review and return HTTP 200 OK.                   | PASS    |
+| RV4     | Authenticated user tries to update a review they don't own.              | Should receive HTTP 403 Forbidden.                                 | PASS    |
+| RV5     | Authenticated user deletes a review they own.                            | Should delete the review and return HTTP 204 No Content.           | PASS    |
+| RV6     | Authenticated user tries to delete a review they don't own.              | Should receive HTTP 403 Forbidden.                                 | PASS    |
+| RV7     | User likes a review for the first time.                                  | Should increment like count and return HTTP 201 Created.           | PASS    |
+| RV8     | User dislikes a review they previously liked.                            | Should update like status and adjust counts, returning HTTP 200 OK.| PASS    |
