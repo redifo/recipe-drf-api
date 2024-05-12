@@ -36,12 +36,8 @@ The primary objective of the backend for Recipe Domain is to support a dynamic a
   * [Frameworks, Libraries, and Dependencies](#frameworks--libraries--and-dependencies)
     + [Database](#database)
     + [Key Settings and Configurations](#key-settings-and-configurations)
-  * [Resolved bugs](#resolved-bugs)
-  * [Unresolved bugs](#unresolved-bugs)
-  * [Credits](#credits)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 ## Planning
 The planning phase of the project began with defining epics and user stories to shape the frontend application based on project objectives. These user stories informed the creation of wireframes that outlined the intended functionality and user flow through the application. 
@@ -155,9 +151,3 @@ Each model is designed to support the core functionalities of the app, from user
 - `CORS_ALLOWED_ORIGINS` and `CORS_ALLOW_CREDENTIALS` are set to ensure the frontend can interact with the API without CORS issues.
 - `INSTALLED_APPS` includes several custom apps like `profiles`, `recipes`, `reviews`, `ratings`, `followers`, `likes`, `notifications`, and `favorites` which define the core functionality of the application.
 - Static and media file handling are configured with Django's standard settings and `WhiteNoise` for production readiness.
-
-## Resolved bugs
-
-## Unresolved bugs
-
-## Credits
