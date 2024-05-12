@@ -96,10 +96,74 @@ The validator have shown that there were some issues in some of the css files (o
 
 ### ESLint JavaScript validator
 
-All JavaScript files were validated using the ESLint JavaScript validator duting development and all warning and errors ahve been solved as sson as they appear or as soon as possoible. Identified issues were addressed accordingly.
-
+All JavaScript files were validated using the ESLint JavaScript validator duting development and all warning and errors have been solved as soon as they appear or as soon as possible. 
 
 ## Lighthouse testing
+
+Lighthouse testing was conducted in incognito mode for every URL for mobile and in desktop page mode, and on the landing page, sign-in page, and registration page. Each page/section was tested with add, edit, and search forms and modal dialogs open.
+
+Most pages achieved 100% for accessibility. All pages achieved 100% for best practices, except for the landing, registration, and sign-in pages, where HTTP 401 errors in the console reduced the score. This is expected as a consequence of a non-authenticated user being redirected away from content requiring authorization.
+
+Performance scores were not as high, ranging from  to  for the app in single page mode with the  form being opened. Performance scores for the majority of pages/scenarios ranged from  to . The same potential performance improvements were identified in each case:
+
+- Serve images in next-gen formats.
+- Reduce unused JavaScript.
+- Eliminate render-blocking resources (e.g., deliver critical JavaScript and CSS inline).
+- Minify JavaScript.
+- Efficiently encode images.
+- Preload the largest contentful paint image.
+- Serve static assets with an efficient cache policy.
+- Avoid chaining critical requests.
+- Use user timing marks and measures.
+- Keep request counts low and transfer sizes small.
+- Avoid large layout shifts.
+- Avoid long main-thread tasks.
+
+The hero image on the landing page was compressed to improve loading time. The other potential improvements could be implemented in a future iteration.
+
+Lighthouse testing resutls for desktop:
+recipe create page
+<p align="center">
+    <img src="readme-documentation/tests/lighthouse/create-recipe.png" width=100%>
+</p>
+
+followed chefs page
+<p align="center">
+    <img src="readme-documentation/tests/lighthouse/followed-chefs.png" width=100%>
+</p>
+
+Home page
+<p align="center">
+    <img src="readme-documentation/tests/lighthouse/home.png" width=100%>
+</p>
+
+Recipe page
+<p align="center">
+    <img src="readme-documentation/tests/lighthouse/recipe.png" width=100%>
+</p>
+
+Recipe grid page
+<p align="center">
+    <img src="readme-documentation/tests/lighthouse/recipes.png" width=100%>
+</p>
+
+Signin Page
+<p align="center">
+    <img src="readme-documentation/tests/lighthouse/signin.png" width=100%>
+</p>
+
+Signup Page
+<p align="center">
+    <img src="readme-documentation/tests/lighthouse/signup.png" width=100%>
+</p>
+
+User Profile page
+<p align="center">
+    <img src="readme-documentation/tests/lighthouse/user-profile.png" width=100%>
+</p>
+
+The issue with performance can be improved by automatically converting (to webp) and automaticall resizing the images according to the website requirements using the built in cloudinary transformers and converters.
+For mobile, results only had different scores for performace and therefore the results for mobile is not included in the report. 
 
 ## Resolved bugs
 
