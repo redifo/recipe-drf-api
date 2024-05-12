@@ -196,7 +196,7 @@ For mobile, results only had different scores for performace and therefore the r
 
 ### Non-Responsive Signup Link in Mobile View
 - **Issue**: On smaller screens where the burger icon appears, the signup link was not working despite having the correct values.
-- **Fix**: 
+- **Fix**: Introduced a delay in the `useClickOutsideToggle` hook to prevent the menu from closing prematurely. This allows users to click the signup link without interruption.
 
 ## Unresolved Bugs
 
