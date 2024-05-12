@@ -167,4 +167,45 @@ For mobile, results only had different scores for performace and therefore the r
 
 ## Resolved bugs
 
-## Unresolved bugs
+### Authentication Checks in Recipe Serializer
+- **Issue**: When a user was not authenticated, methods like `get_initial_rating` and `get_favorite_id` in the recipe serializer were raising data fetching errors.
+- **Fix**: Added a check for user authentication (`is_authenticated`) before attempting to fetch data.
+
+### Editing Review Functionality
+- **Issue**: Editing a review was not working because the review information was not being correctly passed to the recipe page.
+- **Fix**: Ensured that the values of the review from `Review.js` are properly passed to `ReviewEditForm` and the recipe page to facilitate editing.
+
+### Image Uploads to Cloudinary
+- **Issue**: The image fields in `RecipeCreateForm` and profile edit pages were appending a null value to the image field instead of uploading the image to Cloudinary.
+- **Fix**: Modified the `perform_create` method to call the image inside `serializer.save` and handle the case where the image file is present or absent:
+  ```python
+  image_file = self.request.FILES.get('image', None)
+  if image_file:
+      serializer.save(user=self.request.user, image=image_file)
+  else:
+      serializer.save(user=self.request.user)
+
+
+### Likes and Dislikes Count Adjustments
+- **Issue**: The likes count was inaccurately increasing or decreasing by more than 1 on the front end after multiple likes and dislikes actions.
+- **Fix**: Implemented logic to ensure the likes and dislikes counts accurately reflect user actions without excessive increment or decrement.
+
+### Layout Adjustments on Large Screens
+- **Issue**: On large screens, the search bar and "Add a Recipe" container on the home page appeared on the same row instead of one above the other.
+- **Fix**: Adjusted the margins in the styles to ensure these elements appear one above the other as intended.
+
+### Non-Responsive Signup Link in Mobile View
+- **Issue**: On smaller screens where the burger icon appears, the signup link was not working despite having the correct values.
+- **Fix**: 
+
+## Unresolved Bugs
+
+### Remove Image Button in Recipe Create/Edit Form
+- **Issue**: When the user clicks the "Remove Image" button on the recipe create or edit form, after the image is deleted, the window for uploading a new image opens unexpectedly.
+- **Resolution**: This behavior is planned to be corrected to prevent the image upload window from opening automatically after image removal.
+
+### Multiple Review Postings on Rapid Clicks
+- **Issue**: If a user clicks the "Post Review" button too quickly multiple times, the review is posted multiple times.
+- **Resolution**: A fix is required to prevent multiple submissions by disabling the button temporarily after the first click until the operation is complete.
+
+

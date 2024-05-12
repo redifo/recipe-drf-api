@@ -41,3 +41,11 @@
     margin-left: 24%;
     margin-right: 24%;
 }
+
+@media (min-width: 1500px) {
+    .CreateRecipeBox{
+        margin-left: 40%;
+        margin-right: 40%;
+    }
+    
+}
